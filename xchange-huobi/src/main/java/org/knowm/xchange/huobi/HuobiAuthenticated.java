@@ -18,7 +18,7 @@ public interface HuobiAuthenticated extends Huobi {
 
     @GET
     @Path("v1/account/accounts")
-    ApiResponse<List<Account>> accounts(@QueryParam("id") Long id, @QueryParam("state")String state, @QueryParam("type") String type) throws ApiException;
+    ApiResponse<List<Account>> accounts(@QueryParam("id") Long id, @QueryParam("state") String state, @QueryParam("type") String type) throws ApiException;
 
 
 }

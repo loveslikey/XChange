@@ -28,7 +28,7 @@ public interface Huobi {
 
     @GET
     @Path("v1/common/symbols")
-    SymbolsResponse<List<Symbol>> symbols ()  throws ApiException;
+    SymbolsResponse<List<Symbol>> symbols()  throws ApiException;
 
     /**
      *
@@ -40,7 +40,7 @@ public interface Huobi {
      */
     @GET
     @Path("market/history/kline")
-    KlineResponse<List<Kline>> kline(@QueryParam("symbol")String symbol, @QueryParam("period")String period,@QueryParam("size") Integer size) throws ApiException;
+    KlineResponse<List<Kline>> kline(@QueryParam("symbol") String symbol, @QueryParam("period") String period, @QueryParam("size") Integer size) throws ApiException;
 
 
     /**
@@ -51,7 +51,7 @@ public interface Huobi {
      */
     @GET
     @Path("market/detail/merged")
-    MergedResponse<Merged> merged (@QueryParam("symbol")String symbol) throws ApiException;
+    MergedResponse<Merged> merged(@QueryParam("symbol") String symbol) throws ApiException;
 
 
     /**
@@ -63,7 +63,7 @@ public interface Huobi {
      */
     @GET
     @Path("market/depth")
-    DepthResponse depth  (@QueryParam("symbol")String symbol,@QueryParam("type") String type) throws ApiException;
+    DepthResponse depth(@QueryParam("symbol") String symbol, @QueryParam("type") String type) throws ApiException;
 
     /**
      *
@@ -73,7 +73,7 @@ public interface Huobi {
      */
     @GET
     @Path("market/trade ")
-    TradeResponse trade   (@QueryParam("symbol") String symbol) throws ApiException;
+    TradeResponse trade(@QueryParam("symbol") String symbol) throws ApiException;
 
 
     /**
@@ -85,7 +85,7 @@ public interface Huobi {
      */
     @GET
     @Path("market/history/trade")
-    HistoryTradeResponse<List<HistoryTradess>>  historyTrade (@QueryParam("symbol") String symbol,@QueryParam("size") Integer size) throws ApiException;
+    HistoryTradeResponse<List<HistoryTradess>>  historyTrade(@QueryParam("symbol") String symbol, @QueryParam("size") Integer size) throws ApiException;
 
     /**
      *
@@ -95,7 +95,7 @@ public interface Huobi {
      */
     @GET
     @Path("market/detail")
-    DetailResponse<Details>  detail (@QueryParam("symbol") String symbol) throws ApiException;
+    DetailResponse<Details>  detail(@QueryParam("symbol") String symbol) throws ApiException;
 
 
 
