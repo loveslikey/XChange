@@ -20,7 +20,7 @@ import org.knowm.xchange.gdax.dto.trade.GDAXSendMoneyResponse;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class GDAXAccountServiceRaw extends GDAXBaseService {
 

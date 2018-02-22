@@ -1,14 +1,12 @@
 package org.knowm.xchange.bittrex.service;
 
-import java.math.BigInteger;
+import feign.RequestTemplate;
+import org.knowm.xchange.service.ParamsDigest;
 
 import javax.crypto.Mac;
+import java.math.BigInteger;
 
-import org.knowm.xchange.service.BaseParamsDigest;
-
-import si.mazi.rescu.RestInvocation;
-
-public class BittrexDigest extends BaseParamsDigest {
+public class BittrexDigest extends ParamsDigest {
 
   /**
    * Constructor
@@ -27,9 +25,9 @@ public class BittrexDigest extends BaseParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
+  public String digestParams(RequestTemplate requestTemplate) {
 
-    String invocationUrl = restInvocation.getInvocationUrl();
+    String invocationUrl = requestTemplate.url()+requestTemplate.queryLine();
     Mac mac = getMac();
     mac.update(invocationUrl.getBytes());
 

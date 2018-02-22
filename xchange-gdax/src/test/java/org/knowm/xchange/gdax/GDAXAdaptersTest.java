@@ -33,8 +33,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.knowm.xchange.gdax.dto.trade.GDAXOrder;
-import si.mazi.rescu.serialization.jackson.DefaultJacksonObjectMapperFactory;
-import si.mazi.rescu.serialization.jackson.JacksonObjectMapperFactory;
+import org.knowm.xchange.utils.jackson.DefaultJacksonObjectMapperFactory;
+import org.knowm.xchange.utils.jackson.JacksonObjectMapperFactory;
 
 /**
  * Created by Yingzhe on 4/8/2015.

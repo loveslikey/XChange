@@ -19,7 +19,7 @@ import org.knowm.xchange.yobit.dto.marketdata.YoBitOrderBooksReturn;
 import org.knowm.xchange.yobit.dto.marketdata.YoBitTickersReturn;
 import org.knowm.xchange.yobit.dto.marketdata.YoBitTrades;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 @Path("/")
 @Produces(MediaType.APPLICATION_JSON)

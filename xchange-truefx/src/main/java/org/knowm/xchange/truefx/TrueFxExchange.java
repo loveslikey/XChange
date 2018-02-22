@@ -7,7 +7,7 @@ import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.truefx.service.TrueFxMarketDataService;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class TrueFxExchange extends BaseExchange {
 

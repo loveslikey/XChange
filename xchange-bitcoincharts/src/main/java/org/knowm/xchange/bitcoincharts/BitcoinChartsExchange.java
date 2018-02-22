@@ -9,7 +9,7 @@ import org.knowm.xchange.bitcoincharts.dto.marketdata.BitcoinChartsTicker;
 import org.knowm.xchange.bitcoincharts.service.BitcoinChartsMarketDataService;
 import org.knowm.xchange.exceptions.ExchangeException;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class BitcoinChartsExchange extends BaseExchange implements Exchange {
 

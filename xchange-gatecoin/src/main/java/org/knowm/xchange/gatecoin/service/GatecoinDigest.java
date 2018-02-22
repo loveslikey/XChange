@@ -1,14 +1,12 @@
 package org.knowm.xchange.gatecoin.service;
 
-import javax.crypto.Mac;
-import javax.ws.rs.HeaderParam;
-
-import org.knowm.xchange.service.BaseParamsDigest;
-
+import feign.RequestTemplate;
 import net.iharder.Base64;
-import si.mazi.rescu.RestInvocation;
+import org.knowm.xchange.service.ParamsDigest;
 
-public class GatecoinDigest extends BaseParamsDigest {
+import javax.crypto.Mac;
+
+public class GatecoinDigest extends ParamsDigest {
 
   private GatecoinDigest(String secretKeyBase64) {
     super(secretKeyBase64, HMAC_SHA_256);
@@ -19,9 +17,9 @@ public class GatecoinDigest extends BaseParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
-    return digest(restInvocation.getHttpMethod(), restInvocation.getInvocationUrl(), restInvocation.getReqContentType(),
-        restInvocation.getParamValue(HeaderParam.class, "API_REQUEST_DATE").toString());
+  public String digestParams(RequestTemplate requestTemplate) {
+    return digest(requestTemplate.method(), requestTemplate.url()+requestTemplate.queryLine(), requestTemplate.headers().get("Content-Type").iterator().next(),
+        requestTemplate.queries().get("API_REQUEST_DATE").iterator().next().toString());
   }
 
   String digest(String httpMethod, String invocationUrl, String reqContentType, String now) {

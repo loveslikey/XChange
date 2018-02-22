@@ -25,7 +25,7 @@ import org.knowm.xchange.therock.dto.trade.TheRockTransactions;
 import org.knowm.xchange.therock.dto.trade.TheRockUserTrades;
 import org.knowm.xchange.therock.service.TheRockDigest;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 @Path("v1")
 @Produces(MediaType.APPLICATION_JSON)

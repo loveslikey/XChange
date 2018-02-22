@@ -31,7 +31,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.reflect.Whitebox;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({BTCMarketsAuthenticated.class, BTCMarketsOpenOrdersAndTradeHistoryRequest.class, BTCMarketsCancelOrderRequest.class, BTCMarketsOrder.class})

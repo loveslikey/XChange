@@ -1,23 +1,21 @@
 package org.knowm.xchange.btcmarkets.service;
 
-import javax.crypto.Mac;
-import javax.ws.rs.HeaderParam;
-
-import org.knowm.xchange.service.BaseParamsDigest;
-
+import feign.RequestTemplate;
 import net.iharder.Base64;
-import si.mazi.rescu.RestInvocation;
+import org.knowm.xchange.service.ParamsDigest;
 
-public class BTCMarketsDigest extends BaseParamsDigest {
+import javax.crypto.Mac;
+
+public class BTCMarketsDigest extends ParamsDigest {
 
   public BTCMarketsDigest(String secretKey) {
     super(decodeBase64(secretKey), HMAC_SHA_512);
   }
 
   @Override
-  public String digestParams(RestInvocation inv) {
-    final String nonce = inv.getParamValue(HeaderParam.class, "timestamp").toString();
-    return digest(inv.getMethodPath(), nonce, inv.getRequestBody());
+  public String digestParams(RequestTemplate requestTemplate) {
+    final String nonce = requestTemplate.queries().get("timestamp").iterator().next();
+    return digest(requestTemplate.url(), nonce, requestTemplate.bodyTemplate());
   }
 
   String digest(String url, String nonce, String requestBody) {

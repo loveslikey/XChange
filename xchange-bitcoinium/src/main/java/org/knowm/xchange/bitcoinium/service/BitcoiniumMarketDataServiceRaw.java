@@ -10,7 +10,7 @@ import org.knowm.xchange.bitcoinium.dto.marketdata.BitcoiniumTicker;
 import org.knowm.xchange.bitcoinium.dto.marketdata.BitcoiniumTickerHistory;
 import org.knowm.xchange.utils.Assert;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 /**
  * <p>

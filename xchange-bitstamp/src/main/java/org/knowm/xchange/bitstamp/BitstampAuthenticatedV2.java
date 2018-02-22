@@ -18,8 +18,8 @@ import org.knowm.xchange.bitstamp.dto.account.WithdrawalRequest;
 import org.knowm.xchange.bitstamp.dto.trade.BitstampOrder;
 import org.knowm.xchange.bitstamp.dto.trade.BitstampUserTransaction;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 @Path("api/v2")
 @Consumes(MediaType.APPLICATION_FORM_URLENCODED)

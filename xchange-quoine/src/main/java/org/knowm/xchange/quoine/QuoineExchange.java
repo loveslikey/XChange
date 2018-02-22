@@ -15,7 +15,7 @@ import org.knowm.xchange.quoine.service.QuoineMarketDataService;
 import org.knowm.xchange.quoine.service.QuoineTradeService;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class QuoineExchange extends BaseExchange implements Exchange {
 

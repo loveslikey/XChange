@@ -9,7 +9,7 @@ import org.knowm.xchange.empoex.service.EmpoExAccountService;
 import org.knowm.xchange.empoex.service.EmpoExMarketDataService;
 import org.knowm.xchange.empoex.service.EmpoExTradeService;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class EmpoExExchange extends BaseExchange implements Exchange {
 

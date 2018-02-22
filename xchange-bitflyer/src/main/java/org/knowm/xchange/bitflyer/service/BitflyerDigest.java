@@ -1,14 +1,9 @@
 package org.knowm.xchange.bitflyer.service;
 
-import javax.crypto.Mac;
+import feign.RequestTemplate;
+import org.knowm.xchange.service.ParamsDigest;
 
-import org.knowm.xchange.bitflyer.Bitflyer;
-import org.knowm.xchange.service.BaseParamsDigest;
-import org.knowm.xchange.utils.DigestUtils;
-
-import si.mazi.rescu.RestInvocation;
-
-public class BitflyerDigest extends BaseParamsDigest {
+public class BitflyerDigest extends ParamsDigest {
 
   private String apiKey;
 
@@ -28,9 +23,9 @@ public class BitflyerDigest extends BaseParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
-
-    String queryString = restInvocation.getQueryString();
+  public String digestParams(RequestTemplate requestTemplate) {
+    throw  new RuntimeException("暂未做适配");
+/*    String queryString = restInvocation.getQueryString();
 //    System.out.println("queryString = " + queryString);
 
     String httpMethod = restInvocation.getHttpMethod();
@@ -50,7 +45,7 @@ public class BitflyerDigest extends BaseParamsDigest {
     Mac mac256 = getMac();
     mac256.update(hmac_data.getBytes());
 
-    return DigestUtils.bytesToHex(mac256.doFinal()).trim();
+    return DigestUtils.bytesToHex(mac256.doFinal()).trim();*/
 
   }
 }

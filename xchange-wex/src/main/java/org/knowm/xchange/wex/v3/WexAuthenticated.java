@@ -21,8 +21,8 @@ import org.knowm.xchange.wex.v3.dto.trade.WexPlaceOrderReturn;
 import org.knowm.xchange.wex.v3.dto.trade.WexTradeHistoryReturn;
 import org.knowm.xchange.wex.v3.dto.trade.WexTransHistoryReturn;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 /**
  * @author Matija Mazi

@@ -2,7 +2,7 @@ package org.knowm.xchange.itbit.v1.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import si.mazi.rescu.HttpStatusExceptionSupport;
+import org.knowm.xchange.exceptions.HttpStatusExceptionSupport;
 
 public class ItBitException extends HttpStatusExceptionSupport {
 

@@ -10,7 +10,7 @@ import org.knowm.xchange.bitso.dto.account.BitsoDepositAddress;
 import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.exceptions.ExchangeException;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 public class BitsoAccountServiceRaw extends BitsoBaseService {
 

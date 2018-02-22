@@ -14,7 +14,7 @@ import org.knowm.xchange.independentreserve.dto.trade.IndependentReserveSynchDig
 import org.knowm.xchange.independentreserve.dto.trade.IndependentReserveSynchDigitalCurrencyDepositAddressWithBlockchainResponse;
 import org.knowm.xchange.independentreserve.util.ExchangeEndpoint;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 /**
  * Author: Kamil Zbikowski Date: 4/10/15

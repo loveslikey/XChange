@@ -31,8 +31,8 @@ import org.knowm.xchange.dsx.dto.trade.DSXTransHistoryResult;
 import org.knowm.xchange.dsx.dto.trade.DSXTransHistoryReturn;
 import org.knowm.xchange.dsx.dto.trade.DSXVolumeReturn;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 /**
  * @author Mikhail Wall

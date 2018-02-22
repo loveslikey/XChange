@@ -12,8 +12,8 @@ import org.knowm.xchange.btcmarkets.dto.trade.BTCMarketsWithdrawCryptoResponse;
 import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.exceptions.ExchangeException;
 
-import si.mazi.rescu.RestProxyFactory;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.RestProxyFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class BTCMarketsAccountServiceRaw extends BTCMarketsBaseService {
 

@@ -11,8 +11,8 @@ import org.knowm.xchange.anx.v2.service.ANXV2Digest;
 import org.knowm.xchange.examples.anx.v2.ANXExamplesUtils;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.RestProxyFactory;
 
 /**
  * Demo requesting wallethistory at ANX

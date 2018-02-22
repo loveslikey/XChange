@@ -16,8 +16,8 @@ import javax.ws.rs.core.MediaType;
 import org.knowm.xchange.bitcointoyou.dto.account.BitcointoyouBalance;
 import org.knowm.xchange.bitcointoyou.dto.trade.BitcointoyouOrderResponse;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 /**
  * Bitcointoyou Exchange end-points that needs a credential to be used.

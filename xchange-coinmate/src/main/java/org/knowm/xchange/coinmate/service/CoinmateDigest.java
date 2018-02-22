@@ -23,21 +23,18 @@
  */
 package org.knowm.xchange.coinmate.service;
 
-import java.math.BigInteger;
+import feign.RequestTemplate;
+import org.knowm.xchange.service.ParamsDigest;
 
 import javax.crypto.Mac;
-import javax.ws.rs.FormParam;
-
-import org.knowm.xchange.service.BaseParamsDigest;
-
-import si.mazi.rescu.RestInvocation;
+import java.math.BigInteger;
 
 /**
  * This is based on BitstampDigest
  *
  * @author Martin Stachon
  */
-public class CoinmateDigest extends BaseParamsDigest {
+public class CoinmateDigest extends ParamsDigest {
 
   private final String clientId;
   private final String publicApiKey;
@@ -62,10 +59,10 @@ public class CoinmateDigest extends BaseParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
+  public String digestParams(RequestTemplate requestTemplate) {
 
     Mac mac256 = getMac();
-    mac256.update(restInvocation.getParamValue(FormParam.class, "nonce").toString().getBytes());
+    mac256.update(requestTemplate.queries().get("nonce").iterator().next().getBytes());
     mac256.update(clientId.getBytes());
     mac256.update(publicApiKey.getBytes());
 

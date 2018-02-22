@@ -1,16 +1,6 @@
 package org.knowm.xchange.test.binance;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import org.junit.Assert;
-import org.junit.Assume;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.ExchangeFactory;
 import org.knowm.xchange.binance.BinanceExchange;
@@ -20,6 +10,12 @@ import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.service.marketdata.MarketDataService;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 public class MarketDataServiceIntegration {
 
   static Exchange exchange;
@@ -27,7 +23,7 @@ public class MarketDataServiceIntegration {
 
   @BeforeClass
   public static void beforeClass() {
-    exchange = ExchangeFactory.INSTANCE.createExchange(BinanceExchange.class.getName());
+    exchange = ExchangeFactory.INSTANCE.createExchange(BinanceExchange.class.getName(),"JVvEWSCl3diPyOJGqpDQC6AqA7MCVdTi0MxSakfRjhQgJocp0ZMUiPGGr4Cyg7ky", "fWfxSRDg0H0PjT0U3kPx4Y9ts1WVhdbtkOYCs90z5p6ozoRspAzE5aTytoOG88fO");
     marketService = exchange.getMarketDataService();
   }
 

@@ -8,7 +8,7 @@ import org.knowm.xchange.oer.OER;
 import org.knowm.xchange.oer.dto.marketdata.OERRates;
 import org.knowm.xchange.oer.dto.marketdata.OERTickers;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 /**
  * @author timmolter

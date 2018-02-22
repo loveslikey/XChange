@@ -25,7 +25,7 @@ import org.knowm.xchange.okcoin.dto.trade.OkCoinPositionResult;
 import org.knowm.xchange.okcoin.dto.trade.OkCoinPriceLimit;
 import org.knowm.xchange.okcoin.dto.trade.OkCoinTradeResult;
 
-import si.mazi.rescu.ParamsDigest;
+import org.knowm.xchange.service.ParamsDigest;
 
 @Path("v1")
 @Produces(MediaType.APPLICATION_JSON)

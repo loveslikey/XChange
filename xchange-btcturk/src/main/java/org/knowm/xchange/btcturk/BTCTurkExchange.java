@@ -6,7 +6,7 @@ import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.btcturk.service.BTCTurkMarketDataService;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 /**
  * @author semihunaldi

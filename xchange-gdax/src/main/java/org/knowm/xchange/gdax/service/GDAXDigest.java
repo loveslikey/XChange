@@ -1,17 +1,13 @@
 package org.knowm.xchange.gdax.service;
 
+import feign.RequestTemplate;
+import net.iharder.Base64;
+import org.knowm.xchange.exceptions.ExchangeException;
+import org.knowm.xchange.service.ParamsDigest;
+
 import java.io.IOException;
 
-import javax.crypto.Mac;
-import javax.ws.rs.HeaderParam;
-
-import org.knowm.xchange.exceptions.ExchangeException;
-import org.knowm.xchange.service.BaseParamsDigest;
-
-import net.iharder.Base64;
-import si.mazi.rescu.RestInvocation;
-
-public class GDAXDigest extends BaseParamsDigest {
+public class GDAXDigest extends ParamsDigest {
 
   private String signature = "";
   
@@ -30,9 +26,9 @@ public class GDAXDigest extends BaseParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
-
-    String pathWithQueryString = restInvocation.getInvocationUrl().replace(restInvocation.getBaseUrl(), "");
+  public String digestParams(RequestTemplate requestTemplate) {
+    throw  new RuntimeException("暂未做适配");
+  /*  String pathWithQueryString = restInvocation.getInvocationUrl().replace(restInvocation.getBaseUrl(), "");
     String message = restInvocation.getParamValue(HeaderParam.class, "CB-ACCESS-TIMESTAMP").toString() + restInvocation.getHttpMethod()
         + pathWithQueryString + (restInvocation.getRequestBody() != null ? restInvocation.getRequestBody() : "");
 
@@ -45,7 +41,7 @@ public class GDAXDigest extends BaseParamsDigest {
     }
 
     signature = Base64.encodeBytes(mac256.doFinal());
-    return signature;
+    return signature;*/
   }
   
   public String getSignature() {

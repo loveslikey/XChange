@@ -14,7 +14,7 @@ import org.knowm.xchange.bleutrade.service.BleutradeMarketDataServiceRaw;
 import org.knowm.xchange.bleutrade.service.BleutradeTradeService;
 import org.knowm.xchange.utils.nonce.AtomicLongIncrementalTime2013NonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class BleutradeExchange extends BaseExchange implements Exchange {
 

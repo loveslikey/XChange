@@ -1,18 +1,16 @@
 package org.knowm.xchange.hitbtc.v2;
 
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
+import feign.RequestTemplate;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.utils.DigestUtils;
 
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 
-import org.knowm.xchange.utils.DigestUtils;
-
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.RestInvocation;
-
-public class HitbtcHmacDigest implements ParamsDigest {
+public class HitbtcHmacDigest extends ParamsDigest {
 
   private static final String HMAC_SHA_512 = "HmacSHA512";
   private final Mac mac;
@@ -38,14 +36,14 @@ public class HitbtcHmacDigest implements ParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
+  public String digestParams(RequestTemplate requestTemplate) {
 
-    String postBody = restInvocation.getRequestBody();
+    String postBody = requestTemplate.bodyTemplate();
     if (postBody == null) {
       postBody = "";
     }
 
-    String uri = restInvocation.getPath() + "?" + restInvocation.getQueryString();
+    String uri = requestTemplate.url() +requestTemplate.queryLine();
     String message = uri + postBody;
 
     mac.update(message.getBytes());

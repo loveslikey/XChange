@@ -24,7 +24,7 @@ import org.knowm.xchange.cryptopia.dto.marketdata.CryptopiaTradePair;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import si.mazi.rescu.ParamsDigest;
+import org.knowm.xchange.service.ParamsDigest;
 
 @Path("api")
 @Produces(MediaType.APPLICATION_JSON)

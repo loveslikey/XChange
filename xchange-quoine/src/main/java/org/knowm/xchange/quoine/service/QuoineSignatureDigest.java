@@ -4,11 +4,11 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.algorithms.Algorithm;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.RestInvocation;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import feign.RequestTemplate;
+import org.knowm.xchange.SynchronizedValueFactory;
 
-public class QuoineSignatureDigest implements ParamsDigest {
+public class QuoineSignatureDigest extends ParamsDigest {
 
   private final JWTCreator.Builder builder;
   private final String tokenID;
@@ -24,13 +24,12 @@ public class QuoineSignatureDigest implements ParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
+  public String digestParams(RequestTemplate requestTemplate) {
 
-    String path = "/" + restInvocation.getMethodPath();
+    String path = "/" + requestTemplate.method();
 
-    String queryString = restInvocation.getQueryString();
-    if (queryString != null && queryString.length() > 0)
-      path += "?" + restInvocation.getQueryString();
+    if (requestTemplate.queries() != null && requestTemplate.queries().size() > 0)
+      path +=requestTemplate.queryLine();
 
     return builder.withClaim("path", path)
         .withClaim("nonce", String.valueOf(nonceFactory.createValue()))

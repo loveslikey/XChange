@@ -1,7 +1,5 @@
 package org.knowm.xchange.service.marketdata;
 
-import java.io.IOException;
-
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.OrderBook;
@@ -11,6 +9,8 @@ import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.exceptions.NotAvailableFromExchangeException;
 import org.knowm.xchange.exceptions.NotYetImplementedForExchangeException;
 import org.knowm.xchange.service.BaseService;
+
+import java.io.IOException;
 
 /**
  * <p>
@@ -27,6 +27,7 @@ public interface MarketDataService extends BaseService {
 
   /**
    * <p>
+   *     理解为K线
    * Get a ticker representing the current exchange rate
    * </p>
    *
@@ -42,6 +43,7 @@ public interface MarketDataService extends BaseService {
 
   /**
    * <p>
+   *     理解为深度
    * Get an order book representing the current offered exchange rates (market depth)
    * </p>
    *
@@ -58,6 +60,7 @@ public interface MarketDataService extends BaseService {
 
   /**
    * <p>
+   *     理解为最新深度
    * Get the trades recently performed by the exchange
    * </p>
    *

@@ -12,7 +12,7 @@ import org.knowm.xchange.bitcoinaverage.service.BitcoinAverageMarketDataServiceR
 import org.knowm.xchange.dto.meta.ExchangeMetaData;
 import org.knowm.xchange.exceptions.ExchangeException;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class BitcoinAverageExchange extends BaseExchange implements Exchange {
 

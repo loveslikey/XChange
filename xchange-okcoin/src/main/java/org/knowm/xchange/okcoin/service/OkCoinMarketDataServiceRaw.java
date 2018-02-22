@@ -11,7 +11,7 @@ import org.knowm.xchange.okcoin.dto.marketdata.OkCoinDepth;
 import org.knowm.xchange.okcoin.dto.marketdata.OkCoinTickerResponse;
 import org.knowm.xchange.okcoin.dto.marketdata.OkCoinTrade;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 public class OkCoinMarketDataServiceRaw extends OkCoinBaseService {
 

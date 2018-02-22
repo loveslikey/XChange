@@ -1,18 +1,15 @@
 package org.xchange.coinegg.service;
 
+import feign.RequestTemplate;
+import org.apache.commons.codec.binary.Hex;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.utils.Params;
+
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import javax.ws.rs.FormParam;
-
-import org.apache.commons.codec.binary.Hex;
-import org.knowm.xchange.service.BaseParamsDigest;
-
-import si.mazi.rescu.Params;
-import si.mazi.rescu.RestInvocation;
-
-public final class CoinEggDigest extends BaseParamsDigest {
+public final class CoinEggDigest extends ParamsDigest {
 
   private static Charset UTF8;
 
@@ -21,18 +18,15 @@ public final class CoinEggDigest extends BaseParamsDigest {
   }
   
   @Override
-  public String digestParams(RestInvocation restInvocation) {
+  public String digestParams(RequestTemplate requestTemplate) {
 
     // Create Query String From Form Parameters
-    Params params = Params.of();
-    restInvocation.getParamsMap()
-                  .get(FormParam.class)
-                  .asHttpHeaders()
-                  .entrySet()
-                  .stream()
-                  .filter(e -> !e.getKey().equalsIgnoreCase("signature"))
-                  .forEach(e -> params.add(e.getKey(), e.getValue()));
-    
+    final Params params = Params.of();
+    requestTemplate.queries().entrySet().stream().filter(entry -> !entry.getKey().equals("signature")).forEach(entry -> {
+      params.add(entry.getKey(), entry.getValue());
+    });
+
+
     // Parse Query String
     byte[] queryString = params.asQueryString()
                                .trim()

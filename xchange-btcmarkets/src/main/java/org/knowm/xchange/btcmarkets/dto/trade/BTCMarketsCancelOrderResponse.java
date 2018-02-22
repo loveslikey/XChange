@@ -7,7 +7,7 @@ import org.knowm.xchange.btcmarkets.dto.BTCMarketsException;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import si.mazi.rescu.ExceptionalReturnContentException;
+import org.knowm.xchange.exceptions.ExceptionalReturnContentException;
 
 public class BTCMarketsCancelOrderResponse extends BTCMarketsBaseResponse {
 

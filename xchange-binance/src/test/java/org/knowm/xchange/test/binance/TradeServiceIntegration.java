@@ -28,7 +28,9 @@ public class TradeServiceIntegration {
 
   @BeforeClass
   public static void beforeClass() {
-    exchange = ExchangeFactory.INSTANCE.createExchange(BinanceExchange.class.getName());
+    //exchange = ExchangeFactory.INSTANCE.createExchange(BinanceExchange.class.getName());
+    exchange = ExchangeFactory.INSTANCE.createExchange(BinanceExchange.class.getName(),"JVvEWSCl3diPyOJGqpDQC6AqA7MCVdTi0MxSakfRjhQgJocp0ZMUiPGGr4Cyg7ky", "fWfxSRDg0H0PjT0U3kPx4Y9ts1WVhdbtkOYCs90z5p6ozoRspAzE5aTytoOG88fO");
+
     marketService = (BinanceMarketDataService) exchange.getMarketDataService();
     accountService = (BinanceAccountService) exchange.getAccountService();
     tradeService = (BinanceTradeService) exchange.getTradeService();

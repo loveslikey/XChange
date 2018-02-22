@@ -8,7 +8,7 @@ import org.knowm.xchange.taurus.dto.marketdata.TaurusOrderBook;
 import org.knowm.xchange.taurus.dto.marketdata.TaurusTicker;
 import org.knowm.xchange.taurus.dto.marketdata.TaurusTransaction;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 public class TaurusMarketDataServiceRaw extends TaurusBaseService {
 

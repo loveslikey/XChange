@@ -11,7 +11,7 @@ import org.knowm.xchange.bibox.service.BiboxTradeService;
 import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class BiboxExchange extends BaseExchange implements Exchange {
 

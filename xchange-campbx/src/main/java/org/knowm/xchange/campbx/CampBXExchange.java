@@ -7,7 +7,7 @@ import org.knowm.xchange.campbx.service.CampBXAccountService;
 import org.knowm.xchange.campbx.service.CampBXMarketDataService;
 import org.knowm.xchange.campbx.service.CampBXTradeService;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 /**
  * Exchange for CampBX.

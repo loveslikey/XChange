@@ -9,7 +9,7 @@ import org.knowm.xchange.blockchain.BlockchainExchange;
 import org.knowm.xchange.blockchain.dto.BitcoinAddress;
 import org.knowm.xchange.blockchain.dto.BitcoinAddresses;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 /**
  * @author timmolter

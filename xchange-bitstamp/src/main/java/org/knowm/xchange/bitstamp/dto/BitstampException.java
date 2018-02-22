@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import si.mazi.rescu.HttpStatusExceptionSupport;
+import org.knowm.xchange.exceptions.HttpStatusExceptionSupport;
 
 public class BitstampException extends HttpStatusExceptionSupport {
 

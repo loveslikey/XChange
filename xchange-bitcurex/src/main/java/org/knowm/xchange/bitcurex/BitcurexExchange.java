@@ -6,7 +6,7 @@ import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.bitcurex.service.BitcurexMarketDataService;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class BitcurexExchange extends BaseExchange implements Exchange {
 

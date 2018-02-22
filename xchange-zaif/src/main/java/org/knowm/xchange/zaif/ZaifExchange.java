@@ -9,7 +9,7 @@ import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 import org.knowm.xchange.zaif.service.ZaifMarketDataService;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class ZaifExchange extends BaseExchange implements Exchange {
 

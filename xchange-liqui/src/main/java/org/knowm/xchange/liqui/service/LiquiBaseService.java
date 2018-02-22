@@ -11,7 +11,7 @@ import org.knowm.xchange.liqui.dto.marketdata.LiquiResult;
 import org.knowm.xchange.service.BaseExchangeService;
 import org.knowm.xchange.service.BaseService;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 public class LiquiBaseService extends BaseExchangeService implements BaseService {
 

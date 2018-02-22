@@ -24,7 +24,7 @@ import org.knowm.xchange.hitbtc.v2.dto.HitbtcOrder;
 import org.knowm.xchange.hitbtc.v2.dto.HitbtcOwnTrade;
 import org.knowm.xchange.hitbtc.v2.dto.HitbtcTransaction;
 
-import si.mazi.rescu.HttpStatusIOException;
+import org.knowm.xchange.exceptions.HttpStatusIOException;
 
 /**
  * Version 2 of HitBtc API. See https://api.hitbtc.com/api/2/explore/

@@ -13,7 +13,7 @@ import org.knowm.xchange.livecoin.service.LivecoinMarketDataServiceRaw;
 import org.knowm.xchange.livecoin.service.LivecoinTradeService;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class LivecoinExchange extends BaseExchange implements Exchange {
 

@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.knowm.xchange.Exchange;
 
-import si.mazi.rescu.ParamsDigest;
+import org.knowm.xchange.service.ParamsDigest;
 
 public class BTCTradeBaseTradeService extends BTCTradeBaseService {
 

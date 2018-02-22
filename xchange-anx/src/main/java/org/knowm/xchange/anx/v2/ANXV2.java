@@ -30,8 +30,8 @@ import org.knowm.xchange.anx.v2.dto.trade.ANXOpenOrderWrapper;
 import org.knowm.xchange.anx.v2.dto.trade.ANXOrderResultWrapper;
 import org.knowm.xchange.anx.v2.dto.trade.ANXTradeResultWrapper;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 @Path("api/2")
 @Produces(MediaType.APPLICATION_JSON)

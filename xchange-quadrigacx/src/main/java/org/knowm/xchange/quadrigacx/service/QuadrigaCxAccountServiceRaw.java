@@ -9,7 +9,7 @@ import org.knowm.xchange.quadrigacx.QuadrigaCxAuthenticated;
 import org.knowm.xchange.quadrigacx.dto.account.QuadrigaCxBalance;
 import org.knowm.xchange.quadrigacx.dto.account.QuadrigaCxDepositAddress;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 public class QuadrigaCxAccountServiceRaw extends QuadrigaCxBaseService {
 

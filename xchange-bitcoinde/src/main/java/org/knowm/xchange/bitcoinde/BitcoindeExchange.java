@@ -6,7 +6,7 @@ import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.bitcoinde.service.BitcoindeMarketDataService;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 /**
  * @author matthewdowney

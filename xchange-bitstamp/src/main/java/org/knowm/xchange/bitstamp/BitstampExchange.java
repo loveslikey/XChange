@@ -8,7 +8,7 @@ import org.knowm.xchange.bitstamp.service.BitstampMarketDataService;
 import org.knowm.xchange.bitstamp.service.BitstampTradeService;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 /**
  * @author Matija Mazi

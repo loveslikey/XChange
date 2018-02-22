@@ -31,7 +31,7 @@ import org.knowm.xchange.coinmate.service.CoinmateMarketDataService;
 import org.knowm.xchange.coinmate.service.CoinmateTradeService;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 /**
  * @author Martin Stachon

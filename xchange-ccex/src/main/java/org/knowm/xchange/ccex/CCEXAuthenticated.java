@@ -16,8 +16,8 @@ import org.knowm.xchange.ccex.dto.trade.CCEXCancelResponse;
 import org.knowm.xchange.ccex.dto.trade.CCEXGetopenordersResponse;
 import org.knowm.xchange.ccex.dto.trade.CCEXGetorderhistoryResponse;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 @Path("t")
 @Produces(MediaType.APPLICATION_JSON)

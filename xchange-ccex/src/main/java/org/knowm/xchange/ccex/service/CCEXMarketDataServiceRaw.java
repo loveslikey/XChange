@@ -13,7 +13,7 @@ import org.knowm.xchange.ccex.dto.ticker.CCEXPriceResponse;
 import org.knowm.xchange.ccex.dto.ticker.CCEXTickerResponse;
 import org.knowm.xchange.currency.CurrencyPair;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 /**
  * @author Andraž Prinčič

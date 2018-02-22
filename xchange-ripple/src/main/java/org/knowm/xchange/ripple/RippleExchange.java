@@ -13,7 +13,7 @@ import org.knowm.xchange.ripple.service.RippleMarketDataService;
 import org.knowm.xchange.ripple.service.RippleTradeService;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class RippleExchange extends BaseExchange implements Exchange {
 

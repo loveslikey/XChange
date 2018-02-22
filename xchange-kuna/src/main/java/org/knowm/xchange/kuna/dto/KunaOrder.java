@@ -1,14 +1,13 @@
 package org.knowm.xchange.kuna.dto;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.knowm.xchange.kuna.dto.enums.KunaOrderType;
 import org.knowm.xchange.kuna.dto.enums.KunaSide;
 import org.knowm.xchange.kuna.util.KunaUtils;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * Order of crypto currency.

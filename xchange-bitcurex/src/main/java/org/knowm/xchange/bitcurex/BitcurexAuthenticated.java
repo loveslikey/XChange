@@ -11,8 +11,8 @@ import javax.ws.rs.core.MediaType;
 
 import org.knowm.xchange.bitcurex.dto.marketdata.BitcurexFunds;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 @Path("api/0")
 @Consumes(MediaType.APPLICATION_FORM_URLENCODED)

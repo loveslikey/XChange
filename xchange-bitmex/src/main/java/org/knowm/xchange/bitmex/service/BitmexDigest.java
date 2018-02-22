@@ -1,15 +1,11 @@
 package org.knowm.xchange.bitmex.service;
 
+import feign.RequestTemplate;
+import org.knowm.xchange.service.ParamsDigest;
+
 import java.util.Base64;
 
-import javax.ws.rs.HeaderParam;
-
-import org.apache.commons.codec.binary.Hex;
-import org.knowm.xchange.service.BaseParamsDigest;
-
-import si.mazi.rescu.RestInvocation;
-
-public class BitmexDigest extends BaseParamsDigest {
+public class BitmexDigest extends ParamsDigest {
 
   private String apiKey;
 
@@ -33,13 +29,14 @@ public class BitmexDigest extends BaseParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
+  public String digestParams(RequestTemplate requestTemplate ) {
 
-    String nonce = restInvocation.getParamValue(HeaderParam.class, "api-nonce").toString();
+    throw  new RuntimeException("暂未做适配");
+/*    String nonce = requestTemplate.queries().get( "api-nonce").iterator().next();
     String path = restInvocation.getInvocationUrl().split(restInvocation.getBaseUrl())[1];
     String payload = restInvocation.getHttpMethod() + "/" + path + nonce + restInvocation.getRequestBody();
 
-    return new String(Hex.encodeHex(getMac().doFinal(payload.getBytes())));
+    return new String(Hex.encodeHex(getMac().doFinal(payload.getBytes())));*/
   }
 
   private BitmexDigest(String secretKeyBase64, String apiKey) {

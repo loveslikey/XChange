@@ -10,8 +10,8 @@ import org.knowm.xchange.quoine.QuoineExchange;
 import org.knowm.xchange.service.BaseExchangeService;
 import org.knowm.xchange.service.BaseService;
 
-import si.mazi.rescu.HttpStatusIOException;
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.exceptions.HttpStatusIOException;
+import org.knowm.xchange.RestProxyFactory;
 
 public class QuoineBaseService extends BaseExchangeService implements BaseService {
 

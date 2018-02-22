@@ -9,7 +9,7 @@ import org.knowm.xchange.bitcoinde.dto.marketdata.BitcoindeOrderbookWrapper;
 import org.knowm.xchange.bitcoinde.dto.marketdata.BitcoindeTradesWrapper;
 import org.knowm.xchange.currency.CurrencyPair;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 /**
  * @author matthewdowney

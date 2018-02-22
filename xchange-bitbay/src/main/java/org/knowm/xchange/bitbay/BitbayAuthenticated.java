@@ -19,8 +19,8 @@ import org.knowm.xchange.bitbay.dto.trade.BitbayCancelResponse;
 import org.knowm.xchange.bitbay.dto.trade.BitbayOrder;
 import org.knowm.xchange.bitbay.dto.trade.BitbayTradeResponse;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 /**
  * @author Z. Dolezal

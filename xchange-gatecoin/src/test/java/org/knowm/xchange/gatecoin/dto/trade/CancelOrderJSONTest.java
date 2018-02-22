@@ -12,7 +12,7 @@ import org.knowm.xchange.gatecoin.dto.trade.Results.GatecoinCancelOrderResult;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import si.mazi.rescu.ExceptionalReturnContentException;
+import org.knowm.xchange.exceptions.ExceptionalReturnContentException;
 
 public class CancelOrderJSONTest {
 

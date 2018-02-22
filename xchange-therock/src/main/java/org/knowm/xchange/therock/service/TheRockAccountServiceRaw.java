@@ -15,7 +15,7 @@ import org.knowm.xchange.therock.dto.account.TheRockWithdrawal;
 import org.knowm.xchange.therock.dto.account.TheRockWithdrawalResponse;
 import org.knowm.xchange.therock.dto.trade.TheRockTransactions;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 public class TheRockAccountServiceRaw extends TheRockBaseService {
 

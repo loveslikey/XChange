@@ -33,7 +33,7 @@ import org.knowm.xchange.luno.dto.trade.LunoUserTrades;
 import org.knowm.xchange.luno.dto.trade.OrderType;
 import org.knowm.xchange.luno.dto.trade.State;
 
-import si.mazi.rescu.ParamsDigest;
+import org.knowm.xchange.service.ParamsDigest;
 
 /**
  * @see https://www.luno.com/en/api

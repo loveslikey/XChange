@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import si.mazi.rescu.ExceptionalReturnContentException;
+import org.knowm.xchange.exceptions.ExceptionalReturnContentException;
 
 public class QuadrigaCxOrderBook {
 

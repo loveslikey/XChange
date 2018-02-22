@@ -1,24 +1,22 @@
 package org.knowm.xchange.cryptofacilities.service;
 
+import feign.RequestTemplate;
+import net.iharder.Base64;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.utils.Params;
+
+import javax.crypto.Mac;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import javax.crypto.Mac;
-import javax.ws.rs.HeaderParam;
-
-import org.knowm.xchange.service.BaseParamsDigest;
-
-import net.iharder.Base64;
-import si.mazi.rescu.RestInvocation;
-
 /**
  * @author Jean-Christophe Laruelle
  */
 
-public class CryptoFacilitiesDigest extends BaseParamsDigest {
+public class CryptoFacilitiesDigest extends ParamsDigest {
 
   /**
    * Constructor
@@ -43,7 +41,7 @@ public class CryptoFacilitiesDigest extends BaseParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
+  public String digestParams(RequestTemplate requestTemplate) {
 
     MessageDigest sha256;
     try {
@@ -53,16 +51,19 @@ public class CryptoFacilitiesDigest extends BaseParamsDigest {
     }
 
     String decodedQuery = null;
-
+    final Params params = Params.of();
+    requestTemplate.queries().entrySet().stream().forEach(entry -> {
+      params.add(entry.getKey(), entry.getValue());
+    });
     try {
-      decodedQuery = URLDecoder.decode(restInvocation.getQueryString(), "UTF-8");
+      decodedQuery = URLDecoder.decode(params.asQueryString(), "UTF-8");
     } catch (UnsupportedEncodingException e) {
       throw new IllegalArgumentException("Unsupported query encoding", e);
     }
 
     sha256.update(decodedQuery.getBytes());
-    sha256.update(restInvocation.getParamValue(HeaderParam.class, "Nonce").toString().getBytes());
-    sha256.update((restInvocation.getPath()).getBytes());
+    sha256.update(requestTemplate.queries().get("Nonce").iterator().next().getBytes());
+    sha256.update((requestTemplate.url()).getBytes());
 
     Mac mac512 = getMac();
     mac512.update(sha256.digest());

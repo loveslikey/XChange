@@ -8,7 +8,7 @@ import org.knowm.xchange.mercadobitcoin.MercadoBitcoinAuthenticated;
 import org.knowm.xchange.mercadobitcoin.dto.MercadoBitcoinBaseTradeApiResult;
 import org.knowm.xchange.mercadobitcoin.dto.account.MercadoBitcoinAccountInfo;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 /**
  * @author Felipe Micaroni Lalli

@@ -10,7 +10,7 @@ import org.knowm.xchange.cexio.dto.marketdata.CexIOTicker;
 import org.knowm.xchange.cexio.dto.marketdata.CexIOTrade;
 import org.knowm.xchange.currency.CurrencyPair;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 /**
  * @author timmolter

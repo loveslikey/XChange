@@ -1,13 +1,13 @@
 package org.knowm.xchange.campbx.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.knowm.xchange.utils.jackson.serializers.SqlTimeDeserializer;
+import org.knowm.xchange.utils.jackson.serializers.YesNoBooleanDeserializerImpl;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
-import si.mazi.rescu.serialization.jackson.serializers.SqlTimeDeserializer;
-import si.mazi.rescu.serialization.jackson.serializers.YesNoBooleanDeserializerImpl;
 
 /**
  * @author Matija Mazi

@@ -1,9 +1,10 @@
 package org.knowm.xchange.bitcoincore.service;
 
-import java.io.IOException;
-
+import feign.Feign;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.ExchangeSpecification;
+import org.knowm.xchange.HttpClientBuilderUtil;
+import org.knowm.xchange.RestProxyFactory;
 import org.knowm.xchange.bitcoincore.BitcoinCore;
 import org.knowm.xchange.bitcoincore.dto.BitcoinCoreException;
 import org.knowm.xchange.bitcoincore.dto.account.BitcoinCoreBalanceRequest;
@@ -12,9 +13,7 @@ import org.knowm.xchange.bitcoincore.dto.account.BitcoinCoreUnconfirmedBalanceRe
 import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.service.BaseExchangeService;
 
-import si.mazi.rescu.ClientConfig;
-import si.mazi.rescu.ClientConfigUtil;
-import si.mazi.rescu.RestProxyFactory;
+import java.io.IOException;
 
 public class BitcoinCoreAccountServiceRaw extends BaseExchangeService {
 
@@ -28,11 +27,12 @@ public class BitcoinCoreAccountServiceRaw extends BaseExchangeService {
 
     ExchangeSpecification specification = exchange.getExchangeSpecification();
 
-    ClientConfig config = getClientConfig();
-    String user = specification.getUserName();
-    ClientConfigUtil.addBasicAuthCredentials(config, user == null ? "" : user, specification.getPassword());
+    okhttp3.OkHttpClient.Builder okHttpbuilder=getClientBuilder();
 
-    bitcoinCore = RestProxyFactory.createProxy(BitcoinCore.class, specification.getPlainTextUri(), config);
+    String user = specification.getUserName();
+    okHttpbuilder= HttpClientBuilderUtil.addBasicAuthCredentials(okHttpbuilder, user == null ? "" : user, specification.getPassword());
+    Feign.Builder builder = getClientConfig(okHttpbuilder);
+    bitcoinCore = RestProxyFactory.createProxy(BitcoinCore.class, specification.getPlainTextUri(), builder);
   }
 
   public BitcoinCoreBalanceResponse getBalance() throws IOException {

@@ -1,18 +1,19 @@
 package org.knowm.xchange.service;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
+import feign.RequestTemplate;
+import net.iharder.Base64;
+import org.knowm.xchange.ParamsDigestFactory;
 
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 
-import net.iharder.Base64;
-import si.mazi.rescu.ParamsDigest;
-
-public abstract class BaseParamsDigest implements ParamsDigest {
+public abstract class ParamsDigest  {
 
   public static final String HMAC_SHA_512 = "HmacSHA512";
   public static final String HMAC_SHA_384 = "HmacSHA384";
@@ -22,14 +23,22 @@ public abstract class BaseParamsDigest implements ParamsDigest {
 
   private final ThreadLocal<Mac> threadLocalMac;
 
+  String uuid;
+
+  public ParamsDigest(){
+    threadLocalMac=null;
+  }
+
+  public abstract String digestParams(RequestTemplate requestTemplate);
   /**
    * Constructor
    *
    * @param secretKeyBase64 Base64 secret key
    * @throws IllegalArgumentException if key is invalid (cannot be base-64-decoded or the decoded key is invalid).
    */
-  protected BaseParamsDigest(String secretKeyBase64, final String hmacString) throws IllegalArgumentException {
-
+  protected ParamsDigest(String secretKeyBase64, final String hmacString) throws IllegalArgumentException {
+    uuid=UUID.randomUUID().toString().replaceAll("-","");
+    ParamsDigestFactory.add(toString(),this);
     try {
       final SecretKey secretKey = new SecretKeySpec(secretKeyBase64.getBytes("UTF-8"), hmacString);
       threadLocalMac = new ThreadLocal<Mac>() {
@@ -59,7 +68,7 @@ public abstract class BaseParamsDigest implements ParamsDigest {
    * @param secretKeyBase64 Base64 secret key
    * @throws IllegalArgumentException if key is invalid (cannot be base-64-decoded or the decoded key is invalid).
    */
-  protected BaseParamsDigest(byte[] secretKeyBase64, final String hmacString) throws IllegalArgumentException {
+  protected ParamsDigest(byte[] secretKeyBase64, final String hmacString) throws IllegalArgumentException {
 
     final SecretKey secretKey = new SecretKeySpec(secretKeyBase64, hmacString);
     threadLocalMac = new ThreadLocal<Mac>() {
@@ -91,5 +100,10 @@ public abstract class BaseParamsDigest implements ParamsDigest {
     } catch (IOException e) {
       throw new RuntimeException("Can't decode secret key as Base 64", e);
     }
+  }
+
+  @Override
+  public String toString() {
+    return "ParamsDigest:"+uuid;
   }
 }

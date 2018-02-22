@@ -2,7 +2,7 @@ package org.knowm.xchange.kuna.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import si.mazi.rescu.HttpStatusExceptionSupport;
+import org.knowm.xchange.exceptions.HttpStatusExceptionSupport;
 
 /**
  * Kuna default exception.

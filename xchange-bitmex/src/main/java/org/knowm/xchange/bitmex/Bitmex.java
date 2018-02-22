@@ -20,8 +20,8 @@ import org.knowm.xchange.bitmex.dto.marketdata.BitmexPublicTrade;
 import org.knowm.xchange.bitmex.dto.marketdata.results.BitmexSymbolsAndPromptsResult;
 import org.knowm.xchange.bitmex.dto.trade.BitmexPosition;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 @Path("/api/v1")
 @Produces(MediaType.APPLICATION_JSON)

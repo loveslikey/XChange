@@ -22,8 +22,8 @@ import org.knowm.xchange.kucoin.dto.trading.KucoinActiveOrders;
 import org.knowm.xchange.kucoin.dto.trading.KucoinDealtOrdersInfo;
 import org.knowm.xchange.kucoin.dto.trading.KucoinOrder;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 @Path("v1")
 @Produces(MediaType.APPLICATION_JSON)

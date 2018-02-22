@@ -1,17 +1,10 @@
 package org.knowm.xchange.cexio.service;
 
-import java.math.BigInteger;
-import java.util.List;
+import feign.RequestTemplate;
+import org.knowm.xchange.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
 
-import javax.crypto.Mac;
-
-import org.knowm.xchange.cexio.dto.CexIORequest;
-import org.knowm.xchange.service.BaseParamsDigest;
-
-import si.mazi.rescu.RestInvocation;
-import si.mazi.rescu.SynchronizedValueFactory;
-
-public class CexIODigest extends BaseParamsDigest {
+public class CexIODigest extends ParamsDigest {
 
   private final String clientId;
   private final String apiKey;
@@ -38,9 +31,9 @@ public class CexIODigest extends BaseParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
-
-    Mac mac256 = getMac();
+  public String digestParams(RequestTemplate requestTemplate) {
+    throw  new RuntimeException("暂未做适配");
+/*    Mac mac256 = getMac();
     String nonce = nonceFactory.createValue().toString();
     mac256.update(nonce.getBytes());
     mac256.update(clientId.getBytes());
@@ -60,7 +53,7 @@ public class CexIODigest extends BaseParamsDigest {
       }
     }
 
-    return signature;
+    return signature;*/
   }
 
 }

@@ -18,8 +18,8 @@ import org.knowm.xchange.cryptofacilities.dto.marketdata.CryptoFacilitiesOpenOrd
 import org.knowm.xchange.cryptofacilities.dto.marketdata.CryptoFacilitiesOpenPositions;
 import org.knowm.xchange.cryptofacilities.dto.marketdata.CryptoFacilitiesOrder;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 /**
  * @author Jean-Christophe Laruelle

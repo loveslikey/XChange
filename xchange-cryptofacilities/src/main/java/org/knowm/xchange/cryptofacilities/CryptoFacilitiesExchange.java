@@ -8,7 +8,7 @@ import org.knowm.xchange.cryptofacilities.service.CryptoFacilitiesMarketDataServ
 import org.knowm.xchange.cryptofacilities.service.CryptoFacilitiesTradeService;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 /**
  * @author Jean-Christophe Laruelle

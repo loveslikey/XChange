@@ -11,7 +11,7 @@ import org.knowm.xchange.gatecoin.dto.account.Results.GatecoinBalanceResult;
 import org.knowm.xchange.gatecoin.dto.account.Results.GatecoinDepositAddressResult;
 import org.knowm.xchange.gatecoin.dto.account.Results.GatecoinWithdrawResult;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 /**
  * @author sumedha

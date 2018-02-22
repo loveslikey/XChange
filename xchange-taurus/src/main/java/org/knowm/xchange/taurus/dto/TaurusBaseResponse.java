@@ -1,6 +1,6 @@
 package org.knowm.xchange.taurus.dto;
 
-import si.mazi.rescu.ExceptionalReturnContentException;
+import org.knowm.xchange.exceptions.ExceptionalReturnContentException;
 
 public class TaurusBaseResponse {
 

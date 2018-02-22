@@ -25,7 +25,7 @@ import org.knowm.xchange.gemini.v1.dto.trade.GeminiOrderStatusResponse;
 import org.knowm.xchange.gemini.v1.dto.trade.GeminiPastTradesRequest;
 import org.knowm.xchange.gemini.v1.dto.trade.GeminiTradeResponse;
 
-import si.mazi.rescu.ParamsDigest;
+import org.knowm.xchange.service.ParamsDigest;
 
 @Path("v1")
 @Produces(MediaType.APPLICATION_JSON)

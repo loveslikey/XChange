@@ -8,7 +8,7 @@ import org.knowm.xchange.independentreserve.service.IndependentReserveMarketData
 import org.knowm.xchange.independentreserve.service.IndependentReserveTradeService;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class IndependentReserveExchange extends BaseExchange implements Exchange {
 

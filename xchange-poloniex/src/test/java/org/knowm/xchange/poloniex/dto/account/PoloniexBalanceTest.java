@@ -1,21 +1,7 @@
 package org.knowm.xchange.poloniex.dto.account;
 
-import java.lang.reflect.Method;
-
-import org.junit.Assert;
-import org.junit.Test;
-import org.knowm.xchange.poloniex.PoloniexAuthenticated;
-import org.knowm.xchange.poloniex.PoloniexException;
-
-import si.mazi.rescu.InvocationResult;
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.RestMethodMetadata;
-import si.mazi.rescu.SynchronizedValueFactory;
-import si.mazi.rescu.serialization.jackson.DefaultJacksonObjectMapperFactory;
-import si.mazi.rescu.serialization.jackson.JacksonResponseReader;
-
 public class PoloniexBalanceTest {
-
+/*
   @Test(expected = PoloniexException.class)
   public void balanceRejectTest() throws Exception {
 
@@ -31,5 +17,5 @@ public class PoloniexBalanceTest {
       Assert.assertTrue(e.getMessage().startsWith("Invalid API key/secret pair."));
       throw e;
     }
-  }
+  }*/
 }

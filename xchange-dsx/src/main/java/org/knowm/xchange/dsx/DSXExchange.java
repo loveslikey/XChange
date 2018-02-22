@@ -12,7 +12,7 @@ import org.knowm.xchange.dsx.service.DSXMarketDataService;
 import org.knowm.xchange.dsx.service.DSXTradeService;
 import org.knowm.xchange.utils.nonce.AtomicLongCurrentTimeIncrementalNonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 /**
  * @author Mikhail Wall

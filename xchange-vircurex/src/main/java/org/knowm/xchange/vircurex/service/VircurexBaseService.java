@@ -5,7 +5,7 @@ import org.knowm.xchange.service.BaseExchangeService;
 import org.knowm.xchange.service.BaseService;
 import org.knowm.xchange.vircurex.VircurexAuthenticated;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 public class VircurexBaseService extends BaseExchangeService implements BaseService {
 

@@ -1,22 +1,16 @@
 package org.knowm.xchange.okcoin;
 
+import feign.RequestTemplate;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.utils.Params;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
-import javax.ws.rs.FormParam;
-
-import si.mazi.rescu.Params;
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.RestInvocation;
-
-public class OkCoinDigest implements ParamsDigest {
+public class OkCoinDigest extends ParamsDigest {
 
   private static final char[] DIGITS_UPPER = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
@@ -57,9 +51,11 @@ public class OkCoinDigest implements ParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
-
-    final Params params = restInvocation.getParamsMap().get(FormParam.class);
+  public String digestParams(RequestTemplate requestTemplate) {
+    final Params params = Params.of();
+    requestTemplate.queries().entrySet().stream().forEach(entry -> {
+      params.add(entry.getKey(), entry.getValue());
+    });
     final Map<String, String> nameValueMap = params.asHttpHeaders();
 
     nameValueMap.remove("sign");

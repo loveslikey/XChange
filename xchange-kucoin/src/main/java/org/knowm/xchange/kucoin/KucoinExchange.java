@@ -11,7 +11,7 @@ import org.knowm.xchange.kucoin.service.KucoinMarketDataService;
 import org.knowm.xchange.kucoin.service.KucoinTradeService;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class KucoinExchange extends BaseExchange implements Exchange {
 

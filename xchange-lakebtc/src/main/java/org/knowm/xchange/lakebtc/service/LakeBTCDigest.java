@@ -1,21 +1,17 @@
 package org.knowm.xchange.lakebtc.service;
 
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-
-import org.knowm.xchange.lakebtc.LakeBTCUtil;
-import org.knowm.xchange.lakebtc.dto.LakeBTCRequest;
-import org.knowm.xchange.service.BaseParamsDigest;
+import feign.RequestTemplate;
+import org.knowm.xchange.service.ParamsDigest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import si.mazi.rescu.BasicAuthCredentials;
-import si.mazi.rescu.RestInvocation;
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
 
 /**
  * User: cristian.lucaci Date: 10/3/2014 Time: 5:03 PM
  */
-public class LakeBTCDigest extends BaseParamsDigest {
+public class LakeBTCDigest extends ParamsDigest {
 
   private final Logger log = LoggerFactory.getLogger(LakeBTCDigest.class);
 
@@ -41,9 +37,9 @@ public class LakeBTCDigest extends BaseParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
-
-    String tonce = restInvocation.getHttpHeadersFromParams().get("Json-Rpc-Tonce");
+  public String digestParams(RequestTemplate requestTemplate) {
+    throw  new RuntimeException("暂未做适配");
+ /*   String tonce = restInvocation.getHttpHeadersFromParams().get("Json-Rpc-Tonce");
 
     LakeBTCRequest request = null;
     for (Object param : restInvocation.getUnannanotatedParams()) {
@@ -69,7 +65,7 @@ public class LakeBTCDigest extends BaseParamsDigest {
 
     BasicAuthCredentials auth = new BasicAuthCredentials(apiKey, LakeBTCUtil.bytesToHex(hash));
 
-    return auth.digestParams(restInvocation);
+    return auth.digestParams(restInvocation);*/
   }
 
   public static String makeSign(String data, String key) throws Exception {

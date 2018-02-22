@@ -7,7 +7,7 @@ import org.knowm.xchange.independentreserve.IndependentReserve;
 import org.knowm.xchange.independentreserve.dto.marketdata.IndependentReserveOrderBook;
 import org.knowm.xchange.independentreserve.dto.marketdata.IndependentReserveTicker;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 /**
  * Author: Kamil Zbikowski Date: 4/9/15

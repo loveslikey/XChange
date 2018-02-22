@@ -8,7 +8,7 @@ import org.knowm.xchange.therock.service.TheRockMarketDataService;
 import org.knowm.xchange.therock.service.TheRockTradeService;
 import org.knowm.xchange.utils.nonce.TimestampIncrementingNonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 /**
  * @author Matija Mazi

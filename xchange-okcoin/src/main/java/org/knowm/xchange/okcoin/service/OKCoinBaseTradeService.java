@@ -7,7 +7,7 @@ import org.knowm.xchange.okcoin.OkCoinDigest;
 import org.knowm.xchange.okcoin.OkCoinUtils;
 import org.knowm.xchange.okcoin.dto.trade.OkCoinErrorResult;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 public class OKCoinBaseTradeService extends OkCoinBaseService {
 

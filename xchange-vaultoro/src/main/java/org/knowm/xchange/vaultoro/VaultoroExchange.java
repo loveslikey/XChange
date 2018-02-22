@@ -11,7 +11,7 @@ import org.knowm.xchange.vaultoro.service.VaultoroAccountService;
 import org.knowm.xchange.vaultoro.service.VaultoroMarketDataService;
 import org.knowm.xchange.vaultoro.service.VaultoroTradeService;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class VaultoroExchange extends BaseExchange implements Exchange {
 

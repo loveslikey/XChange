@@ -14,7 +14,7 @@ import org.knowm.xchange.dto.Order.OrderType;
 import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.service.trade.params.TradeHistoryParamsSorted;
 
-import si.mazi.rescu.HttpStatusIOException;
+import org.knowm.xchange.exceptions.HttpStatusIOException;
 
 // Coinfloor errors do not appear to be JSON formatted, e.g. the user_transactions query will return 
 // an HTTP status of 400 with and HTTP body consisting of '"limit" parameter must be positive'.

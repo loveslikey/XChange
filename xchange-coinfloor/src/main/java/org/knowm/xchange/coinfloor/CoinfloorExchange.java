@@ -9,7 +9,7 @@ import org.knowm.xchange.coinfloor.service.CoinfloorMarketDataService;
 import org.knowm.xchange.coinfloor.service.CoinfloorTradeService;
 import org.knowm.xchange.exceptions.ExchangeException;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class CoinfloorExchange extends BaseExchange {
 

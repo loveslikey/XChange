@@ -1,9 +1,7 @@
 package org.knowm.xchange.coinbase.service;
 
-import java.io.IOException;
-import java.util.List;
-
 import org.knowm.xchange.Exchange;
+import org.knowm.xchange.RestProxyFactory;
 import org.knowm.xchange.coinbase.CoinbaseAuthenticated;
 import org.knowm.xchange.coinbase.dto.CoinbaseBaseResponse;
 import org.knowm.xchange.coinbase.dto.account.CoinbaseToken;
@@ -12,9 +10,10 @@ import org.knowm.xchange.coinbase.dto.marketdata.CoinbaseCurrency;
 import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.service.BaseExchangeService;
 import org.knowm.xchange.service.BaseService;
+import org.knowm.xchange.service.ParamsDigest;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.RestProxyFactory;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * @author jamespedwards42

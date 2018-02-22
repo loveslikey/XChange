@@ -16,8 +16,8 @@ import org.knowm.xchange.taurus.dto.account.TaurusBalance;
 import org.knowm.xchange.taurus.dto.trade.TaurusOrder;
 import org.knowm.xchange.taurus.dto.trade.TaurusUserTransaction;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 @Path("/")
 @Consumes(MediaType.APPLICATION_FORM_URLENCODED)

@@ -1,21 +1,18 @@
 package org.knowm.xchange.kraken.service;
 
+import feign.RequestTemplate;
+import net.iharder.Base64;
+import org.knowm.xchange.service.ParamsDigest;
+
+import javax.crypto.Mac;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import javax.crypto.Mac;
-import javax.ws.rs.FormParam;
-
-import org.knowm.xchange.service.BaseParamsDigest;
-
-import net.iharder.Base64;
-import si.mazi.rescu.RestInvocation;
-
 /**
  * @author Benedikt Bünz
  */
-public class KrakenDigest extends BaseParamsDigest {
+public class KrakenDigest extends ParamsDigest {
 
   /**
    * Constructor
@@ -40,7 +37,7 @@ public class KrakenDigest extends BaseParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
+  public String digestParams(RequestTemplate requestTemplate) {
 
     MessageDigest sha256;
     try {
@@ -48,11 +45,11 @@ public class KrakenDigest extends BaseParamsDigest {
     } catch (NoSuchAlgorithmException e) {
       throw new RuntimeException("Illegal algorithm for post body digest. Check the implementation.");
     }
-    sha256.update(restInvocation.getParamValue(FormParam.class, "nonce").toString().getBytes());
-    sha256.update(restInvocation.getRequestBody().getBytes());
+    sha256.update(requestTemplate.queries().get("nonce").iterator().next().getBytes());
+    sha256.update(requestTemplate.bodyTemplate().getBytes());
 
     Mac mac512 = getMac();
-    mac512.update(("/" + restInvocation.getPath()).getBytes());
+    mac512.update(("/" + requestTemplate.url()).getBytes());
     mac512.update(sha256.digest());
 
     return Base64.encodeBytes(mac512.doFinal()).trim();

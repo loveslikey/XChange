@@ -1,6 +1,6 @@
 package org.knowm.xchange.utils.nonce;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class CurrentTime1000NonceFactory implements SynchronizedValueFactory<Long> {
 

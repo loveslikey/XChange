@@ -22,8 +22,8 @@ import org.knowm.xchange.bittrex.dto.trade.BittrexOpenOrdersResponse;
 import org.knowm.xchange.bittrex.dto.trade.BittrexTradeHistoryResponse;
 import org.knowm.xchange.bittrex.dto.trade.BittrexTradeResponse;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 @Path("v1.1")
 @Produces(MediaType.APPLICATION_JSON)

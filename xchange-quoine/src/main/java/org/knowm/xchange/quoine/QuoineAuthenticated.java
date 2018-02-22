@@ -25,7 +25,7 @@ import org.knowm.xchange.quoine.dto.trade.QuoineOrdersList;
 import org.knowm.xchange.quoine.dto.trade.QuoineTradesResponse;
 import org.knowm.xchange.quoine.dto.trade.QuoineTransactionsResponse;
 
-import si.mazi.rescu.ParamsDigest;
+import org.knowm.xchange.service.ParamsDigest;
 
 @Path("/")
 @Produces(MediaType.APPLICATION_JSON)

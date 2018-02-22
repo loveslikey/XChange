@@ -19,7 +19,7 @@ import org.knowm.xchange.mercadobitcoin.dto.trade.MercadoBitcoinCancelOrderResul
 import org.knowm.xchange.mercadobitcoin.dto.trade.MercadoBitcoinPlaceLimitOrderResult;
 import org.knowm.xchange.mercadobitcoin.dto.trade.MercadoBitcoinUserOrders;
 
-import si.mazi.rescu.ParamsDigest;
+import org.knowm.xchange.service.ParamsDigest;
 
 /**
  * @author Felipe Micaroni Lalli

@@ -24,9 +24,9 @@ import org.knowm.xchange.gatecoin.dto.trade.Results.GatecoinOrderResult;
 import org.knowm.xchange.gatecoin.dto.trade.Results.GatecoinPlaceOrderResult;
 import org.knowm.xchange.gatecoin.dto.trade.Results.GatecoinTradeHistoryResult;
 
-import si.mazi.rescu.ParamsDigest;
+import org.knowm.xchange.service.ParamsDigest;
 
-@Path("")
+@Path("/")
 @Produces(MediaType.APPLICATION_JSON)
 public interface GatecoinAuthenticated {
 

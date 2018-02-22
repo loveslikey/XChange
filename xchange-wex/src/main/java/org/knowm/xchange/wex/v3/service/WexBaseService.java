@@ -9,8 +9,8 @@ import org.knowm.xchange.service.BaseService;
 import org.knowm.xchange.wex.v3.WexAuthenticated;
 import org.knowm.xchange.wex.v3.dto.WexReturn;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.RestProxyFactory;
 
 public class WexBaseService extends BaseExchangeService implements BaseService {
 

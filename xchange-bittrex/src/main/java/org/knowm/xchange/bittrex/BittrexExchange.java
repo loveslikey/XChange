@@ -14,7 +14,7 @@ import org.knowm.xchange.bittrex.service.BittrexTradeService;
 import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.utils.nonce.AtomicLongIncrementalTime2013NonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class BittrexExchange extends BaseExchange implements Exchange {
 

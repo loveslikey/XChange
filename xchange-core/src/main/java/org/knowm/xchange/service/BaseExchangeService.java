@@ -1,59 +1,66 @@
 package org.knowm.xchange.service;
 
-import java.math.BigDecimal;
-
+import feign.Feign;
 import org.knowm.xchange.Exchange;
+import org.knowm.xchange.RestProxyFactory;
 import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.dto.meta.CurrencyPairMetaData;
 import org.knowm.xchange.dto.meta.ExchangeMetaData;
 import org.knowm.xchange.dto.trade.LimitOrder;
 import org.knowm.xchange.dto.trade.MarketOrder;
 
-import si.mazi.rescu.ClientConfig;
+import java.math.BigDecimal;
 
 /**
  * Top of the hierarchy abstract class for an "exchange service"
  */
 public abstract class BaseExchangeService {
 
-  /**
-   * The base Exchange. Every service has access to the containing exchange class, which hold meta data and the exchange specification
-   */
-  protected final Exchange exchange;
+    /**
+     * The base Exchange. Every service has access to the containing exchange class, which hold meta data and the exchange specification
+     */
+    protected final Exchange exchange;
 
-  /**
-   * Constructor
-   */
-  protected BaseExchangeService(Exchange exchange) {
+    /**
+     * Constructor
+     */
+    protected BaseExchangeService(Exchange exchange) {
 
-    this.exchange = exchange;
-  }
-
-  public void verifyOrder(LimitOrder limitOrder) {
-
-    ExchangeMetaData exchangeMetaData = exchange.getExchangeMetaData();
-    verifyOrder(limitOrder, exchangeMetaData);
-    BigDecimal price = limitOrder.getLimitPrice().stripTrailingZeros();
-
-    if (price.scale() > exchangeMetaData.getCurrencyPairs().get(limitOrder.getCurrencyPair()).getPriceScale()) {
-      throw new IllegalArgumentException("Unsupported price scale " + price.scale());
+        this.exchange = exchange;
     }
-  }
 
-  public void verifyOrder(MarketOrder marketOrder) {
+    public void verifyOrder(LimitOrder limitOrder) {
 
-    verifyOrder(marketOrder, exchange.getExchangeMetaData());
-  }
+        ExchangeMetaData exchangeMetaData = exchange.getExchangeMetaData();
+        verifyOrder(limitOrder, exchangeMetaData);
+        BigDecimal price = limitOrder.getLimitPrice().stripTrailingZeros();
 
-  /**
-   * Get a ClientConfig object which contains exchange-specific timeout values (<i>httpConnTimeout</i> and <i>httpReadTimeout</i>) if they were
-   * present in the ExchangeSpecification of this instance. Subclasses are encouraged to use this config object when creating a RestCU proxy.
-   *
-   * @return a rescu client config object
-   */
-  public ClientConfig getClientConfig() {
+        if (price.scale() > exchangeMetaData.getCurrencyPairs().get(limitOrder.getCurrencyPair()).getPriceScale()) {
+            throw new IllegalArgumentException("Unsupported price scale " + price.scale());
+        }
+    }
 
-    ClientConfig rescuConfig = new ClientConfig(); // create default rescu config
+    public void verifyOrder(MarketOrder marketOrder) {
+        verifyOrder(marketOrder, exchange.getExchangeMetaData());
+    }
+
+    public okhttp3.OkHttpClient.Builder getClientBuilder() {
+        return RestProxyFactory.getDefaultClientBuilder();
+    }
+    public Feign.Builder getClientConfig(okhttp3.OkHttpClient.Builder okHttpBuilder) {
+        return  RestProxyFactory.getDefaultClientConfig(okHttpBuilder);
+    }
+
+    /**
+     * Get a ClientConfig object which contains exchange-specific timeout values (<i>httpConnTimeout</i> and <i>httpReadTimeout</i>) if they were
+     * present in the ExchangeSpecification of this instance. Subclasses are encouraged to use this config object when creating a RestCU proxy.
+     *
+     * @return a rescu client config object
+     */
+    public Feign.Builder getClientConfig() {
+      return  RestProxyFactory.getDefaultClientConfig();
+
+/*    ClientConfig rescuConfig = new ClientConfig(); // create default rescu config
 
     // set per exchange connection- and read-timeout (if they have been set in the ExchangeSpecification)
     int customHttpConnTimeout = exchange.getExchangeSpecification().getHttpConnTimeout();
@@ -70,29 +77,29 @@ public abstract class BaseExchangeService {
     if (exchange.getExchangeSpecification().getProxyPort() != null) {
       rescuConfig.setProxyPort(exchange.getExchangeSpecification().getProxyPort());
     }
-    return rescuConfig;
-  }
-
-  final protected void verifyOrder(Order order, ExchangeMetaData exchangeMetaData) {
-
-    CurrencyPairMetaData metaData = exchangeMetaData.getCurrencyPairs().get(order.getCurrencyPair());
-    if (metaData == null) {
-      throw new IllegalArgumentException("Invalid CurrencyPair");
+    return rescuConfig;*/
     }
 
-    BigDecimal originalAmount = order.getOriginalAmount();
-    if (originalAmount == null) {
-      throw new IllegalArgumentException("Missing originalAmount");
-    }
+    final protected void verifyOrder(Order order, ExchangeMetaData exchangeMetaData) {
 
-    BigDecimal amount = originalAmount.stripTrailingZeros();
-    BigDecimal minimumAmount = metaData.getMinimumAmount();
-    if (minimumAmount != null) {
-      if (amount.scale() > minimumAmount.scale()) {
-        throw new IllegalArgumentException("Unsupported amount scale " + amount.scale());
-      } else if (amount.compareTo(minimumAmount) < 0) {
-        throw new IllegalArgumentException("Order amount less than minimum");
-      }
+        CurrencyPairMetaData metaData = exchangeMetaData.getCurrencyPairs().get(order.getCurrencyPair());
+        if (metaData == null) {
+            throw new IllegalArgumentException("Invalid CurrencyPair");
+        }
+
+        BigDecimal originalAmount = order.getOriginalAmount();
+        if (originalAmount == null) {
+            throw new IllegalArgumentException("Missing originalAmount");
+        }
+
+        BigDecimal amount = originalAmount.stripTrailingZeros();
+        BigDecimal minimumAmount = metaData.getMinimumAmount();
+        if (minimumAmount != null) {
+            if (amount.scale() > minimumAmount.scale()) {
+                throw new IllegalArgumentException("Unsupported amount scale " + amount.scale());
+            } else if (amount.compareTo(minimumAmount) < 0) {
+                throw new IllegalArgumentException("Order amount less than minimum");
+            }
+        }
     }
-  }
 }

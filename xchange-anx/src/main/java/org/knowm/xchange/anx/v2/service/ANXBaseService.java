@@ -10,7 +10,7 @@ import org.knowm.xchange.exceptions.NonceException;
 import org.knowm.xchange.service.BaseExchangeService;
 import org.knowm.xchange.service.BaseService;
 
-import si.mazi.rescu.HttpStatusIOException;
+import org.knowm.xchange.exceptions.HttpStatusIOException;
 
 public class ANXBaseService extends BaseExchangeService implements BaseService {
 

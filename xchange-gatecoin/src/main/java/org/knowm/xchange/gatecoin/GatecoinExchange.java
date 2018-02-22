@@ -8,7 +8,7 @@ import org.knowm.xchange.gatecoin.service.GatecoinMarketDataService;
 import org.knowm.xchange.gatecoin.service.GatecoinTradeService;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 /**
  * @author Sumedha

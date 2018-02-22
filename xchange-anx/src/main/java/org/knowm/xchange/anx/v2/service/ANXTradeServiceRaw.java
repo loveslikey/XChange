@@ -17,8 +17,8 @@ import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.dto.trade.MarketOrder;
 import org.knowm.xchange.utils.Assert;
 
-import si.mazi.rescu.HttpStatusIOException;
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.exceptions.HttpStatusIOException;
+import org.knowm.xchange.RestProxyFactory;
 
 public class ANXTradeServiceRaw extends ANXBaseService {
 

@@ -14,7 +14,7 @@ import org.knowm.xchange.quoine.dto.trade.QuoineTransaction;
 import org.knowm.xchange.quoine.dto.trade.QuoineTransactionsResponse;
 import org.knowm.xchange.utils.Assert;
 
-import si.mazi.rescu.HttpStatusIOException;
+import org.knowm.xchange.exceptions.HttpStatusIOException;
 
 public class QuoineAccountServiceRaw extends QuoineBaseService {
 

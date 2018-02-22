@@ -17,8 +17,8 @@ import org.knowm.xchange.vaultoro.dto.trade.VaultoroCancelOrderResponse;
 import org.knowm.xchange.vaultoro.dto.trade.VaultoroNewOrderResponse;
 import org.knowm.xchange.vaultoro.dto.trade.VaultoroOrdersResponse;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 @Path("/")
 @Produces(MediaType.APPLICATION_JSON)

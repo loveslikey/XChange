@@ -6,7 +6,7 @@ import org.knowm.xchange.btcc.BTCCExchange;
 import org.knowm.xchange.service.BaseExchangeService;
 import org.knowm.xchange.service.BaseService;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 public class BTCCBaseService<T extends BTCC> extends BaseExchangeService implements BaseService {
 

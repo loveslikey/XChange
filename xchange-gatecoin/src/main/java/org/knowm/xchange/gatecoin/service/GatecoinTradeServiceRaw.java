@@ -10,7 +10,7 @@ import org.knowm.xchange.gatecoin.dto.trade.Results.GatecoinOrderResult;
 import org.knowm.xchange.gatecoin.dto.trade.Results.GatecoinPlaceOrderResult;
 import org.knowm.xchange.gatecoin.dto.trade.Results.GatecoinTradeHistoryResult;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 /**
  * @author sumedha

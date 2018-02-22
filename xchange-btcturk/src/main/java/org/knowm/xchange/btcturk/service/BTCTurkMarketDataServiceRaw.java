@@ -12,7 +12,7 @@ import org.knowm.xchange.btcturk.dto.marketdata.BTCTurkTicker;
 import org.knowm.xchange.btcturk.dto.marketdata.BTCTurkTrade;
 import org.knowm.xchange.currency.CurrencyPair;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 /**
  * @author semihunaldi

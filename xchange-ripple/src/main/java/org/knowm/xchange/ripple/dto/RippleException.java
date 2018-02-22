@@ -2,7 +2,7 @@ package org.knowm.xchange.ripple.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import si.mazi.rescu.HttpStatusExceptionSupport;
+import org.knowm.xchange.exceptions.HttpStatusExceptionSupport;
 
 /* Examples of rejects observed: 
 

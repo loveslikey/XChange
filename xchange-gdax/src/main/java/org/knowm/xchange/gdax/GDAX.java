@@ -38,9 +38,9 @@ import org.knowm.xchange.utils.DateUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 
-import si.mazi.rescu.HttpStatusIOException;
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.exceptions.HttpStatusIOException;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 @Path("/")
 @Produces(MediaType.APPLICATION_JSON)

@@ -17,8 +17,8 @@ import org.knowm.xchange.quadrigacx.dto.trade.QuadrigaCxOrder;
 import org.knowm.xchange.quadrigacx.dto.trade.QuadrigaCxUserTransaction;
 import org.knowm.xchange.quadrigacx.service.QuadrigaCxDigest;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 @Path("v2")
 @Consumes(MediaType.APPLICATION_FORM_URLENCODED)

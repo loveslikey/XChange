@@ -1,15 +1,13 @@
 package org.knowm.xchange.bitfinex.v1.service;
 
-import java.math.BigInteger;
+import feign.RequestTemplate;
+import net.iharder.Base64;
+import org.knowm.xchange.service.ParamsDigest;
 
 import javax.crypto.Mac;
+import java.math.BigInteger;
 
-import org.knowm.xchange.service.BaseParamsDigest;
-
-import net.iharder.Base64;
-import si.mazi.rescu.RestInvocation;
-
-public class BitfinexHmacPostBodyDigest extends BaseParamsDigest {
+public class BitfinexHmacPostBodyDigest extends ParamsDigest {
 
   /**
    * Constructor
@@ -28,9 +26,9 @@ public class BitfinexHmacPostBodyDigest extends BaseParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
+  public String digestParams(RequestTemplate requestTemplate) {
 
-    String postBody = restInvocation.getRequestBody();
+    String postBody = requestTemplate.bodyTemplate();
     Mac mac = getMac();
     mac.update(Base64.encodeBytes(postBody.getBytes()).getBytes());
 

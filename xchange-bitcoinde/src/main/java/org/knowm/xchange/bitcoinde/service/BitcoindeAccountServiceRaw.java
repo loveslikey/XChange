@@ -6,7 +6,7 @@ import org.knowm.xchange.Exchange;
 import org.knowm.xchange.bitcoinde.dto.BitcoindeException;
 import org.knowm.xchange.bitcoinde.dto.account.BitcoindeAccountWrapper;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 /**
  * 

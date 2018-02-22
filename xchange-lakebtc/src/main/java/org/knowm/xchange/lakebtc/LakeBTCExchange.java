@@ -8,7 +8,7 @@ import org.knowm.xchange.lakebtc.service.LakeBTCMarketDataService;
 import org.knowm.xchange.lakebtc.service.LakeBTCTradeService;
 import org.knowm.xchange.utils.nonce.CurrentNanosecondTimeIncrementalNonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 /**
  * @author kpysniak

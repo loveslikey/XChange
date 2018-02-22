@@ -9,7 +9,7 @@ import org.knowm.xchange.luno.service.LunoAccountService;
 import org.knowm.xchange.luno.service.LunoMarketDataService;
 import org.knowm.xchange.luno.service.LunoTradeService;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 /**
  * @author Benedikt Bünz

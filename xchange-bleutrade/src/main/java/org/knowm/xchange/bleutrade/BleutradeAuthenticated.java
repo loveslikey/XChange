@@ -23,8 +23,8 @@ import org.knowm.xchange.bleutrade.service.BleutradeResponse;
 import org.knowm.xchange.bleutrade.service.DepositRecord;
 import org.knowm.xchange.bleutrade.service.WithdrawRecord;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 @Path("v2")
 @Produces(MediaType.APPLICATION_JSON)

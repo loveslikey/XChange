@@ -21,8 +21,8 @@ import org.knowm.xchange.bitcoinde.dto.marketdata.BitcoindeTradesWrapper;
 import org.knowm.xchange.bitcoinde.trade.BitcoindeIdResponse;
 import org.knowm.xchange.bitcoinde.trade.BitcoindeMyOpenOrdersWrapper;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 @Path("/")
 @Produces(MediaType.APPLICATION_JSON)

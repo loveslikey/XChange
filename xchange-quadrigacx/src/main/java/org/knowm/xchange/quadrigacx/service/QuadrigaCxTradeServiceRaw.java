@@ -10,7 +10,7 @@ import org.knowm.xchange.quadrigacx.QuadrigaCxUtils;
 import org.knowm.xchange.quadrigacx.dto.trade.QuadrigaCxOrder;
 import org.knowm.xchange.quadrigacx.dto.trade.QuadrigaCxUserTransaction;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 public class QuadrigaCxTradeServiceRaw extends QuadrigaCxBaseService {
 

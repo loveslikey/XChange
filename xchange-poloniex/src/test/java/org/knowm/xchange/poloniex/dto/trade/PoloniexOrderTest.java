@@ -1,25 +1,13 @@
 package org.knowm.xchange.poloniex.dto.trade;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Test;
+import org.knowm.xchange.poloniex.dto.marketdata.PoloniexPublicTrade;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Method;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.knowm.xchange.poloniex.PoloniexAuthenticated;
-import org.knowm.xchange.poloniex.PoloniexException;
-import org.knowm.xchange.poloniex.dto.marketdata.PoloniexPublicTrade;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import si.mazi.rescu.InvocationResult;
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.RestMethodMetadata;
-import si.mazi.rescu.SynchronizedValueFactory;
-import si.mazi.rescu.serialization.jackson.DefaultJacksonObjectMapperFactory;
-import si.mazi.rescu.serialization.jackson.JacksonResponseReader;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PoloniexOrderTest {
 
@@ -51,7 +39,7 @@ public class PoloniexOrderTest {
     assertThat(response.getPoloniexPublicTrades().size()).isEqualTo(0);
     assertThat(response.getAmountUnfilled()).isEqualTo("1.00000000");
   }
-
+/*
   @Test(expected = PoloniexException.class)
   public void buyRejectTest() throws Exception {
 
@@ -119,5 +107,5 @@ public class PoloniexOrderTest {
       Assert.assertTrue(e.getMessage().startsWith("Not enough LTC."));
       throw e;
     }
-  }
+  }*/
 }

@@ -5,14 +5,14 @@ import org.known.xchange.acx.dto.account.AcxAccountInfo;
 import org.known.xchange.acx.dto.marketdata.AcxMarket;
 import org.known.xchange.acx.dto.marketdata.AcxOrder;
 import org.known.xchange.acx.dto.marketdata.AcxOrderBook;
-import si.mazi.rescu.ParamsDigest;
+import org.knowm.xchange.service.ParamsDigest;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.util.List;
 
-@Path("")
+@Path("/")
 @Produces(MediaType.APPLICATION_JSON)
 public interface AcxApi {
     /**

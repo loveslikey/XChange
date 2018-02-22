@@ -1,18 +1,17 @@
 package org.knowm.xchange.itbit.v1.service;
 
+import feign.RequestTemplate;
+import net.iharder.Base64;
+import org.knowm.xchange.service.ParamsDigest;
+
+import javax.crypto.Mac;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Collection;
 import java.util.Map;
 
-import javax.crypto.Mac;
-
-import org.knowm.xchange.service.BaseParamsDigest;
-
-import net.iharder.Base64;
-import si.mazi.rescu.RestInvocation;
-
-public class ItBitHmacPostBodyDigest extends BaseParamsDigest {
+public class ItBitHmacPostBodyDigest extends ParamsDigest {
 
   private static final String FIELD_SEPARATOR = "\",\"";
 
@@ -38,7 +37,7 @@ public class ItBitHmacPostBodyDigest extends BaseParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
+  public String digestParams(RequestTemplate requestTemplate) {
 
     MessageDigest md;
     try {
@@ -47,20 +46,20 @@ public class ItBitHmacPostBodyDigest extends BaseParamsDigest {
       throw new RuntimeException("Illegal algorithm for post body digest. Check the implementation.");
     }
 
-    Map<String, String> httpHeaders = restInvocation.getHttpHeadersFromParams();
-    String currentNonce = httpHeaders.get("X-Auth-Nonce");
-    String currentTimestamp = httpHeaders.get("X-Auth-Timestamp");
+    Map<String, Collection<String>> httpHeaders =requestTemplate.queries();
+    String currentNonce = httpHeaders.get("X-Auth-Nonce").iterator().next();
+    String currentTimestamp = httpHeaders.get("X-Auth-Timestamp").iterator().next();
 
     // only POST requests will have a non-null request body.
-    String requestBody = restInvocation.getRequestBody();
+    String requestBody = requestTemplate.bodyTemplate();
     if (requestBody == null) {
       requestBody = "";
     } else {
       requestBody = requestBody.replace("\"", "\\\"");
     }
 
-    String verb = restInvocation.getHttpMethod().trim();
-    String invocationUrl = restInvocation.getInvocationUrl().trim();
+    String verb = requestTemplate.method().trim();
+    String invocationUrl = (requestTemplate.url()+requestTemplate.queryLine()).trim();
     String jsonEncodedArray = new StringBuilder("[\"").append(verb).append(FIELD_SEPARATOR).append(invocationUrl).append(FIELD_SEPARATOR)
         .append(requestBody).append(FIELD_SEPARATOR).append(currentNonce).append(FIELD_SEPARATOR).append(currentTimestamp).append("\"]").toString();
     md.update(currentNonce.getBytes(charset));

@@ -1,18 +1,16 @@
 package org.knowm.xchange.anx.v2.service;
 
-import java.io.IOException;
+import feign.RequestTemplate;
+import net.iharder.Base64;
+import org.knowm.xchange.service.ParamsDigest;
 
 import javax.crypto.Mac;
-
-import org.knowm.xchange.service.BaseParamsDigest;
-
-import net.iharder.Base64;
-import si.mazi.rescu.RestInvocation;
+import java.io.IOException;
 
 /**
  * @author Matija Mazi
  */
-public class ANXV2Digest extends BaseParamsDigest {
+public class ANXV2Digest extends ParamsDigest {
 
   /**
    * Constructor
@@ -37,12 +35,12 @@ public class ANXV2Digest extends BaseParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
+  public String digestParams(RequestTemplate requestTemplate) {
 
     Mac mac = getMac();
-    mac.update(restInvocation.getMethodPath().getBytes());
+    mac.update(requestTemplate.url().getBytes());
     mac.update(new byte[]{0});
-    mac.update(restInvocation.getRequestBody().getBytes());
+    mac.update(requestTemplate.bodyTemplate().getBytes());
 
     return Base64.encodeBytes(mac.doFinal()).trim();
   }

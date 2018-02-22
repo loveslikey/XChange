@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import si.mazi.rescu.HttpStatusExceptionSupport;
+import org.knowm.xchange.exceptions.HttpStatusExceptionSupport;
 
 public class BTCMarketsException extends HttpStatusExceptionSupport {
 

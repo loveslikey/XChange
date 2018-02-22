@@ -13,16 +13,16 @@ import org.knowm.xchange.bitcoincore.dto.account.BitcoinCoreBalanceRequest;
 import org.knowm.xchange.bitcoincore.dto.account.BitcoinCoreBalanceResponse;
 import org.knowm.xchange.bitcoincore.dto.account.BitcoinCoreUnconfirmedBalanceRequest;
 
-@Path("")
+@Path("/")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public interface BitcoinCore {
 
   @POST
-  @Path("")
+  @Path("/")
   BitcoinCoreBalanceResponse getBalance(BitcoinCoreBalanceRequest request) throws IOException, BitcoinCoreException;
 
   @POST
-  @Path("")
+  @Path("/")
   BitcoinCoreBalanceResponse getUnconfirmedBalance(BitcoinCoreUnconfirmedBalanceRequest request) throws IOException, BitcoinCoreException;
 }

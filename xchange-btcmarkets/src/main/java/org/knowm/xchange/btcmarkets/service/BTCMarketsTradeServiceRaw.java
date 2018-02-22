@@ -16,8 +16,8 @@ import org.knowm.xchange.btcmarkets.dto.trade.BTCMarketsPlaceOrderResponse;
 import org.knowm.xchange.btcmarkets.dto.trade.BTCMarketsTradeHistory;
 import org.knowm.xchange.currency.CurrencyPair;
 
-import si.mazi.rescu.RestProxyFactory;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.RestProxyFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class BTCMarketsTradeServiceRaw extends BTCMarketsBaseService {
 

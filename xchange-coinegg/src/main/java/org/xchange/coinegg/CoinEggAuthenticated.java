@@ -16,7 +16,7 @@ import org.xchange.coinegg.dto.trade.CoinEggTradeCancel;
 import org.xchange.coinegg.dto.trade.CoinEggTradeList;
 import org.xchange.coinegg.dto.trade.CoinEggTradeView;
 
-import si.mazi.rescu.ParamsDigest;
+import org.knowm.xchange.service.ParamsDigest;
 
 @Path("api/v1")
 @Consumes(MediaType.APPLICATION_FORM_URLENCODED)

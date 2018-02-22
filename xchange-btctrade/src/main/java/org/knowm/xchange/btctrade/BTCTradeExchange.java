@@ -8,7 +8,7 @@ import org.knowm.xchange.btctrade.service.BTCTradeMarketDataService;
 import org.knowm.xchange.btctrade.service.BTCTradeTradeService;
 import org.knowm.xchange.utils.nonce.CurrentNanosecondTimeIncrementalNonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class BTCTradeExchange extends BaseExchange implements Exchange {
 

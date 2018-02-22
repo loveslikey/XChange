@@ -5,7 +5,7 @@ import org.knowm.xchange.paymium.Paymium;
 import org.knowm.xchange.service.BaseExchangeService;
 import org.knowm.xchange.service.BaseService;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 public class PaymiumBaseService extends BaseExchangeService implements BaseService {
 

@@ -10,7 +10,7 @@ import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 import org.xchange.coinegg.service.CoinEggAccountService;
 import org.xchange.coinegg.service.CoinEggMarketDataService;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class CoinEggExchange extends BaseExchange implements Exchange {
 

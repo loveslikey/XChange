@@ -14,8 +14,8 @@ import org.knowm.xchange.bitstamp.dto.trade.BitstampOrderStatusResponse;
 import org.knowm.xchange.bitstamp.dto.trade.BitstampUserTransaction;
 import org.knowm.xchange.currency.CurrencyPair;
 
-import si.mazi.rescu.RestProxyFactory;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.RestProxyFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 /**
  * @author gnandiga

@@ -29,8 +29,8 @@ import org.knowm.xchange.bitflyer.dto.marketdata.BitflyerTicker;
 import org.knowm.xchange.bitflyer.dto.trade.BitflyerExecution;
 import org.knowm.xchange.bitflyer.dto.trade.BitflyerPosition;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 @Path("/v1")
 @Produces(MediaType.APPLICATION_JSON)

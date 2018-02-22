@@ -36,8 +36,8 @@ import org.knowm.xchange.coinbase.dto.merchant.CoinbaseSubscriptions;
 import org.knowm.xchange.coinbase.dto.trade.CoinbaseTransfer;
 import org.knowm.xchange.coinbase.dto.trade.CoinbaseTransfers;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 /**
  * @author jamespedwards42

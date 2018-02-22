@@ -14,7 +14,7 @@ import org.knowm.xchange.liqui.service.LiquiMarketDataServiceRaw;
 import org.knowm.xchange.liqui.service.LiquiTradeService;
 import org.knowm.xchange.utils.nonce.CurrentTime1000NonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class LiquiExchange extends BaseExchange implements Exchange {
 

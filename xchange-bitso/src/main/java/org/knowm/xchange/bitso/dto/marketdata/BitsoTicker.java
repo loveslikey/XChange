@@ -1,13 +1,13 @@
 package org.knowm.xchange.bitso.dto.marketdata;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.knowm.xchange.exceptions.ExceptionalReturnContentException;
+import org.knowm.xchange.utils.jackson.serializers.TimestampDeserializer;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
-import si.mazi.rescu.ExceptionalReturnContentException;
-import si.mazi.rescu.serialization.jackson.serializers.TimestampDeserializer;
 
 /**
  * @author Piotr Ładyżyński

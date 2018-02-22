@@ -8,7 +8,7 @@ import org.knowm.xchange.itbit.v1.service.ItBitMarketDataService;
 import org.knowm.xchange.itbit.v1.service.ItBitTradeService;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class ItBitExchange extends BaseExchange implements Exchange {
 

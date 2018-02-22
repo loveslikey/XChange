@@ -9,7 +9,7 @@ import javax.ws.rs.PathParam;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.truefx.dto.marketdata.TrueFxTicker;
 
-@Path("")
+@Path("/")
 public interface TrueFxPublic {
   @GET
   @Path("rates/connect.html?f=csv&c={pair}")

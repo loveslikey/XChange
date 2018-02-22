@@ -8,7 +8,7 @@ import org.knowm.xchange.poloniex.dto.marketdata.PoloniexPublicTrade;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import si.mazi.rescu.ExceptionalReturnContentException;
+import org.knowm.xchange.exceptions.ExceptionalReturnContentException;
 
 public class PoloniexMoveResponse {
 

@@ -8,7 +8,7 @@ import org.knowm.xchange.gatecoin.dto.marketdata.Results.GatecoinDepthResult;
 import org.knowm.xchange.gatecoin.dto.marketdata.Results.GatecoinTickerResult;
 import org.knowm.xchange.gatecoin.dto.marketdata.Results.GatecoinTransactionResult;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 /**
  * @author sumedha

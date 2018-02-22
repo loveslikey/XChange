@@ -7,7 +7,7 @@ import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.quoine.dto.marketdata.QuoineOrderBook;
 import org.knowm.xchange.quoine.dto.marketdata.QuoineProduct;
 
-import si.mazi.rescu.HttpStatusIOException;
+import org.knowm.xchange.exceptions.HttpStatusIOException;
 
 public class QuoineMarketDataServiceRaw extends QuoineBaseService {
 

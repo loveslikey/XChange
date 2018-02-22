@@ -33,7 +33,7 @@ import org.knowm.xchange.coinmate.dto.account.CoinmateDepositAddresses;
 import org.knowm.xchange.coinmate.dto.trade.CoinmateTradeResponse;
 
 import org.knowm.xchange.coinmate.dto.trade.CoinmateTransactionHistory;
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 /**
  * @author Martin Stachon

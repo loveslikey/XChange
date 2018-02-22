@@ -18,8 +18,8 @@ import org.knowm.xchange.gateio.dto.trade.GateioOrderStatus;
 import org.knowm.xchange.gateio.dto.trade.GateioPlaceOrderReturn;
 import org.knowm.xchange.gateio.dto.trade.GateioTradeHistoryReturn;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 @Path("api2/1")
 @Consumes(MediaType.APPLICATION_FORM_URLENCODED)

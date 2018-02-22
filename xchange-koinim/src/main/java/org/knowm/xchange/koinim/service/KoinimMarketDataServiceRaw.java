@@ -6,7 +6,7 @@ import org.knowm.xchange.Exchange;
 import org.knowm.xchange.koinim.Koinim;
 import org.knowm.xchange.koinim.dto.marketdata.KoinimTicker;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 /**
  * @author ahmet.oz

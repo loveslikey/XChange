@@ -8,7 +8,7 @@ import org.knowm.xchange.vircurex.service.VircurexAccountService;
 import org.knowm.xchange.vircurex.service.VircurexMarketDataService;
 import org.knowm.xchange.vircurex.service.VircurexTradeService;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class VircurexExchange extends BaseExchange implements Exchange {
 

@@ -7,7 +7,7 @@ import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.bitcoincore.service.BitcoinCoreAccountService;
 import org.knowm.xchange.exceptions.ExchangeException;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class BitcoinCoreWallet extends BaseExchange {
 

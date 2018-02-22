@@ -20,8 +20,8 @@ import org.knowm.xchange.btctrade.dto.marketdata.BTCTradeTrade;
 import org.knowm.xchange.btctrade.dto.trade.BTCTradeOrder;
 import org.knowm.xchange.btctrade.dto.trade.BTCTradePlaceOrderResult;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 @Path("/")
 @Produces(MediaType.APPLICATION_JSON)

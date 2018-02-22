@@ -13,7 +13,7 @@ import org.knowm.xchange.ccex.service.CCEXMarketDataServiceRaw;
 import org.knowm.xchange.ccex.service.CCEXTradeService;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class CCEXExchange extends BaseExchange implements Exchange {
 

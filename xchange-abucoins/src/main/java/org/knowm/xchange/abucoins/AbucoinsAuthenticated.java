@@ -25,7 +25,7 @@ import org.knowm.xchange.abucoins.dto.marketdata.AbucoinsCreateOrderResponse;
 import org.knowm.xchange.abucoins.dto.trade.AbucoinsOrder;
 import org.knowm.xchange.abucoins.dto.trade.AbucoinsOrders;
 
-import si.mazi.rescu.ParamsDigest;
+import org.knowm.xchange.service.ParamsDigest;
 
 @Path("/")
 @Produces(MediaType.APPLICATION_JSON)

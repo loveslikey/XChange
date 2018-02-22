@@ -1,16 +1,13 @@
 package org.knowm.xchange.bibox.service;
 
-import java.io.UnsupportedEncodingException;
-
-import javax.ws.rs.FormParam;
-
+import feign.RequestTemplate;
 import org.apache.commons.codec.binary.Hex;
 import org.knowm.xchange.bibox.BiboxAuthenticated;
-import org.knowm.xchange.service.BaseParamsDigest;
+import org.knowm.xchange.service.ParamsDigest;
 
-import si.mazi.rescu.RestInvocation;
+import java.io.UnsupportedEncodingException;
 
-public class BiboxDigest extends BaseParamsDigest {
+public class BiboxDigest extends ParamsDigest {
 
   /**
    * Constructor
@@ -29,9 +26,9 @@ public class BiboxDigest extends BaseParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
+  public String digestParams(RequestTemplate requestTemplate) {
 
-    String cmds = (String) restInvocation.getParamValue(FormParam.class, BiboxAuthenticated.FORM_CMDS);
+    String cmds = (String) requestTemplate.queries().get(BiboxAuthenticated.FORM_CMDS).iterator().next();
     try {
       return new String(Hex.encodeHex(getMac().doFinal(cmds.getBytes("UTF-8"))));
     } catch (IllegalStateException | UnsupportedEncodingException e1) {

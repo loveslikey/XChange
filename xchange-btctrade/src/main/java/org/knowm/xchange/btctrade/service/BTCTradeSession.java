@@ -6,7 +6,7 @@ import org.knowm.xchange.Exchange;
 import org.knowm.xchange.btctrade.BTCTradeAdapters;
 import org.knowm.xchange.btctrade.dto.BTCTradeSecretData;
 
-import si.mazi.rescu.ParamsDigest;
+import org.knowm.xchange.service.ParamsDigest;
 
 /**
  * Represents an API key status.

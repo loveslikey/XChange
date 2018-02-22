@@ -12,7 +12,7 @@ import org.knowm.xchange.wex.v3.service.WexAccountService;
 import org.knowm.xchange.wex.v3.service.WexMarketDataService;
 import org.knowm.xchange.wex.v3.service.WexTradeService;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class WexExchange extends BaseExchange implements Exchange {
 

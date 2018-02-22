@@ -44,7 +44,7 @@ import org.knowm.xchange.bitfinex.v1.dto.trade.BitfinexPastTradesRequest;
 import org.knowm.xchange.bitfinex.v1.dto.trade.BitfinexReplaceOrderRequest;
 import org.knowm.xchange.bitfinex.v1.dto.trade.BitfinexTradeResponse;
 
-import si.mazi.rescu.ParamsDigest;
+import org.knowm.xchange.service.ParamsDigest;
 
 @Path("v1")
 @Produces(MediaType.APPLICATION_JSON)

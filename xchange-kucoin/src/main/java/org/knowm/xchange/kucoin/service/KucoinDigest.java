@@ -1,20 +1,9 @@
 package org.knowm.xchange.kucoin.service;
 
-import java.io.UnsupportedEncodingException;
-import java.util.Base64;
-import java.util.stream.Collectors;
+import feign.RequestTemplate;
+import org.knowm.xchange.service.ParamsDigest;
 
-import javax.crypto.Mac;
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.QueryParam;
-
-import org.apache.commons.codec.binary.Hex;
-import org.knowm.xchange.kucoin.KucoinAuthenticated;
-import org.knowm.xchange.service.BaseParamsDigest;
-
-import si.mazi.rescu.RestInvocation;
-
-public class KucoinDigest extends BaseParamsDigest {
+public class KucoinDigest extends ParamsDigest {
 
   /**
    * Constructor
@@ -33,11 +22,12 @@ public class KucoinDigest extends BaseParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
+  public String digestParams(RequestTemplate requestTemplate) {
 
+    throw  new RuntimeException("暂未做适配");
     // just write down their example code without thinking too much
     // https://kucoinapidocs.docs.apiary.io/#introduction/authentication/signature-calculation
-    String endpoint = "/" + restInvocation.getPath(); // needs leading slash
+/*    String endpoint = "/" + restInvocation.getPath(); // needs leading slash
     String queryString = restInvocation.getParamsMap().get(QueryParam.class).asHttpHeaders().entrySet()
         .stream()
         .sorted((e1, e2) -> e1.getKey().compareTo(e2.getKey()))
@@ -51,6 +41,6 @@ public class KucoinDigest extends BaseParamsDigest {
     } catch (IllegalStateException | UnsupportedEncodingException e1) {
       throw new RuntimeException(e1.getMessage());
     }
-    return new String(Hex.encodeHex(mac.doFinal()));
+    return new String(Hex.encodeHex(mac.doFinal()));*/
   }
 }

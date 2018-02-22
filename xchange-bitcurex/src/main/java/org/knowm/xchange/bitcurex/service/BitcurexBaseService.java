@@ -6,7 +6,7 @@ import org.knowm.xchange.bitcurex.BitcurexAuthenticated;
 import org.knowm.xchange.service.BaseExchangeService;
 import org.knowm.xchange.service.BaseService;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 public class BitcurexBaseService extends BaseExchangeService implements BaseService {
 

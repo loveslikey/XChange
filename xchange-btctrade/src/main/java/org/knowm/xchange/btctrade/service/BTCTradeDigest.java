@@ -1,18 +1,14 @@
 package org.knowm.xchange.btctrade.service;
 
-import java.math.BigInteger;
-import java.nio.charset.Charset;
-import java.util.Map;
+import feign.RequestTemplate;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.utils.Params;
 
 import javax.crypto.Mac;
-import javax.ws.rs.FormParam;
+import java.math.BigInteger;
+import java.nio.charset.Charset;
 
-import org.knowm.xchange.service.BaseParamsDigest;
-
-import si.mazi.rescu.Params;
-import si.mazi.rescu.RestInvocation;
-
-public class BTCTradeDigest extends BaseParamsDigest {
+public class BTCTradeDigest extends ParamsDigest {
 
   private static final String ENCODING = "UTF-8";
   private static final Charset CHARSET = Charset.forName(ENCODING);
@@ -31,18 +27,14 @@ public class BTCTradeDigest extends BaseParamsDigest {
    * {@inheritDoc}
    */
   @Override
-  public String digestParams(RestInvocation restInvocation) {
+  public String digestParams(RequestTemplate requestTemplate) {
 
-    Params params = restInvocation.getParamsMap().get(FormParam.class);
-    Map<String, String> nameValues = params.asHttpHeaders();
-    nameValues.remove("signature");
+    final Params params = Params.of();
+    requestTemplate.queries().entrySet().stream().filter(entry -> !entry.getKey().equals("signature")).forEach(entry -> {
+      params.add(entry.getKey(), entry.getValue());
+    });
 
-    Params newParams = Params.of();
-    for (Map.Entry<String, String> nameValue : nameValues.entrySet()) {
-      newParams.add(nameValue.getKey(), nameValue.getValue());
-    }
-
-    String message = newParams.asQueryString();
+    String message = params.asQueryString();
 
     Mac mac = getMac();
     mac.update(message.getBytes());

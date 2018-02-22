@@ -21,8 +21,8 @@ import org.knowm.xchange.lakebtc.dto.trade.LakeBTCSellOrderRequest;
 import org.knowm.xchange.lakebtc.dto.trade.LakeBTCTradeResponse;
 import org.knowm.xchange.lakebtc.dto.trade.LakeBTCTradesRequest;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 /**
  * User: cristian.lucaci Date: 10/3/2014 Time: 5:04 PM

@@ -1,22 +1,22 @@
 package org.knowm.xchange.truefx.service;
 
-import java.io.IOException;
-
-import org.knowm.xchange.Exchange;
-import org.knowm.xchange.currency.CurrencyPair;
-import org.knowm.xchange.service.BaseExchangeService;
-import org.knowm.xchange.truefx.TrueFxPublic;
-import org.knowm.xchange.truefx.dto.marketdata.TrueFxTicker;
-
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
+import feign.Feign;
+import feign.jackson.JacksonDecoder;
+import feign.jackson.JacksonEncoder;
+import org.knowm.xchange.Exchange;
+import org.knowm.xchange.RestProxyFactory;
+import org.knowm.xchange.currency.CurrencyPair;
+import org.knowm.xchange.service.BaseExchangeService;
+import org.knowm.xchange.truefx.TrueFxPublic;
+import org.knowm.xchange.truefx.dto.marketdata.TrueFxTicker;
+import org.knowm.xchange.utils.jackson.DefaultJacksonObjectMapperFactory;
+import org.knowm.xchange.utils.jackson.JacksonObjectMapperFactory;
 
-import si.mazi.rescu.ClientConfig;
-import si.mazi.rescu.RestProxyFactory;
-import si.mazi.rescu.serialization.jackson.DefaultJacksonObjectMapperFactory;
-import si.mazi.rescu.serialization.jackson.JacksonObjectMapperFactory;
+import java.io.IOException;
 
 public class TrueFxMarketDataServiceRaw extends BaseExchangeService {
 
@@ -25,10 +25,12 @@ public class TrueFxMarketDataServiceRaw extends BaseExchangeService {
   protected TrueFxMarketDataServiceRaw(Exchange exchange) {
     super(exchange);
 
-    final ClientConfig config = getClientConfig();
-    config.setJacksonObjectMapperFactory(factory);
-
-    trueFx = RestProxyFactory.createProxy(TrueFxPublic.class, exchange.getExchangeSpecification().getPlainTextUri(), config);
+    //final ClientConfig config = getClientConfig();
+    //config.setJacksonObjectMapperFactory(factory);
+    ObjectMapper objectMapper=createObjectMapper();
+    Feign.Builder builder = getClientConfig();
+    builder.encoder(new JacksonEncoder(objectMapper)).decoder(new JacksonDecoder(objectMapper));
+    trueFx = RestProxyFactory.createProxy(TrueFxPublic.class, exchange.getExchangeSpecification().getPlainTextUri(), builder);
   }
 
   public TrueFxTicker getTicker(CurrencyPair pair) throws IOException {

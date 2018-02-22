@@ -12,7 +12,7 @@ import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 import org.powermock.reflect.Whitebox;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class BTCMarketsExchangeTest extends BTCMarketsTestSupport {
 

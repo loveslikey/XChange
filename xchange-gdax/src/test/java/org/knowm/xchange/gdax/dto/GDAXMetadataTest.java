@@ -16,8 +16,8 @@ import org.knowm.xchange.gdax.dto.marketdata.GDAXProduct;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import si.mazi.rescu.serialization.jackson.DefaultJacksonObjectMapperFactory;
-import si.mazi.rescu.serialization.jackson.JacksonObjectMapperFactory;
+import org.knowm.xchange.utils.jackson.DefaultJacksonObjectMapperFactory;
+import org.knowm.xchange.utils.jackson.JacksonObjectMapperFactory;
 
 public class GDAXMetadataTest {
 

@@ -32,9 +32,9 @@ import org.knowm.xchange.binance.dto.trade.OrderSide;
 import org.knowm.xchange.binance.dto.trade.OrderType;
 import org.knowm.xchange.binance.dto.trade.TimeInForce;
 
-import si.mazi.rescu.ParamsDigest;
+import org.knowm.xchange.service.ParamsDigest;
 
-@Path("")
+@Path("/")
 @Produces(MediaType.APPLICATION_JSON)
 public interface BinanceAuthenticated extends Binance {
 

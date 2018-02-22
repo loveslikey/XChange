@@ -1,42 +1,21 @@
 package org.known.xchange.acx;
 
-import org.knowm.xchange.service.BaseParamsDigest;
-import si.mazi.rescu.Params;
-import si.mazi.rescu.RestInvocation;
+import feign.RequestTemplate;
+import org.knowm.xchange.service.ParamsDigest;
 
-import javax.crypto.Mac;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.PathParam;
-import java.lang.reflect.Field;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-public class AcxSignatureCreator extends BaseParamsDigest {
-    private final Field invocationUrlField;
+public class AcxSignatureCreator extends ParamsDigest {
     private static final String PLACEHOLDER = "ACX_PLACEHOLDER";
 
     public AcxSignatureCreator(String secretKey) {
         super(secretKey, HMAC_SHA_256);
-        try {
-            invocationUrlField = RestInvocation.class.getDeclaredField("invocationUrl");
-            invocationUrlField.setAccessible(true);
-        } catch (NoSuchFieldException e) {
-            throw new IllegalStateException("rescu library has been updated");
-        }
     }
 
     @Override
-    public String digestParams(RestInvocation restInvocation) {
-        String method = restInvocation.getHttpMethod();
-        String path = stripParams(restInvocation.getPath());
-        String query = Stream.of(
-                restInvocation.getParamsMap().get(PathParam.class),
-                restInvocation.getParamsMap().get(FormParam.class))
+    public String digestParams(RequestTemplate requestTemplate) {
+        throw  new RuntimeException("暂未做适配");
+/*        String method =requestTemplate.method();
+        String path = stripParams(requestTemplate.url());
+        String query = Stream.of(requestTemplate.queries())
                 .map(Params::asHttpHeaders)
                 .map(Map::entrySet)
                 .flatMap(Collection::stream)
@@ -48,8 +27,8 @@ public class AcxSignatureCreator extends BaseParamsDigest {
         Mac sha256hmac = getMac();
         byte[] signed = sha256hmac.doFinal(toSign.getBytes());
         String signature = new String(encodeHex(signed));
-        replaceInvocationUrl(restInvocation, signature);
-        return signature;
+
+        return signature;*/
     }
 
     private String stripParams(String path) {
@@ -72,18 +51,6 @@ public class AcxSignatureCreator extends BaseParamsDigest {
         return out;
     }
 
-    // rescu client doesn't support ParamsDigest and therefore url has to be updated manually,
-    // see https://github.com/mmazi/rescu/issues/62
-    // TODO: remove the hack once the functionality is provided
-    private void replaceInvocationUrl(RestInvocation restInvocation, String signature) {
-        String invocationUrl = restInvocation.getInvocationUrl();
-        String newInvocationUrl = invocationUrl.replace(PLACEHOLDER, signature);
-        try {
-            invocationUrlField.set(restInvocation, newInvocationUrl);
-        } catch (IllegalArgumentException | IllegalAccessException e) {
-            throw new IllegalStateException("rescu library has been updated");
-        }
-    }
 
     @Override
     public String toString() {

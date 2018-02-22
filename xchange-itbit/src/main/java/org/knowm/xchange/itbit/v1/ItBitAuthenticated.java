@@ -11,8 +11,8 @@ import org.knowm.xchange.itbit.v1.dto.marketdata.ItBitTicker;
 import org.knowm.xchange.itbit.v1.dto.trade.ItBitOrder;
 import org.knowm.xchange.itbit.v1.dto.trade.ItBitPlaceOrderRequest;
 import org.knowm.xchange.itbit.v1.dto.trade.ItBitTradeHistory;
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;

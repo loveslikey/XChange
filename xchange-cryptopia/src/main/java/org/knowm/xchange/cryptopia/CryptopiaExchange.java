@@ -19,7 +19,7 @@ import org.knowm.xchange.service.account.AccountService;
 import org.knowm.xchange.utils.jackson.CurrencyPairDeserializer;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class CryptopiaExchange extends BaseExchange {
 

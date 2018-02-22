@@ -12,7 +12,7 @@ import org.knowm.xchange.yobit.service.YoBitMarketDataService;
 import org.knowm.xchange.yobit.service.YoBitMarketDataServiceRaw;
 import org.knowm.xchange.yobit.service.YoBitTradeService;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class YoBitExchange extends BaseExchange implements Exchange {
 

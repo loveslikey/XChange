@@ -14,7 +14,7 @@ import org.knowm.xchange.bitflyer.service.BitflyerTradeService;
 import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.utils.nonce.AtomicLongIncrementalTime2014NonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class BitflyerExchange extends BaseExchange implements Exchange {
 

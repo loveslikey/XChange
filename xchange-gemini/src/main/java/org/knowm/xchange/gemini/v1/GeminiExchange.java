@@ -13,7 +13,7 @@ import org.knowm.xchange.gemini.v1.service.GeminiMarketDataServiceRaw;
 import org.knowm.xchange.gemini.v1.service.GeminiTradeService;
 import org.knowm.xchange.utils.nonce.AtomicLongCurrentTimeIncrementalNonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class GeminiExchange extends BaseExchange {
 

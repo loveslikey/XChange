@@ -5,7 +5,7 @@ import org.knowm.xchange.service.BaseExchangeService;
 import org.knowm.xchange.service.BaseService;
 import org.knowm.xchange.zaif.Zaif;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 public class ZaifBaseService extends BaseExchangeService implements BaseService {
 

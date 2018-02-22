@@ -13,7 +13,7 @@ import org.knowm.xchange.therock.dto.TheRockException;
 import org.knowm.xchange.therock.dto.trade.TheRockOrder;
 import org.knowm.xchange.therock.service.TheRockDigest;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 /**
  * The old API V0 https://api.therocktrading.com/doc/v0/index.html#api-Trading_API-GetOrders

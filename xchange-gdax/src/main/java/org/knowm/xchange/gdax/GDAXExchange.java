@@ -11,7 +11,7 @@ import org.knowm.xchange.gdax.service.GDAXMarketDataServiceRaw;
 import org.knowm.xchange.gdax.service.GDAXTradeService;
 import org.knowm.xchange.utils.nonce.CurrentTime1000NonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class GDAXExchange extends BaseExchange {
 

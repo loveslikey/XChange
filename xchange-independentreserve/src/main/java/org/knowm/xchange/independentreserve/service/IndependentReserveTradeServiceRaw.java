@@ -21,7 +21,7 @@ import org.knowm.xchange.independentreserve.dto.trade.IndependentReserveTransact
 import org.knowm.xchange.independentreserve.dto.trade.IndependentReserveTransactionsResponse;
 import org.knowm.xchange.independentreserve.util.ExchangeEndpoint;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 /**
  * Author: Kamil Zbikowski Date: 4/13/15

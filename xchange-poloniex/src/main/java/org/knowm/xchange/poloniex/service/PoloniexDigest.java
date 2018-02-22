@@ -1,14 +1,12 @@
 package org.knowm.xchange.poloniex.service;
 
-import java.math.BigInteger;
+import feign.RequestTemplate;
+import org.knowm.xchange.service.ParamsDigest;
 
 import javax.crypto.Mac;
+import java.math.BigInteger;
 
-import org.knowm.xchange.service.BaseParamsDigest;
-
-import si.mazi.rescu.RestInvocation;
-
-public class PoloniexDigest extends BaseParamsDigest {
+public class PoloniexDigest extends ParamsDigest {
 
   /**
    * Constructor
@@ -27,9 +25,9 @@ public class PoloniexDigest extends BaseParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
+  public String digestParams(RequestTemplate requestTemplate) {
 
-    String postBody = restInvocation.getRequestBody();
+    String postBody = requestTemplate.bodyTemplate();
 
     Mac mac = getMac();
     mac.update(postBody.getBytes());

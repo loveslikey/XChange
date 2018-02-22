@@ -14,7 +14,7 @@ import org.knowm.xchange.hitbtc.v2.dto.HitbtcInternalTransferResponse;
 import org.knowm.xchange.hitbtc.v2.dto.HitbtcTransaction;
 import org.knowm.xchange.hitbtc.v2.dto.HitbtcTransferType;
 
-import si.mazi.rescu.HttpStatusIOException;
+import org.knowm.xchange.exceptions.HttpStatusIOException;
 
 public class HitbtcAccountServiceRaw extends HitbtcBaseService {
 

@@ -1,23 +1,21 @@
 package org.knowm.xchange.independentreserve.service;
 
+import feign.RequestTemplate;
+import org.knowm.xchange.independentreserve.util.ExchangeEndpoint;
+import org.knowm.xchange.service.ParamsDigest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.crypto.Mac;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.crypto.Mac;
-
-import org.knowm.xchange.independentreserve.util.ExchangeEndpoint;
-import org.knowm.xchange.service.BaseParamsDigest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import si.mazi.rescu.RestInvocation;
-
 /**
  * Author: Kamil Zbikowski Date: 4/10/15
  */
-public class IndependentReserveDigest extends BaseParamsDigest {
+public class IndependentReserveDigest extends ParamsDigest {
 
   private final Logger logger = LoggerFactory.getLogger(IndependentReserveDigest.class);
 
@@ -35,7 +33,7 @@ public class IndependentReserveDigest extends BaseParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
+  public String digestParams(RequestTemplate requestTemplate) {
     throw new IllegalStateException("For Independent Reserve one should use digestParamsToString method instead");
   }
 

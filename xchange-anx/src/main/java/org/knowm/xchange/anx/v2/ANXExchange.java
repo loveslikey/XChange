@@ -10,7 +10,7 @@ import org.knowm.xchange.anx.v2.service.ANXMarketDataService;
 import org.knowm.xchange.anx.v2.service.ANXTradeService;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class ANXExchange extends BaseExchange {
 

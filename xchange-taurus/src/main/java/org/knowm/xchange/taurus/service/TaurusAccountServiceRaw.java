@@ -8,7 +8,7 @@ import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.taurus.TaurusAuthenticated;
 import org.knowm.xchange.taurus.dto.account.TaurusBalance;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 public class TaurusAccountServiceRaw extends TaurusBaseService {
 

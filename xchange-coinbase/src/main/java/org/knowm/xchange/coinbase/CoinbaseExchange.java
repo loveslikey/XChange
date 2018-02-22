@@ -8,7 +8,7 @@ import org.knowm.xchange.coinbase.service.CoinbaseMarketDataService;
 import org.knowm.xchange.coinbase.service.CoinbaseTradeService;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 /**
  * @author jamespedwards42

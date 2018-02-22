@@ -1,14 +1,12 @@
 package org.knowm.xchange.ccex.service;
 
-import java.math.BigInteger;
+import feign.RequestTemplate;
+import org.knowm.xchange.service.ParamsDigest;
 
 import javax.crypto.Mac;
+import java.math.BigInteger;
 
-import org.knowm.xchange.service.BaseParamsDigest;
-
-import si.mazi.rescu.RestInvocation;
-
-public class CCEXDigest extends BaseParamsDigest {
+public class CCEXDigest extends ParamsDigest {
 
   private CCEXDigest(String secretKey) {
 
@@ -21,8 +19,8 @@ public class CCEXDigest extends BaseParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
-    String invocationUrl = restInvocation.getInvocationUrl();
+  public String digestParams(RequestTemplate requestTemplate) {
+    String invocationUrl = requestTemplate.url()+requestTemplate.queryLine();
     Mac mac = getMac();
     mac.update(invocationUrl.getBytes());
 

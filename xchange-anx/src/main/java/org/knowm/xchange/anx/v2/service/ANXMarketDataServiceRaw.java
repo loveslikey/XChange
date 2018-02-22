@@ -19,8 +19,8 @@ import org.knowm.xchange.anx.v2.dto.marketdata.ANXTrade;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.utils.Assert;
 
-import si.mazi.rescu.HttpStatusIOException;
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.exceptions.HttpStatusIOException;
+import org.knowm.xchange.RestProxyFactory;
 
 public class ANXMarketDataServiceRaw extends ANXBaseService {
 

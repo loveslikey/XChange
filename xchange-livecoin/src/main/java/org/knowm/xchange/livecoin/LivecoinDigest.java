@@ -1,5 +1,10 @@
 package org.knowm.xchange.livecoin;
 
+import feign.RequestTemplate;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.utils.Params;
+
+import javax.crypto.Mac;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.URLEncoder;
@@ -7,16 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.crypto.Mac;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.QueryParam;
-
-import org.knowm.xchange.service.BaseParamsDigest;
-
-import si.mazi.rescu.Params;
-import si.mazi.rescu.RestInvocation;
-
-public class LivecoinDigest extends BaseParamsDigest {
+public class LivecoinDigest extends ParamsDigest {
 
   private LivecoinDigest(String secretKeyBase64) throws UnsupportedEncodingException {
     super(secretKeyBase64.getBytes(StandardCharsets.UTF_8), HMAC_SHA_256);
@@ -31,12 +27,11 @@ public class LivecoinDigest extends BaseParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
-    Params params;
-    if (restInvocation.getHttpMethod().equals("GET"))
-      params = restInvocation.getParamsMap().get(QueryParam.class);
-    else
-      params = restInvocation.getParamsMap().get(FormParam.class);
+  public String digestParams(RequestTemplate requestTemplate) {
+    final Params params = Params.of();
+    requestTemplate.queries().entrySet().stream().forEach(entry -> {
+      params.add(entry.getKey(), entry.getValue());
+    });
 
     Map<String, String> sorted = new TreeMap<>(params.asHttpHeaders());
     String queryString = buildQueryString(sorted);

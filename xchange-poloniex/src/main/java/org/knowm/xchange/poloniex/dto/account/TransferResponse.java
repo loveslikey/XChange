@@ -2,7 +2,7 @@ package org.knowm.xchange.poloniex.dto.account;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import si.mazi.rescu.ExceptionalReturnContentException;
+import org.knowm.xchange.exceptions.ExceptionalReturnContentException;
 
 /**
  * Created by John on 03/12/2017.

@@ -11,7 +11,7 @@ import org.knowm.xchange.hitbtc.v2.service.HitbtcTradeService;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 import java.io.IOException;
 import java.io.InputStream;

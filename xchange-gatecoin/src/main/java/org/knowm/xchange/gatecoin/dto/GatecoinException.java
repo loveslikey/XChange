@@ -4,7 +4,7 @@ import org.knowm.xchange.gatecoin.dto.marketdata.ResponseStatus;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import si.mazi.rescu.HttpStatusExceptionSupport;
+import org.knowm.xchange.exceptions.HttpStatusExceptionSupport;
 
 public class GatecoinException extends HttpStatusExceptionSupport {
   protected final ResponseStatus responseStatus;

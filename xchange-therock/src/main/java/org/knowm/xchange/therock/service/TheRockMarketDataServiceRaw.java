@@ -10,7 +10,7 @@ import org.knowm.xchange.therock.dto.marketdata.TheRockOrderBook;
 import org.knowm.xchange.therock.dto.marketdata.TheRockTicker;
 import org.knowm.xchange.therock.dto.marketdata.TheRockTrades;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 public class TheRockMarketDataServiceRaw extends TheRockBaseService {
 

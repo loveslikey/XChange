@@ -9,7 +9,7 @@ import org.knowm.xchange.okcoin.service.OkCoinFuturesTradeService;
 import org.knowm.xchange.okcoin.service.OkCoinMarketDataService;
 import org.knowm.xchange.okcoin.service.OkCoinTradeService;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class OkCoinExchange extends BaseExchange {
 

@@ -1,13 +1,12 @@
 package org.knowm.xchange.bitcurex.service;
 
+import feign.RequestTemplate;
+import org.knowm.xchange.service.ParamsDigest;
+
 import javax.crypto.Mac;
 import java.util.Base64;
 
-import org.knowm.xchange.service.BaseParamsDigest;
-
-import si.mazi.rescu.RestInvocation;
-
-public class BitcurexDigest extends BaseParamsDigest {
+public class BitcurexDigest extends ParamsDigest {
 
   /**
    * Constructor
@@ -26,14 +25,14 @@ public class BitcurexDigest extends BaseParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
+  public String digestParams(RequestTemplate requestTemplate) {
 
     String digest;
     byte[] signature;
 
     Mac sha512 = getMac();
 
-    sha512.update(restInvocation.getRequestBody().getBytes());
+    sha512.update(requestTemplate.bodyTemplate().getBytes());
 
     signature = sha512.doFinal();
     digest =  Base64.getEncoder().encodeToString(signature);

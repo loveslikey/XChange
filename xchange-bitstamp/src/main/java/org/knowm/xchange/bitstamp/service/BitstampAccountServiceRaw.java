@@ -1,29 +1,23 @@
 package org.knowm.xchange.bitstamp.service;
 
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
-
 import org.knowm.xchange.Exchange;
+import org.knowm.xchange.RestProxyFactory;
 import org.knowm.xchange.bitstamp.BitstampAuthenticated;
 import org.knowm.xchange.bitstamp.BitstampAuthenticatedV2;
 import org.knowm.xchange.bitstamp.BitstampV2;
 import org.knowm.xchange.bitstamp.dto.BitstampException;
 import org.knowm.xchange.bitstamp.dto.BitstampTransferBalanceResponse;
-import org.knowm.xchange.bitstamp.dto.account.BitstampBalance;
-import org.knowm.xchange.bitstamp.dto.account.BitstampDepositAddress;
-import org.knowm.xchange.bitstamp.dto.account.BitstampRippleDepositAddress;
-import org.knowm.xchange.bitstamp.dto.account.BitstampWithdrawal;
-import org.knowm.xchange.bitstamp.dto.account.DepositTransaction;
-import org.knowm.xchange.bitstamp.dto.account.WithdrawalRequest;
+import org.knowm.xchange.bitstamp.dto.account.*;
 import org.knowm.xchange.bitstamp.dto.trade.BitstampUserTransaction;
 import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.exceptions.ExchangeException;
+import org.knowm.xchange.SynchronizedValueFactory;
 
-import si.mazi.rescu.RestProxyFactory;
-import si.mazi.rescu.SynchronizedValueFactory;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author gnandiga

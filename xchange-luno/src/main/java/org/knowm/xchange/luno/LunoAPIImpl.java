@@ -1,42 +1,31 @@
 package org.knowm.xchange.luno;
 
+import feign.Feign;
+import org.knowm.xchange.RestProxyFactory;
+import org.knowm.xchange.luno.dto.LunoBoolean;
+import org.knowm.xchange.luno.dto.LunoException;
+import org.knowm.xchange.luno.dto.account.*;
+import org.knowm.xchange.luno.dto.account.LunoWithdrawals.Withdrawal;
+import org.knowm.xchange.luno.dto.marketdata.LunoOrderBook;
+import org.knowm.xchange.luno.dto.marketdata.LunoTicker;
+import org.knowm.xchange.luno.dto.marketdata.LunoTickers;
+import org.knowm.xchange.luno.dto.marketdata.LunoTrades;
+import org.knowm.xchange.luno.dto.trade.*;
+import org.knowm.xchange.luno.dto.trade.LunoOrders.Order;
+import org.knowm.xchange.utils.BasicAuthCredentials;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.knowm.xchange.luno.dto.LunoBoolean;
-import org.knowm.xchange.luno.dto.LunoException;
-import org.knowm.xchange.luno.dto.account.LunoAccount;
-import org.knowm.xchange.luno.dto.account.LunoAccountTransactions;
-import org.knowm.xchange.luno.dto.account.LunoBalance;
-import org.knowm.xchange.luno.dto.account.LunoFundingAddress;
-import org.knowm.xchange.luno.dto.account.LunoPendingTransactions;
-import org.knowm.xchange.luno.dto.account.LunoQuote;
-import org.knowm.xchange.luno.dto.account.LunoWithdrawals;
-import org.knowm.xchange.luno.dto.account.LunoWithdrawals.Withdrawal;
-import org.knowm.xchange.luno.dto.marketdata.LunoOrderBook;
-import org.knowm.xchange.luno.dto.marketdata.LunoTicker;
-import org.knowm.xchange.luno.dto.marketdata.LunoTickers;
-import org.knowm.xchange.luno.dto.marketdata.LunoTrades;
-import org.knowm.xchange.luno.dto.trade.LunoFeeInfo;
-import org.knowm.xchange.luno.dto.trade.LunoOrders;
-import org.knowm.xchange.luno.dto.trade.LunoOrders.Order;
-import org.knowm.xchange.luno.dto.trade.LunoPostOrder;
-import org.knowm.xchange.luno.dto.trade.OrderType;
-import org.knowm.xchange.luno.dto.trade.State;
-
-import si.mazi.rescu.BasicAuthCredentials;
-import si.mazi.rescu.ClientConfig;
-import si.mazi.rescu.RestProxyFactory;
-
 public class LunoAPIImpl implements LunoAPI {
 
   private final LunoAuthenticated luno;
   private final BasicAuthCredentials auth;
 
-  public LunoAPIImpl(String key, String secret, String uri, ClientConfig clientConfig) {
+  public LunoAPIImpl(String key, String secret, String uri, Feign.Builder clientConfig) {
 
     luno = RestProxyFactory.createProxy(LunoAuthenticated.class, uri, clientConfig);
     auth = new BasicAuthCredentials(key, secret);

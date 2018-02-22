@@ -8,7 +8,7 @@ import org.knowm.xchange.mercadobitcoin.service.MercadoBitcoinMarketDataService;
 import org.knowm.xchange.mercadobitcoin.service.MercadoBitcoinTradeService;
 import org.knowm.xchange.utils.nonce.CurrentTime1000NonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 /**
  * @author Felipe Micaroni Lalli

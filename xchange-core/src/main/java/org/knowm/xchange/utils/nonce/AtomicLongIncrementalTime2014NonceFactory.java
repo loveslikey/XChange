@@ -2,7 +2,7 @@ package org.knowm.xchange.utils.nonce;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class AtomicLongIncrementalTime2014NonceFactory implements SynchronizedValueFactory<Long> {
 

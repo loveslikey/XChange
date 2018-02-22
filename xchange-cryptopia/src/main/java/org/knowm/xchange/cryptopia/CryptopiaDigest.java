@@ -1,17 +1,16 @@
 package org.knowm.xchange.cryptopia;
 
+import feign.RequestTemplate;
+import net.iharder.Base64;
+import org.knowm.xchange.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
-import org.knowm.xchange.service.BaseParamsDigest;
-
-import net.iharder.Base64;
-import si.mazi.rescu.RestInvocation;
-import si.mazi.rescu.SynchronizedValueFactory;
-
-public class CryptopiaDigest extends BaseParamsDigest {
+public class CryptopiaDigest extends ParamsDigest {
 
   private final SynchronizedValueFactory<Long> nonceFactory;
   private final String apiKey;
@@ -35,12 +34,12 @@ public class CryptopiaDigest extends BaseParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
+  public String digestParams(RequestTemplate requestTemplate) {
     try {
-      String urlMethod = restInvocation.getInvocationUrl();
+      String urlMethod = requestTemplate.url()+requestTemplate.queryLine();
       String nonce = String.valueOf(nonceFactory.createValue());
 
-      String body = restInvocation.getRequestBody();
+      String body =requestTemplate.bodyTemplate();
       String md5 = Base64.encodeBytes(MessageDigest.getInstance("MD5").digest(body.getBytes("UTF-8")));
 
       String reqSignature =

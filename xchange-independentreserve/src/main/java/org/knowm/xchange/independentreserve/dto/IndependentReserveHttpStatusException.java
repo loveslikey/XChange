@@ -2,7 +2,7 @@ package org.knowm.xchange.independentreserve.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import si.mazi.rescu.HttpStatusExceptionSupport;
+import org.knowm.xchange.exceptions.HttpStatusExceptionSupport;
 
 /**
  * Author: Kamil Zbikowski Date: 4/10/15

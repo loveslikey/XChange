@@ -1,18 +1,16 @@
 package org.knowm.xchange.bitbay;
 
-import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
+import feign.RequestTemplate;
+import org.knowm.xchange.service.ParamsDigest;
 
 import javax.crypto.Mac;
-
-import org.knowm.xchange.service.BaseParamsDigest;
-
-import si.mazi.rescu.RestInvocation;
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 
 /**
  * @author kfonal
  */
-public class BitbayDigest extends BaseParamsDigest {
+public class BitbayDigest extends ParamsDigest {
 
   private BitbayDigest(String secretKeyBase64) throws IllegalArgumentException {
     super(secretKeyBase64, HMAC_SHA_512);
@@ -24,10 +22,10 @@ public class BitbayDigest extends BaseParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
+  public String digestParams(RequestTemplate requestTemplate) {
 
     try {
-      String postBody = restInvocation.getRequestBody();
+      String postBody = requestTemplate.bodyTemplate();
       Mac mac = getMac();
       mac.update(postBody.getBytes("UTF-8"));
       return String.format("%0128x", new BigInteger(1, mac.doFinal()));

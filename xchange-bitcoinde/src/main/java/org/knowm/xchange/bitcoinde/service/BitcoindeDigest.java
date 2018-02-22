@@ -1,23 +1,19 @@
 package org.knowm.xchange.bitcoinde.service;
 
+import feign.RequestTemplate;
+import org.knowm.xchange.service.ParamsDigest;
+
+import javax.crypto.Mac;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-import javax.crypto.Mac;
-
-import org.knowm.xchange.service.BaseParamsDigest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import si.mazi.rescu.RestInvocation;	
 
 /**
  * 
  * @author kaiserfr
  *
  */
-public class BitcoindeDigest extends BaseParamsDigest {
+public class BitcoindeDigest extends ParamsDigest {
 	private final String apiKey;
 
 	/**
@@ -43,14 +39,14 @@ public class BitcoindeDigest extends BaseParamsDigest {
 
 	@Override
 	public String digestParams(
-			RestInvocation restInvocation) {
+			RequestTemplate requestTemplate) {
 
 		// Step 1: concatenate URL with query string
-		String completeURL = restInvocation.getInvocationUrl();
+		String completeURL = requestTemplate.url()+requestTemplate.queryLine();
 
 		// Step 2: create md5-Hash of the POST-Parameters for the HMAC-data
-		String httpMethod = restInvocation.getHttpMethod();
-		String requestBody = restInvocation.getRequestBody();
+		String httpMethod = requestTemplate.method();
+		String requestBody = requestTemplate.bodyTemplate();
 		
 		String md5;		
 		if ("POST".equals(httpMethod)) {
@@ -62,7 +58,7 @@ public class BitcoindeDigest extends BaseParamsDigest {
 		// Step 3: concat HMAC-input
 
 		// http_method+'#'+uri+'#'+api_key+'#'+nonce+'#'+post_parameter_md5_hashed_url_encoded_query_string
-		String nonce = restInvocation.getHttpHeadersFromParams().get("X-API-NONCE");
+		String nonce = requestTemplate.headers().get("X-API-NONCE").iterator().next();
 		String hmac_data = String.format("%s#%s#%s#%s#%s", httpMethod, completeURL, apiKey, nonce, md5);
 
 		// Step 3: Create actual sha256-HMAC

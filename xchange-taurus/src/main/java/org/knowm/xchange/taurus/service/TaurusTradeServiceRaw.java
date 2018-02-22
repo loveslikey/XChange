@@ -9,7 +9,7 @@ import org.knowm.xchange.taurus.TaurusAuthenticated;
 import org.knowm.xchange.taurus.dto.trade.TaurusOrder;
 import org.knowm.xchange.taurus.dto.trade.TaurusUserTransaction;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 public class TaurusTradeServiceRaw extends TaurusBaseService {
 

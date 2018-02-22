@@ -13,7 +13,7 @@ import org.knowm.xchange.mercadobitcoin.dto.marketdata.MercadoBitcoinOrderBook;
 import org.knowm.xchange.mercadobitcoin.dto.marketdata.MercadoBitcoinTicker;
 import org.knowm.xchange.mercadobitcoin.dto.marketdata.MercadoBitcoinTransaction;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 /**
  * @author Felipe Micaroni Lalli

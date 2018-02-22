@@ -8,7 +8,7 @@ import org.knowm.xchange.coinbase.v2.service.CoinbaseMarketDataService;
 import org.knowm.xchange.coinbase.v2.service.CoinbaseTradeService;
 import org.knowm.xchange.utils.nonce.CurrentTimeNonceFactory;
 
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class CoinbaseExchange extends BaseExchange implements Exchange {
 

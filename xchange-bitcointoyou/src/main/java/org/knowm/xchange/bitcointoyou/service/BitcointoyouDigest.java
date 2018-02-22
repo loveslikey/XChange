@@ -1,15 +1,14 @@
 package org.knowm.xchange.bitcointoyou.service;
 
-import org.knowm.xchange.service.BaseParamsDigest;
-
+import feign.RequestTemplate;
 import net.iharder.Base64;
-import si.mazi.rescu.RestInvocation;
+import org.knowm.xchange.service.ParamsDigest;
 
 /**
  * @author Jonathas Carrijo
  * @author Danilo Guimaraes
  */
-public class BitcointoyouDigest extends BaseParamsDigest {
+public class BitcointoyouDigest extends ParamsDigest {
 
   private final String apiKey;
 
@@ -32,10 +31,10 @@ public class BitcointoyouDigest extends BaseParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
+  public String digestParams(RequestTemplate requestTemplate) {
 
     // The Bitcointoyou API specifies that signature field is a concat between nonce and API Key.
-    String signature = restInvocation.getHttpHeadersFromParams().get("nonce") + apiKey;
+    String signature = requestTemplate.queries().get("nonce").iterator().next() + apiKey;
 
     return Base64.encodeBytes(getMac().doFinal(signature.getBytes())).toUpperCase();
   }

@@ -10,7 +10,7 @@ import org.knowm.xchange.bitso.dto.marketdata.BitsoTransaction;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.exceptions.ExchangeException;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 /**
  * @author Piotr Ładyżyński

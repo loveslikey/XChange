@@ -32,8 +32,8 @@ import org.knowm.xchange.kraken.dto.trade.results.KrakenQueryOrderResult;
 import org.knowm.xchange.kraken.dto.trade.results.KrakenQueryTradeResult;
 import org.knowm.xchange.kraken.dto.trade.results.KrakenTradeHistoryResult;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 @Path("0")
 @Produces(MediaType.APPLICATION_JSON)

@@ -15,8 +15,8 @@ import org.knowm.xchange.service.BaseExchangeService;
 import org.knowm.xchange.service.BaseService;
 import org.knowm.xchange.utils.HmacDigest;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.RestProxyFactory;
 
 public class CoinbaseBaseService extends BaseExchangeService implements BaseService {
 

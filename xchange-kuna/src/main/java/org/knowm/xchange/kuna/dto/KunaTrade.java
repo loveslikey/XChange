@@ -1,12 +1,11 @@
 package org.knowm.xchange.kuna.dto;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.knowm.xchange.kuna.dto.enums.KunaSide;
 import org.knowm.xchange.kuna.util.KunaUtils;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * @author Dat Bui

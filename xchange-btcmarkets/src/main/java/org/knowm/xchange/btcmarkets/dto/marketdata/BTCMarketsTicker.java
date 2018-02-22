@@ -1,16 +1,12 @@
 package org.knowm.xchange.btcmarkets.dto.marketdata;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.knowm.xchange.utils.jackson.serializers.TimestampDeserializer;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
-import org.knowm.xchange.utils.jackson.BtcToSatoshi;
-import org.knowm.xchange.utils.jackson.SatoshiToBtc;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import si.mazi.rescu.serialization.jackson.serializers.TimestampDeserializer;
 
 public class BTCMarketsTicker {
 

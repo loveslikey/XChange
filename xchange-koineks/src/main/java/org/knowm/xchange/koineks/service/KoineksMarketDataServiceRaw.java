@@ -6,7 +6,7 @@ import org.knowm.xchange.Exchange;
 import org.knowm.xchange.koineks.Koineks;
 import org.knowm.xchange.koineks.dto.marketdata.KoineksTicker;
 
-import si.mazi.rescu.RestProxyFactory;
+import org.knowm.xchange.RestProxyFactory;
 
 /**
  * @author semihunaldi

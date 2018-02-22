@@ -20,8 +20,8 @@ import org.knowm.xchange.bitmarket.dto.trade.BitMarketHistoryTradesResponse;
 import org.knowm.xchange.bitmarket.dto.trade.BitMarketOrdersResponse;
 import org.knowm.xchange.bitmarket.dto.trade.BitMarketTradeResponse;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 /**
  * @author kfonal

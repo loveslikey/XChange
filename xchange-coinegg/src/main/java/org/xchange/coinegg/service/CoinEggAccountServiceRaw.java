@@ -7,8 +7,8 @@ import org.knowm.xchange.ExchangeSpecification;
 import org.xchange.coinegg.CoinEggAuthenticated;
 import org.xchange.coinegg.dto.accounts.CoinEggBalance;
 
-import si.mazi.rescu.RestProxyFactory;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.RestProxyFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class CoinEggAccountServiceRaw extends CoinEggBaseService {
 

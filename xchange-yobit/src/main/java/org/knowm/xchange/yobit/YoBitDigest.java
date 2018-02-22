@@ -1,17 +1,17 @@
 package org.knowm.xchange.yobit;
 
-import java.io.IOException;
-import java.math.BigInteger;
+import feign.RequestTemplate;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.utils.Params;
 
 import javax.crypto.Mac;
-import javax.ws.rs.FormParam;
+import java.io.IOException;
+import java.math.BigInteger;
+import java.util.Collection;
+import java.util.Map;
 
-import org.knowm.xchange.service.BaseParamsDigest;
 
-import si.mazi.rescu.Params;
-import si.mazi.rescu.RestInvocation;
-
-public class YoBitDigest extends BaseParamsDigest {
+public class YoBitDigest extends ParamsDigest {
 
   private YoBitDigest(String secretKeyBase64, String apiKey) throws IOException {
     super(secretKeyBase64, HMAC_SHA_512);
@@ -26,9 +26,12 @@ public class YoBitDigest extends BaseParamsDigest {
   }
 
   @Override
-  public String digestParams(RestInvocation restInvocation) {
-    Params params = restInvocation.getParamsMap().get(FormParam.class);
-
+  public String digestParams(RequestTemplate requestTemplate) {
+    Params params =Params.of();
+    Map<String, Collection<String>> queries= requestTemplate.queries();
+    queries.entrySet().stream().forEach(entry-> {
+            params.add(entry.getKey(),entry.getValue());
+    });
     StringBuilder queryString = new StringBuilder(params.asQueryString());
 
     Mac mac = getMac();

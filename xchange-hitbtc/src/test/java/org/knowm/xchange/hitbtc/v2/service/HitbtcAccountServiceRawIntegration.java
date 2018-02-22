@@ -18,7 +18,7 @@ import org.knowm.xchange.hitbtc.v2.dto.HitbtcBalance;
 import org.knowm.xchange.hitbtc.v2.dto.HitbtcTransaction;
 import org.knowm.xchange.hitbtc.v2.dto.HitbtcTransferType;
 
-import si.mazi.rescu.HttpStatusIOException;
+import org.knowm.xchange.exceptions.HttpStatusIOException;
 
 /**
  * Test ignored in default build because it requires production authentication credentials. See {@link BaseAuthenticatedServiceTest}.

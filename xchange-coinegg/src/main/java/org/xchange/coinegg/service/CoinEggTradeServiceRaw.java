@@ -10,8 +10,8 @@ import org.xchange.coinegg.dto.trade.CoinEggTradeAdd;
 import org.xchange.coinegg.dto.trade.CoinEggTradeCancel;
 import org.xchange.coinegg.dto.trade.CoinEggTradeView;
 
-import si.mazi.rescu.RestProxyFactory;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.RestProxyFactory;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 public class CoinEggTradeServiceRaw extends CoinEggBaseService {
  

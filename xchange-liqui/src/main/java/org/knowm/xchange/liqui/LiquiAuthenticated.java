@@ -15,8 +15,8 @@ import org.knowm.xchange.liqui.dto.trade.result.LiquiOrderInfoResult;
 import org.knowm.xchange.liqui.dto.trade.result.LiquiTradeHistoryResult;
 import org.knowm.xchange.liqui.dto.trade.result.LiquiTradeResult;
 
-import si.mazi.rescu.ParamsDigest;
-import si.mazi.rescu.SynchronizedValueFactory;
+import org.knowm.xchange.service.ParamsDigest;
+import org.knowm.xchange.SynchronizedValueFactory;
 
 @Path("tapi")
 @Produces(MediaType.APPLICATION_JSON)

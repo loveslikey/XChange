@@ -13,7 +13,7 @@ import org.knowm.xchange.bibox.dto.BiboxSingleResponse;
 import org.knowm.xchange.bibox.dto.account.BiboxCoin;
 import org.knowm.xchange.bibox.dto.trade.BiboxOrders;
 
-import si.mazi.rescu.ParamsDigest;
+import org.knowm.xchange.service.ParamsDigest;
 
 /**
  * @author odrotleff
