@@ -34,7 +34,7 @@ public class OkCoinDigest extends ParamsDigest {
     try {
       md = MessageDigest.getInstance("MD5");
     } catch (NoSuchAlgorithmException e) {
-      throw new RuntimeException("Problem instantiating message digest.");
+      throw new RuntimeException("Problem instantiating message digest.", e);
     }
   }
 
