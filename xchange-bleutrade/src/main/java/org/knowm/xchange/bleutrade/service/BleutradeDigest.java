@@ -1,18 +1,18 @@
 package org.knowm.xchange.bleutrade.service;
 
-import feign.RequestTemplate;
-import org.knowm.xchange.service.ParamsDigest;
-
-import javax.crypto.Mac;
 import java.math.BigInteger;
+import javax.crypto.Mac;
+import org.knowm.xchange.service.BaseParamsDigest;
+import si.mazi.rescu.RestInvocation;
 
-public class BleutradeDigest extends ParamsDigest {
+public class BleutradeDigest extends BaseParamsDigest {
 
   /**
    * Constructor
    *
    * @param secretKeyBase64
-   * @throws IllegalArgumentException if key is invalid (cannot be base-64-decoded or the decoded key is invalid).
+   * @throws IllegalArgumentException if key is invalid (cannot be base-64-decoded or the decoded
+   *     key is invalid).
    */
   private BleutradeDigest(String secretKeyBase64) {
 
@@ -25,9 +25,9 @@ public class BleutradeDigest extends ParamsDigest {
   }
 
   @Override
-  public String digestParams(RequestTemplate requestTemplate) {
+  public String digestParams(RestInvocation restInvocation) {
 
-    String invocationUrl = requestTemplate.url()+requestTemplate.queryLine();
+    String invocationUrl = restInvocation.getInvocationUrl();
     Mac mac = getMac();
     mac.update(invocationUrl.getBytes());
 

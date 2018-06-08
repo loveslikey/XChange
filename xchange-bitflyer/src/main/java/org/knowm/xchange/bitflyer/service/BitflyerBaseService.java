@@ -9,9 +9,8 @@ import org.knowm.xchange.exceptions.InternalServerException;
 import org.knowm.xchange.exceptions.RateLimitExceededException;
 import org.knowm.xchange.service.BaseExchangeService;
 import org.knowm.xchange.service.BaseService;
-
-import org.knowm.xchange.service.ParamsDigest;
-import org.knowm.xchange.RestProxyFactory;
+import si.mazi.rescu.ParamsDigest;
+import si.mazi.rescu.RestProxyFactory;
 
 public class BitflyerBaseService extends BaseExchangeService implements BaseService {
 
@@ -28,10 +27,14 @@ public class BitflyerBaseService extends BaseExchangeService implements BaseServ
 
     super(exchange);
 
-    this.bitflyer = RestProxyFactory.createProxy(Bitflyer.class, exchange.getExchangeSpecification().getSslUri(), getClientConfig());
+    this.bitflyer =
+        RestProxyFactory.createProxy(
+            Bitflyer.class, exchange.getExchangeSpecification().getSslUri(), getClientConfig());
     this.apiKey = exchange.getExchangeSpecification().getApiKey();
-    this.signatureCreator = BitflyerDigest.createInstance(exchange.getExchangeSpecification().getSecretKey(),
-        exchange.getExchangeSpecification().getApiKey());
+    this.signatureCreator =
+        BitflyerDigest.createInstance(
+            exchange.getExchangeSpecification().getSecretKey(),
+            exchange.getExchangeSpecification().getApiKey());
   }
 
   protected ExchangeException handleError(BitflyerException exception) {

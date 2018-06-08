@@ -1,13 +1,11 @@
 package org.knowm.xchange.quoine.service;
 
 import java.io.IOException;
-
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.quoine.dto.marketdata.QuoineOrderBook;
 import org.knowm.xchange.quoine.dto.marketdata.QuoineProduct;
-
-import org.knowm.xchange.exceptions.HttpStatusIOException;
+import si.mazi.rescu.HttpStatusIOException;
 
 public class QuoineMarketDataServiceRaw extends QuoineBaseService {
 

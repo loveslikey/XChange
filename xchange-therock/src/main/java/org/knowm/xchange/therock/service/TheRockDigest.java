@@ -1,15 +1,15 @@
 package org.knowm.xchange.therock.service;
 
-import feign.RequestTemplate;
-import org.knowm.xchange.service.ParamsDigest;
-import org.knowm.xchange.therock.TheRockAuthenticated;
-
+import java.math.BigInteger;
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import java.math.BigInteger;
+import javax.ws.rs.HeaderParam;
+import org.knowm.xchange.therock.TheRockAuthenticated;
+import si.mazi.rescu.ParamsDigest;
+import si.mazi.rescu.RestInvocation;
 
-public class TheRockDigest extends ParamsDigest {
+public class TheRockDigest implements ParamsDigest {
 
   public static final String HMAC_SHA_512 = "HmacSHA512";
 
@@ -26,10 +26,13 @@ public class TheRockDigest extends ParamsDigest {
   }
 
   @Override
-  public String digestParams(RequestTemplate requestTemplate) {
-    final String nonce = requestTemplate.queries().get(TheRockAuthenticated.X_TRT_NONCE).iterator().next();
+  public String digestParams(RestInvocation restInvocation) {
+    final String nonce =
+        restInvocation
+            .getParamValue(HeaderParam.class, TheRockAuthenticated.X_TRT_NONCE)
+            .toString();
     mac.update(nonce.getBytes());
-    mac.update((requestTemplate.url()+requestTemplate.queryLine()).getBytes());
+    mac.update(restInvocation.getInvocationUrl().getBytes());
 
     return String.format("%0128x", new BigInteger(1, mac.doFinal()));
   }

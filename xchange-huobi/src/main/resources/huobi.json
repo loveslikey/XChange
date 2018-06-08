@@ -1,21 +1,13 @@
 {
   "currency_pairs": {
-    "BTC/CNY": {
-      "price_scale": 2
-    },
-    "LTC/CNY": {
-      "price_scale": 2
-    }
   },
   "currencies": {
-    "BTC": {
-      "scale": 8
-    },
-    "LTC": {
-      "scale": 8
-    },
-    "CNY": {
-      "scale": 4
+  },
+  "private_rate_limits": [
+    {
+      "calls": 600,
+      "time_unit": "minutes"
     }
-  }
+  ],
+  "share_rate_limits": false
 }

@@ -1,19 +1,19 @@
 package org.knowm.xchange.gemini.v1.service;
 
-import feign.RequestTemplate;
-import net.iharder.Base64;
-import org.knowm.xchange.service.ParamsDigest;
-
-import javax.crypto.Mac;
 import java.math.BigInteger;
+import java.util.Base64;
+import javax.crypto.Mac;
+import org.knowm.xchange.service.BaseParamsDigest;
+import si.mazi.rescu.RestInvocation;
 
-public class GeminiHmacPostBodyDigest extends ParamsDigest {
+public class GeminiHmacPostBodyDigest extends BaseParamsDigest {
 
   /**
    * Constructor
    *
    * @param secretKeyBase64
-   * @throws IllegalArgumentException if key is invalid (cannot be base-64-decoded or the decoded key is invalid).
+   * @throws IllegalArgumentException if key is invalid (cannot be base-64-decoded or the decoded
+   *     key is invalid).
    */
   private GeminiHmacPostBodyDigest(String secretKeyBase64) {
 
@@ -26,11 +26,11 @@ public class GeminiHmacPostBodyDigest extends ParamsDigest {
   }
 
   @Override
-  public String digestParams(RequestTemplate requestTemplate) {
+  public String digestParams(RestInvocation restInvocation) {
 
-    String postBody = requestTemplate.bodyTemplate();
+    String postBody = restInvocation.getRequestBody();
     Mac mac = getMac();
-    mac.update(Base64.encodeBytes(postBody.getBytes()).getBytes());
+    mac.update(Base64.getEncoder().encodeToString(postBody.getBytes()).getBytes());
 
     return String.format("%096x", new BigInteger(1, mac.doFinal()));
   }

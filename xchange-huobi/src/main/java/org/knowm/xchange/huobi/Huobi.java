@@ -1,110 +1,161 @@
 package org.knowm.xchange.huobi;
 
-
-import org.knowm.xchange.huobi.dto.marketdata.*;
-import org.knowm.xchange.huobi.dto.meta.CurrencysResponse;
-import org.knowm.xchange.huobi.dto.meta.Symbol;
-import org.knowm.xchange.huobi.dto.meta.SymbolsResponse;
-import org.knowm.xchange.huobi.dto.meta.TimestampResponse;
-
+import java.io.IOException;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import java.util.List;
+import org.knowm.xchange.huobi.dto.account.HuobiCreateWithdrawRequest;
+import org.knowm.xchange.huobi.dto.account.results.HuobiAccountResult;
+import org.knowm.xchange.huobi.dto.account.results.HuobiBalanceResult;
+import org.knowm.xchange.huobi.dto.account.results.HuobiCreateWithdrawResult;
+import org.knowm.xchange.huobi.dto.account.results.HuobiDepositAddressResult;
+import org.knowm.xchange.huobi.dto.account.results.HuobiDepositAddressWithTagResult;
+import org.knowm.xchange.huobi.dto.marketdata.results.HuobiAssetPairsResult;
+import org.knowm.xchange.huobi.dto.marketdata.results.HuobiAssetsResult;
+import org.knowm.xchange.huobi.dto.marketdata.results.HuobiDepthResult;
+import org.knowm.xchange.huobi.dto.marketdata.results.HuobiTickerResult;
+import org.knowm.xchange.huobi.dto.trade.HuobiCreateOrderRequest;
+import org.knowm.xchange.huobi.dto.trade.results.HuobiCancelOrderResult;
+import org.knowm.xchange.huobi.dto.trade.results.HuobiOrderInfoResult;
+import org.knowm.xchange.huobi.dto.trade.results.HuobiOrderResult;
+import org.knowm.xchange.huobi.dto.trade.results.HuobiOrdersResult;
+import si.mazi.rescu.ParamsDigest;
 
 @Path("/")
 @Produces(MediaType.APPLICATION_JSON)
 public interface Huobi {
 
-    @GET
-    @Path("v1/common/timestamp")
-    public TimestampResponse time() throws ApiException;
+  @GET
+  @Path("market/detail/merged")
+  HuobiTickerResult getTicker(@QueryParam("symbol") String symbol) throws IOException;
 
-    @GET
-    @Path("v1/common/currencys")
-    CurrencysResponse currencys()  throws ApiException;
+  @GET
+  @Path("market/depth")
+  HuobiDepthResult getDepth(@QueryParam("symbol") String symbol, @QueryParam("type") String type)
+      throws IOException;
 
-    @GET
-    @Path("v1/common/symbols")
-    SymbolsResponse<List<Symbol>> symbols()  throws ApiException;
+  @GET
+  @Path("v1/common/symbols")
+  HuobiAssetPairsResult getAssetPairs() throws IOException;
 
-    /**
-     *
-     * @param symbol 交易对 btcusdt, bchbtc, rcneth
-     * @param period K线类型 1min, 5min, 15min, 30min, 60min, 1day, 1mon, 1week, 1year
-     * @param size 获取数量 默认150 [1,2000]
-     * @return
-     * @throws ApiException
-     */
-    @GET
-    @Path("market/history/kline")
-    KlineResponse<List<Kline>> kline(@QueryParam("symbol") String symbol, @QueryParam("period") String period, @QueryParam("size") Integer size) throws ApiException;
+  @GET
+  @Path("v1/common/currencys")
+  HuobiAssetsResult getAssets() throws IOException;
 
+  @GET
+  @Path("v1/dw/deposit-virtual/addresses")
+  HuobiDepositAddressResult getDepositAddress(
+      @QueryParam("currency") String currency,
+      @QueryParam("AccessKeyId") String apiKey,
+      @QueryParam("SignatureMethod") String signatureMethod,
+      @QueryParam("SignatureVersion") int signatureVersion,
+      @QueryParam("Timestamp") String nonce,
+      @QueryParam("Signature") ParamsDigest signature)
+      throws IOException;
 
-    /**
-     *
-     * @param symbol  交易对 btcusdt, bchbtc, rcneth ...
-     * @return
-     * @throws ApiException
-     */
-    @GET
-    @Path("market/detail/merged")
-    MergedResponse<Merged> merged(@QueryParam("symbol") String symbol) throws ApiException;
+  @GET
+  @Path("v1/dw/deposit-virtual/sharedAddressWithTag")
+  HuobiDepositAddressWithTagResult getDepositAddressWithTag(
+      @QueryParam("currency") String currency,
+      @QueryParam("AccessKeyId") String apiKey,
+      @QueryParam("SignatureMethod") String signatureMethod,
+      @QueryParam("SignatureVersion") int signatureVersion,
+      @QueryParam("Timestamp") String nonce,
+      @QueryParam("Signature") ParamsDigest signature)
+      throws IOException;
 
+  @POST
+  @Path("v1/dw/withdraw/api/create")
+  @Consumes(MediaType.APPLICATION_JSON)
+  HuobiCreateWithdrawResult createWithdraw(
+      HuobiCreateWithdrawRequest body,
+      @QueryParam("AccessKeyId") String apiKey,
+      @QueryParam("SignatureMethod") String signatureMethod,
+      @QueryParam("SignatureVersion") int signatureVersion,
+      @QueryParam("Timestamp") String nonce,
+      @QueryParam("Signature") ParamsDigest signature)
+      throws IOException;
 
-    /**
-     *
-     * @param symbol 交易对 btcusdt, bchbtc, rcneth
-     * @param type   Depth 类型 step0, step1, step2, step3, step4, step5（合并深度0-5）；step0时，不合并深度
-     * @return
-     * @throws ApiException
-     */
-    @GET
-    @Path("market/depth")
-    DepthResponse depth(@QueryParam("symbol") String symbol, @QueryParam("type") String type) throws ApiException;
+  @GET
+  @Path("v1/account/accounts")
+  HuobiAccountResult getAccount(
+      @QueryParam("AccessKeyId") String apiKey,
+      @QueryParam("SignatureMethod") String signatureMethod,
+      @QueryParam("SignatureVersion") int signatureVersion,
+      @QueryParam("Timestamp") String nonce,
+      @QueryParam("Signature") ParamsDigest signature)
+      throws IOException;
 
-    /**
-     *
-     * @param symbol  交易对 btcusdt, bchbtc, rcneth
-     * @return
-     * @throws ApiException
-     */
-    @GET
-    @Path("market/trade ")
-    TradeResponse trade(@QueryParam("symbol") String symbol) throws ApiException;
+  @GET
+  @Path("v1/account/accounts/{account-id}/balance")
+  HuobiBalanceResult getBalance(
+      @PathParam("account-id") String accountID,
+      @QueryParam("AccessKeyId") String apiKey,
+      @QueryParam("SignatureMethod") String signatureMethod,
+      @QueryParam("SignatureVersion") int signatureVersion,
+      @QueryParam("Timestamp") String nonce,
+      @QueryParam("Signature") ParamsDigest signature)
+      throws IOException;
 
+  @GET
+  @Path("v1/order/orders")
+  HuobiOrdersResult getOpenOrders(
+      @QueryParam("states") String states,
+      @QueryParam("AccessKeyId") String apiKey,
+      @QueryParam("SignatureMethod") String signatureMethod,
+      @QueryParam("SignatureVersion") int signatureVersion,
+      @QueryParam("Timestamp") String nonce,
+      @QueryParam("Signature") ParamsDigest signature)
+      throws IOException;
 
-    /**
-     *
-     * @param symbol 交易对 btcusdt, bchbtc, rcneth
-     * @param size  获取交易记录的数量  1 [1, 2000]
-     * @return
-     * @throws ApiException
-     */
-    @GET
-    @Path("market/history/trade")
-    HistoryTradeResponse<List<HistoryTradess>>  historyTrade(@QueryParam("symbol") String symbol, @QueryParam("size") Integer size) throws ApiException;
+  @GET
+  @Path("v1/order/orders/{order-id}")
+  HuobiOrderInfoResult getOrder(
+      @PathParam("order-id") String orderID,
+      @QueryParam("AccessKeyId") String apiKey,
+      @QueryParam("SignatureMethod") String signatureMethod,
+      @QueryParam("SignatureVersion") int signatureVersion,
+      @QueryParam("Timestamp") String nonce,
+      @QueryParam("Signature") ParamsDigest signature)
+      throws IOException;
 
-    /**
-     *
-     * @param symbol  交易对 btcusdt, bchbtc, rcneth
-     * @return
-     * @throws ApiException
-     */
-    @GET
-    @Path("market/detail")
-    DetailResponse<Details>  detail(@QueryParam("symbol") String symbol) throws ApiException;
+  @POST
+  @Path("v1/order/orders/{order-id}/submitcancel")
+  HuobiCancelOrderResult cancelOrder(
+      @PathParam("order-id") String orderID,
+      @QueryParam("AccessKeyId") String apiKey,
+      @QueryParam("SignatureMethod") String signatureMethod,
+      @QueryParam("SignatureVersion") int signatureVersion,
+      @QueryParam("Timestamp") String nonce,
+      @QueryParam("Signature") ParamsDigest signature)
+      throws IOException;
 
+  @POST
+  @Path("v1/order/orders/place")
+  @Consumes(MediaType.APPLICATION_JSON)
+  HuobiOrderResult placeLimitOrder(
+      HuobiCreateOrderRequest body,
+      @QueryParam("AccessKeyId") String apiKey,
+      @QueryParam("SignatureMethod") String signatureMethod,
+      @QueryParam("SignatureVersion") int signatureVersion,
+      @QueryParam("Timestamp") String nonce,
+      @QueryParam("Signature") ParamsDigest signature)
+      throws IOException;
 
-
-
-
-
-
-
-
-
-
+  @POST
+  @Path("v1/order/orders/place")
+  @Consumes(MediaType.APPLICATION_JSON)
+  HuobiOrderResult placeMarketOrder(
+      HuobiCreateOrderRequest body,
+      @QueryParam("AccessKeyId") String apiKey,
+      @QueryParam("SignatureMethod") String signatureMethod,
+      @QueryParam("SignatureVersion") int signatureVersion,
+      @QueryParam("Timestamp") String nonce,
+      @QueryParam("Signature") ParamsDigest signature)
+      throws IOException;
 }

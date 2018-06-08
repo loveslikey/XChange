@@ -1,8 +1,8 @@
 package org.knowm.xchange.bibox.service;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
-
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.bibox.dto.BiboxAdapters;
 import org.knowm.xchange.bibox.dto.marketdata.BiboxMarket;
@@ -16,13 +16,12 @@ import org.knowm.xchange.exceptions.NotYetImplementedForExchangeException;
 import org.knowm.xchange.service.marketdata.MarketDataService;
 
 /**
- * <p>
  * Implementation of the market data service for Bibox
- * </p>
+ *
  * <ul>
- * <li>Provides access to various market data values</li>
+ *   <li>Provides access to various market data values
  * </ul>
- * 
+ *
  * @author odrotleff
  */
 public class BiboxMarketDataService extends BiboxMarketDataServiceRaw implements MarketDataService {
@@ -55,9 +54,23 @@ public class BiboxMarketDataService extends BiboxMarketDataServiceRaw implements
     return BiboxAdapters.adaptOrderBook(biboxOrderBook, currencyPair);
   }
 
+  public List<OrderBook> getAllOrderBooks(Integer depth) {
+    return getOrderBooks(depth, exchange.getExchangeSymbols());
+  }
+
+  public List<OrderBook> getOrderBooks(Integer depth, Collection<CurrencyPair> currencyPairs) {
+
+    if (depth == null) {
+      depth = 200;
+    }
+    List<BiboxOrderBook> biboxOrderBooks = getBiboxOrderBooks(depth, currencyPairs);
+    return BiboxAdapters.adaptAllOrderBooks(biboxOrderBooks);
+  }
+
   @Override
-  public Trades getTrades(CurrencyPair currencyPair, Object... args) throws IOException {
-    throw new NotYetImplementedForExchangeException("This operation is not yet implemented for this exchange");
+  public Trades getTrades(CurrencyPair currencyPair, Object... args) {
+    throw new NotYetImplementedForExchangeException(
+        "This operation is not yet implemented for this exchange");
   }
 
   public ExchangeMetaData getMetadata() throws IOException {

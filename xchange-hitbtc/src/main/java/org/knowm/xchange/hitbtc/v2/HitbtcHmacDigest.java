@@ -1,16 +1,15 @@
 package org.knowm.xchange.hitbtc.v2;
 
-import feign.RequestTemplate;
-import org.knowm.xchange.service.ParamsDigest;
-import org.knowm.xchange.utils.DigestUtils;
-
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
+import org.knowm.xchange.utils.DigestUtils;
+import si.mazi.rescu.ParamsDigest;
+import si.mazi.rescu.RestInvocation;
 
-public class HitbtcHmacDigest extends ParamsDigest {
+public class HitbtcHmacDigest implements ParamsDigest {
 
   private static final String HMAC_SHA_512 = "HmacSHA512";
   private final Mac mac;
@@ -26,7 +25,8 @@ public class HitbtcHmacDigest extends ParamsDigest {
     } catch (InvalidKeyException e) {
       throw new IllegalArgumentException("Invalid key for hmac initialization.", e);
     } catch (NoSuchAlgorithmException e) {
-      throw new RuntimeException("Illegal algorithm for post body digest. Check the implementation.");
+      throw new RuntimeException(
+          "Illegal algorithm for post body digest. Check the implementation.");
     }
   }
 
@@ -36,19 +36,18 @@ public class HitbtcHmacDigest extends ParamsDigest {
   }
 
   @Override
-  public String digestParams(RequestTemplate requestTemplate) {
+  public String digestParams(RestInvocation restInvocation) {
 
-    String postBody = requestTemplate.bodyTemplate();
+    String postBody = restInvocation.getRequestBody();
     if (postBody == null) {
       postBody = "";
     }
 
-    String uri = requestTemplate.url() +requestTemplate.queryLine();
+    String uri = restInvocation.getPath() + "?" + restInvocation.getQueryString();
     String message = uri + postBody;
 
     mac.update(message.getBytes());
 
     return DigestUtils.bytesToHex(mac.doFinal()).toLowerCase();
   }
-
 }

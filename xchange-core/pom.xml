@@ -1,110 +1,45 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.knowm.xchange</groupId>
-        <artifactId>xchange-parent</artifactId>
-        <version>4.3.4-major-SNAPSHOT</version>
-    </parent>
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.knowm.xchange</groupId>
+		<artifactId>xchange-parent</artifactId>
+		<version>4.3.8-SNAPSHOT</version>
+	</parent>
 
-    <artifactId>xchange-core</artifactId>
+	<artifactId>xchange-core</artifactId>
 
-    <name>XChange Core</name>
-    <description>Core functionality used by all other modules.</description>
+	<name>XChange Core</name>
+	<description>Core functionality used by all other modules.</description>
 
-    <url>http://knowm.org/open-source/xchange/</url>
-    <inceptionYear>2012</inceptionYear>
+	<url>http://knowm.org/open-source/xchange/</url>
+	<inceptionYear>2012</inceptionYear>
 
-    <organization>
-        <name>Knowm Inc.</name>
-        <url>http://knowm.org/open-source/xchange/</url>
-    </organization>
+	<organization>
+		<name>Knowm Inc.</name>
+		<url>http://knowm.org/open-source/xchange/</url>
+	</organization>
 
-    <!-- Parent provides default configuration for dependencies -->
-    <dependencies>
+	<!-- Parent provides default configuration for dependencies -->
+	<dependencies>
 
-        <!-- Third party dependencies -->
+		<!-- Third party dependencies -->
 
-      <!--  <dependency>
-            <groupId>com.github.mmazi</groupId>
-            <artifactId>rescu</artifactId>
-        </dependency>-->
+		<dependency>
+			<groupId>com.github.mmazi</groupId>
+			<artifactId>rescu</artifactId>
+		</dependency>
 
-   <!--     <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
-            <version>2.1</version>
-        </dependency>-->
-
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
 
 
-        <!-- JSR-305 annotations (@Nullable etc.) -->
-        <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
-            <version>2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.findbugs</groupId>
-            <artifactId>jsr305</artifactId>
-            <version>3.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>net.iharder</groupId>
-            <artifactId>base64</artifactId>
-            <version>2.3.9</version>
-        </dependency>
-        <dependency>
-            <groupId>oauth.signpost</groupId>
-            <artifactId>signpost-core</artifactId>
-            <version>1.2.1.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-jaxrs</artifactId>
-            <version>9.5.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-jackson</artifactId>
-            <version>9.5.1</version>
-            <exclusions>
-                <exclusion>
-                        <groupId>com.fasterxml.jackson.core</groupId>
-                        <artifactId>jackson-databind</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.9.4</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-okhttp</artifactId>
-            <version>9.5.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-        </dependency>
-        <!--<dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <scope>test</scope>
-        </dependency>-->
-    </dependencies>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 </project>

@@ -3,7 +3,12 @@ package org.knowm.xchange.binance.dto.trade;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 public enum OrderType {
-  LIMIT, MARKET;
+  LIMIT,
+  MARKET,
+  TAKE_PROFIT_LIMIT,
+  STOP_LOSS_LIMIT,
+  STOP_LOSS,
+  TAKE_PROFIT;
 
   @JsonCreator
   public static OrderType getOrderType(String s) {

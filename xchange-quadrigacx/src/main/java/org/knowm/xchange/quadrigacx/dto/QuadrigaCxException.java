@@ -1,11 +1,9 @@
 package org.knowm.xchange.quadrigacx.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.knowm.xchange.exceptions.HttpStatusExceptionSupport;
-
 import java.util.Collection;
 import java.util.Map;
-
+import si.mazi.rescu.HttpStatusExceptionSupport;
 
 public class QuadrigaCxException extends HttpStatusExceptionSupport {
 

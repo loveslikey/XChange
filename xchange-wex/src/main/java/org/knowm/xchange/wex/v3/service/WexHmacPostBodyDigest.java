@@ -1,27 +1,28 @@
 package org.knowm.xchange.wex.v3.service;
 
-import feign.RequestTemplate;
-import org.knowm.xchange.service.ParamsDigest;
-
-import javax.crypto.Mac;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import javax.crypto.Mac;
+import org.knowm.xchange.service.BaseParamsDigest;
+import si.mazi.rescu.RestInvocation;
 
 /**
- * This may be used as the value of a @HeaderParam, @QueryParam or @PathParam to create a digest of the post body (composed of @FormParam's). Don't
- * use as the value of a @FormParam, it will probably cause an infinite loop.
- * <p>
- * This may be used for REST APIs where some parameters' values must be digests of other parameters. An example is the MtGox API v1, where the
- * Rest-Sign header parameter must be a digest of the request body (which is composed of @FormParams).
- * </p>
+ * This may be used as the value of a @HeaderParam, @QueryParam or @PathParam to create a digest of
+ * the post body (composed of @FormParam's). Don't use as the value of a @FormParam, it will
+ * probably cause an infinite loop.
+ *
+ * <p>This may be used for REST APIs where some parameters' values must be digests of other
+ * parameters. An example is the MtGox API v1, where the Rest-Sign header parameter must be a digest
+ * of the request body (which is composed of @FormParams).
  */
-public class WexHmacPostBodyDigest extends ParamsDigest {
+public class WexHmacPostBodyDigest extends BaseParamsDigest {
 
   /**
    * Constructor
    *
    * @param secretKeyBase64
-   * @throws IllegalArgumentException if key is invalid (cannot be base-64-decoded or the decoded key is invalid).
+   * @throws IllegalArgumentException if key is invalid (cannot be base-64-decoded or the decoded
+   *     key is invalid).
    */
   private WexHmacPostBodyDigest(String secretKeyBase64) {
 
@@ -34,10 +35,10 @@ public class WexHmacPostBodyDigest extends ParamsDigest {
   }
 
   @Override
-  public String digestParams(RequestTemplate requestTemplate) {
+  public String digestParams(RestInvocation restInvocation) {
 
     try {
-      String postBody = requestTemplate.bodyTemplate();
+      String postBody = restInvocation.getRequestBody();
       Mac mac = getMac();
       mac.update(postBody.getBytes("UTF-8"));
       return String.format("%0128x", new BigInteger(1, mac.doFinal()));

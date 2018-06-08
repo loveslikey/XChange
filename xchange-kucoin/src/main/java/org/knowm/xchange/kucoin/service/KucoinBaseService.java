@@ -4,9 +4,8 @@ import org.knowm.xchange.Exchange;
 import org.knowm.xchange.kucoin.KucoinAuthenticated;
 import org.knowm.xchange.service.BaseExchangeService;
 import org.knowm.xchange.service.BaseService;
-
-import org.knowm.xchange.service.ParamsDigest;
-import org.knowm.xchange.RestProxyFactory;
+import si.mazi.rescu.ParamsDigest;
+import si.mazi.rescu.RestProxyFactory;
 
 public class KucoinBaseService extends BaseExchangeService implements BaseService {
 
@@ -21,8 +20,13 @@ public class KucoinBaseService extends BaseExchangeService implements BaseServic
    */
   protected KucoinBaseService(Exchange exchange) {
     super(exchange);
-    this.kucoin = RestProxyFactory.createProxy(KucoinAuthenticated.class, exchange.getExchangeSpecification().getSslUri(), getClientConfig());
+    this.kucoin =
+        RestProxyFactory.createProxy(
+            KucoinAuthenticated.class,
+            exchange.getExchangeSpecification().getSslUri(),
+            getClientConfig());
     this.apiKey = exchange.getExchangeSpecification().getApiKey();
-    this.signatureCreator = KucoinDigest.createInstance(exchange.getExchangeSpecification().getSecretKey());
+    this.signatureCreator =
+        KucoinDigest.createInstance(exchange.getExchangeSpecification().getSecretKey());
   }
 }

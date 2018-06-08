@@ -1,45 +1,47 @@
 package org.knowm.xchange.btctrade.service;
 
-import feign.RequestTemplate;
-import org.knowm.xchange.service.ParamsDigest;
-import org.knowm.xchange.utils.Params;
-
-import javax.crypto.Mac;
 import java.math.BigInteger;
 import java.nio.charset.Charset;
+import java.util.Map;
+import javax.crypto.Mac;
+import javax.ws.rs.FormParam;
+import org.knowm.xchange.service.BaseParamsDigest;
+import si.mazi.rescu.Params;
+import si.mazi.rescu.RestInvocation;
 
-public class BTCTradeDigest extends ParamsDigest {
+public class BTCTradeDigest extends BaseParamsDigest {
 
   private static final String ENCODING = "UTF-8";
   private static final Charset CHARSET = Charset.forName(ENCODING);
-
-  public static BTCTradeDigest createInstance(String secret) {
-
-    return new BTCTradeDigest(secret.getBytes(CHARSET));
-  }
 
   private BTCTradeDigest(byte[] secretKeyBase64) {
 
     super(secretKeyBase64, HMAC_SHA_256);
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  public static BTCTradeDigest createInstance(String secret) {
+
+    return new BTCTradeDigest(secret.getBytes(CHARSET));
+  }
+
+  /** {@inheritDoc} */
   @Override
-  public String digestParams(RequestTemplate requestTemplate) {
+  public String digestParams(RestInvocation restInvocation) {
 
-    final Params params = Params.of();
-    requestTemplate.queries().entrySet().stream().filter(entry -> !entry.getKey().equals("signature")).forEach(entry -> {
-      params.add(entry.getKey(), entry.getValue());
-    });
+    Params params = restInvocation.getParamsMap().get(FormParam.class);
+    Map<String, String> nameValues = params.asHttpHeaders();
+    nameValues.remove("signature");
 
-    String message = params.asQueryString();
+    Params newParams = Params.of();
+    for (Map.Entry<String, String> nameValue : nameValues.entrySet()) {
+      newParams.add(nameValue.getKey(), nameValue.getValue());
+    }
+
+    String message = newParams.asQueryString();
 
     Mac mac = getMac();
     mac.update(message.getBytes());
 
     return String.format("%064x", new BigInteger(1, mac.doFinal()));
   }
-
 }

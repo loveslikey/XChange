@@ -1,18 +1,18 @@
 package org.knowm.xchange.poloniex.service;
 
-import feign.RequestTemplate;
-import org.knowm.xchange.service.ParamsDigest;
-
-import javax.crypto.Mac;
 import java.math.BigInteger;
+import javax.crypto.Mac;
+import org.knowm.xchange.service.BaseParamsDigest;
+import si.mazi.rescu.RestInvocation;
 
-public class PoloniexDigest extends ParamsDigest {
+public class PoloniexDigest extends BaseParamsDigest {
 
   /**
    * Constructor
    *
    * @param secretKeyBase64
-   * @throws IllegalArgumentException if key is invalid (cannot be base-64-decoded or the decoded key is invalid).
+   * @throws IllegalArgumentException if key is invalid (cannot be base-64-decoded or the decoded
+   *     key is invalid).
    */
   private PoloniexDigest(String secretKeyBase64) {
 
@@ -25,9 +25,9 @@ public class PoloniexDigest extends ParamsDigest {
   }
 
   @Override
-  public String digestParams(RequestTemplate requestTemplate) {
+  public String digestParams(RestInvocation restInvocation) {
 
-    String postBody = requestTemplate.bodyTemplate();
+    String postBody = restInvocation.getRequestBody();
 
     Mac mac = getMac();
     mac.update(postBody.getBytes());

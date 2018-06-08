@@ -1,30 +1,26 @@
 package org.knowm.xchange.okcoin;
 
-import feign.RequestTemplate;
-import org.knowm.xchange.service.ParamsDigest;
-import org.knowm.xchange.utils.Params;
-
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.*;
-import java.util.Map.Entry;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import javax.ws.rs.FormParam;
+import si.mazi.rescu.Params;
+import si.mazi.rescu.ParamsDigest;
+import si.mazi.rescu.RestInvocation;
 
-public class OkCoinDigest extends ParamsDigest {
+public class OkCoinDigest implements ParamsDigest {
 
-  private static final char[] DIGITS_UPPER = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+  private static final char[] DIGITS_UPPER = {
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
+  };
 
   private final String apikey;
   private final String secretKey;
   private final MessageDigest md;
-  private final Comparator<Entry<String, String>> comparator = new Comparator<Map.Entry<String, String>>() {
-
-    @Override
-    public int compare(Entry<String, String> o1, Entry<String, String> o2) {
-
-      return o1.getKey().compareTo(o2.getKey());
-    }
-  };
 
   public OkCoinDigest(String apikey, String secretKey) {
 
@@ -34,7 +30,7 @@ public class OkCoinDigest extends ParamsDigest {
     try {
       md = MessageDigest.getInstance("MD5");
     } catch (NoSuchAlgorithmException e) {
-      throw new RuntimeException("Problem instantiating message digest.", e);
+      throw new RuntimeException("Problem instantiating message digest.");
     }
   }
 
@@ -51,11 +47,9 @@ public class OkCoinDigest extends ParamsDigest {
   }
 
   @Override
-  public String digestParams(RequestTemplate requestTemplate) {
-    final Params params = Params.of();
-    requestTemplate.queries().entrySet().stream().forEach(entry -> {
-      params.add(entry.getKey(), entry.getValue());
-    });
+  public String digestParams(RestInvocation restInvocation) {
+
+    final Params params = restInvocation.getParamsMap().get(FormParam.class);
     final Map<String, String> nameValueMap = params.asHttpHeaders();
 
     nameValueMap.remove("sign");
@@ -70,7 +64,7 @@ public class OkCoinDigest extends ParamsDigest {
       }
     }
     final List<Map.Entry<String, String>> nameValueList = new ArrayList<>(nameValueMap.entrySet());
-    Collections.sort(nameValueList, comparator);
+    Collections.sort(nameValueList, (e1, e2) -> e1.getKey().compareTo(e2.getKey()));
 
     final Params newParams = Params.of();
     for (int i = 0; i < nameValueList.size(); i++) {

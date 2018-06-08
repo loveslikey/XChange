@@ -1,12 +1,11 @@
 package org.knowm.xchange.vaultoro.service;
 
-import feign.RequestTemplate;
-import org.knowm.xchange.service.ParamsDigest;
-
-import javax.crypto.Mac;
 import java.math.BigInteger;
+import javax.crypto.Mac;
+import org.knowm.xchange.service.BaseParamsDigest;
+import si.mazi.rescu.RestInvocation;
 
-public class VaultoroDigest extends ParamsDigest {
+public class VaultoroDigest extends BaseParamsDigest {
 
   private VaultoroDigest(String secretKeyBase64) {
 
@@ -19,13 +18,12 @@ public class VaultoroDigest extends ParamsDigest {
   }
 
   @Override
-  public String digestParams(RequestTemplate requestTemplate) {
+  public String digestParams(RestInvocation restInvocation) {
 
-    String invocationUrl = requestTemplate.url()+requestTemplate.queryLine();
+    String invocationUrl = restInvocation.getInvocationUrl();
     Mac mac = getMac();
     mac.update(invocationUrl.getBytes());
 
     return String.format("%040x", new BigInteger(1, mac.doFinal()));
   }
-
 }

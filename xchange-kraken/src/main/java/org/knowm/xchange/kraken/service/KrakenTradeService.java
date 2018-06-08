@@ -1,18 +1,15 @@
 package org.knowm.xchange.kraken.service;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.dto.Order;
-import org.knowm.xchange.dto.trade.*;
+import org.knowm.xchange.dto.trade.LimitOrder;
+import org.knowm.xchange.dto.trade.MarketOrder;
+import org.knowm.xchange.dto.trade.OpenOrders;
+import org.knowm.xchange.dto.trade.UserTrades;
 import org.knowm.xchange.exceptions.ExchangeException;
-import org.knowm.xchange.exceptions.NotYetImplementedForExchangeException;
 import org.knowm.xchange.kraken.KrakenAdapters;
-import org.knowm.xchange.kraken.dto.trade.KrakenOrder;
 import org.knowm.xchange.service.trade.TradeService;
 import org.knowm.xchange.service.trade.params.CancelOrderByIdParams;
 import org.knowm.xchange.service.trade.params.CancelOrderParams;
@@ -41,8 +38,7 @@ public class KrakenTradeService extends KrakenTradeServiceRaw implements TradeSe
   }
 
   @Override
-  public OpenOrders getOpenOrders(
-      OpenOrdersParams params) throws IOException {
+  public OpenOrders getOpenOrders(OpenOrdersParams params) throws IOException {
     return KrakenAdapters.adaptOpenOrders(super.getKrakenOpenOrders());
   }
 
@@ -56,11 +52,6 @@ public class KrakenTradeService extends KrakenTradeServiceRaw implements TradeSe
   public String placeLimitOrder(LimitOrder limitOrder) throws IOException {
 
     return KrakenAdapters.adaptOrderId(super.placeKrakenLimitOrder(limitOrder));
-  }
-
-  @Override
-  public String placeStopOrder(StopOrder stopOrder) throws IOException {
-    throw new NotYetImplementedForExchangeException();
   }
 
   @Override
@@ -79,11 +70,12 @@ public class KrakenTradeService extends KrakenTradeServiceRaw implements TradeSe
   }
 
   /**
-   * @param params Can optionally implement {@link TradeHistoryParamOffset} and {@link TradeHistoryParamsTimeSpan}. All other TradeHistoryParams types
-   * will be ignored.
+   * @param params Can optionally implement {@link TradeHistoryParamOffset} and {@link
+   *     TradeHistoryParamsTimeSpan}. All other TradeHistoryParams types will be ignored.
    */
   @Override
-  public UserTrades getTradeHistory(TradeHistoryParams params) throws ExchangeException, IOException {
+  public UserTrades getTradeHistory(TradeHistoryParams params)
+      throws ExchangeException, IOException {
 
     final Long startTime;
     final Long endTime;
@@ -103,7 +95,8 @@ public class KrakenTradeService extends KrakenTradeServiceRaw implements TradeSe
       offset = null;
     }
 
-    return KrakenAdapters.adaptTradesHistory(getKrakenTradeHistory(null, false, startTime, endTime, offset).getTrades());
+    return KrakenAdapters.adaptTradesHistory(
+        getKrakenTradeHistory(null, false, startTime, endTime, offset).getTrades());
   }
 
   @Override
@@ -117,25 +110,25 @@ public class KrakenTradeService extends KrakenTradeServiceRaw implements TradeSe
     return null;
   }
 
-  public static class KrakenTradeHistoryParams extends DefaultTradeHistoryParamsTimeSpan implements TradeHistoryParamOffset {
-
-    private Long offset;
-
-    @Override
-    public void setOffset(Long offset) {
-      this.offset = offset;
-    }
-
-    @Override
-    public Long getOffset() {
-      return offset;
-    }
-  }
-
   @Override
   public Collection<Order> getOrder(String... orderIds) throws IOException {
 
     return KrakenAdapters.adaptOrders(super.getOrders(orderIds));
   }
 
+  public static class KrakenTradeHistoryParams extends DefaultTradeHistoryParamsTimeSpan
+      implements TradeHistoryParamOffset {
+
+    private Long offset;
+
+    @Override
+    public Long getOffset() {
+      return offset;
+    }
+
+    @Override
+    public void setOffset(Long offset) {
+      this.offset = offset;
+    }
+  }
 }

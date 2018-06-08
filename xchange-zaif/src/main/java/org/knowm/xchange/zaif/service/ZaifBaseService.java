@@ -4,8 +4,7 @@ import org.knowm.xchange.Exchange;
 import org.knowm.xchange.service.BaseExchangeService;
 import org.knowm.xchange.service.BaseService;
 import org.knowm.xchange.zaif.Zaif;
-
-import org.knowm.xchange.RestProxyFactory;
+import si.mazi.rescu.RestProxyFactory;
 
 public class ZaifBaseService extends BaseExchangeService implements BaseService {
 
@@ -17,7 +16,9 @@ public class ZaifBaseService extends BaseExchangeService implements BaseService 
    * @param exchange
    */
   protected ZaifBaseService(Exchange exchange) {
-    super(exchange);    this.zaif = RestProxyFactory.createProxy(Zaif.class, exchange.getExchangeSpecification().getSslUri(), getClientConfig());
-
+    super(exchange);
+    this.zaif =
+        RestProxyFactory.createProxy(
+            Zaif.class, exchange.getExchangeSpecification().getSslUri(), getClientConfig());
   }
 }

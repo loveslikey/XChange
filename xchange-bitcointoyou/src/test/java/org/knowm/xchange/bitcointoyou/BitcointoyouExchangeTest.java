@@ -1,7 +1,6 @@
 package org.knowm.xchange.bitcointoyou;
 
 import java.util.Map;
-
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,8 +11,7 @@ import org.knowm.xchange.dto.meta.CurrencyPairMetaData;
 import org.knowm.xchange.dto.meta.ExchangeMetaData;
 import org.knowm.xchange.dto.meta.RateLimit;
 import org.knowm.xchange.utils.nonce.AtomicLongIncrementalTime2013NonceFactory;
-
-import org.knowm.xchange.SynchronizedValueFactory;
+import si.mazi.rescu.SynchronizedValueFactory;
 
 /**
  * Testes the {@link BitcointoyouExchange} class

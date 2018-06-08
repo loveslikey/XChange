@@ -1,10 +1,17 @@
 package org.knowm.xchange.kraken.service;
 
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Set;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.Order.IOrderFlags;
-import org.knowm.xchange.exceptions.*;
+import org.knowm.xchange.exceptions.ExchangeException;
+import org.knowm.xchange.exceptions.FrequencyLimitExceededException;
+import org.knowm.xchange.exceptions.FundsExceededException;
+import org.knowm.xchange.exceptions.NonceException;
+import org.knowm.xchange.exceptions.RateLimitExceededException;
 import org.knowm.xchange.kraken.KrakenAuthenticated;
 import org.knowm.xchange.kraken.KrakenUtils;
 import org.knowm.xchange.kraken.dto.KrakenResult;
@@ -17,10 +24,6 @@ import org.knowm.xchange.service.BaseExchangeService;
 import org.knowm.xchange.service.BaseService;
 import org.knowm.xchange.service.ParamsDigest;
 import org.knowm.xchange.RestProxyFactory;
-
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Set;
 
 public class KrakenBaseService extends BaseExchangeService implements BaseService {
 
@@ -36,8 +39,13 @@ public class KrakenBaseService extends BaseExchangeService implements BaseServic
 
     super(exchange);
 
-    kraken = RestProxyFactory.createProxy(KrakenAuthenticated.class, exchange.getExchangeSpecification().getSslUri(), getClientConfig());
-    signatureCreator = KrakenDigest.createInstance(exchange.getExchangeSpecification().getSecretKey());
+    kraken =
+        RestProxyFactory.createProxy(
+            KrakenAuthenticated.class,
+            exchange.getExchangeSpecification().getSslUri(),
+            getClientConfig());
+    signatureCreator =
+        KrakenDigest.createInstance(exchange.getExchangeSpecification().getSecretKey());
   }
 
   public KrakenServerTime getServerTime() throws IOException {
@@ -69,10 +77,11 @@ public class KrakenBaseService extends BaseExchangeService implements BaseServic
       } else if ("EGeneral:Temporary lockout".equals(error)) {
         throw new FrequencyLimitExceededException(error);
 
-      } else if ("EOrder:Insufficient funds".equals(error)) {
+      } else if ("EOrder:Insufficient funds".equals(error)
+          || "EFunding:Invalid amount".equals(error)) {
         throw new FundsExceededException(error);
       }
-      if("EAPI:Rate limit exceeded".equals(error)) {
+      if ("EAPI:Rate limit exceeded".equals(error)) {
         throw new RateLimitExceededException(error);
       }
 
@@ -104,7 +113,9 @@ public class KrakenBaseService extends BaseExchangeService implements BaseServic
     if (assets != null && assets.length > 0) {
       boolean started = false;
       for (Currency asset : assets) {
-        commaDelimitedAssets.append((started) ? "," : "").append(KrakenUtils.getKrakenCurrencyCode(asset));
+        commaDelimitedAssets
+            .append((started) ? "," : "")
+            .append(KrakenUtils.getKrakenCurrencyCode(asset));
         started = true;
       }
 
@@ -153,5 +164,4 @@ public class KrakenBaseService extends BaseExchangeService implements BaseServic
     }
     return delimitedSetString;
   }
-
 }

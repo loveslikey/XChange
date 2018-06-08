@@ -1,17 +1,15 @@
 package org.knowm.xchange.itbit.v1.service;
 
-import feign.RequestTemplate;
-import net.iharder.Base64;
-import org.knowm.xchange.service.ParamsDigest;
-
-import javax.crypto.Mac;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Collection;
+import java.util.Base64;
 import java.util.Map;
+import javax.crypto.Mac;
+import org.knowm.xchange.service.BaseParamsDigest;
+import si.mazi.rescu.RestInvocation;
 
-public class ItBitHmacPostBodyDigest extends ParamsDigest {
+public class ItBitHmacPostBodyDigest extends BaseParamsDigest {
 
   private static final String FIELD_SEPARATOR = "\",\"";
 
@@ -22,7 +20,8 @@ public class ItBitHmacPostBodyDigest extends ParamsDigest {
    * Constructor
    *
    * @param secretKeyBase64
-   * @throws IllegalArgumentException if key is invalid (cannot be base-64-decoded or the decoded key is invalid).
+   * @throws IllegalArgumentException if key is invalid (cannot be base-64-decoded or the decoded
+   *     key is invalid).
    */
   private ItBitHmacPostBodyDigest(String apiKey, String secretKeyBase64) {
 
@@ -37,31 +36,43 @@ public class ItBitHmacPostBodyDigest extends ParamsDigest {
   }
 
   @Override
-  public String digestParams(RequestTemplate requestTemplate) {
+  public String digestParams(RestInvocation restInvocation) {
 
     MessageDigest md;
     try {
       md = MessageDigest.getInstance("SHA-256");
     } catch (NoSuchAlgorithmException e) {
-      throw new RuntimeException("Illegal algorithm for post body digest. Check the implementation.");
+      throw new RuntimeException(
+          "Illegal algorithm for post body digest. Check the implementation.");
     }
 
-    Map<String, Collection<String>> httpHeaders =requestTemplate.queries();
-    String currentNonce = httpHeaders.get("X-Auth-Nonce").iterator().next();
-    String currentTimestamp = httpHeaders.get("X-Auth-Timestamp").iterator().next();
+    Map<String, String> httpHeaders = restInvocation.getHttpHeadersFromParams();
+    String currentNonce = httpHeaders.get("X-Auth-Nonce");
+    String currentTimestamp = httpHeaders.get("X-Auth-Timestamp");
 
     // only POST requests will have a non-null request body.
-    String requestBody = requestTemplate.bodyTemplate();
+    String requestBody = restInvocation.getRequestBody();
     if (requestBody == null) {
       requestBody = "";
     } else {
       requestBody = requestBody.replace("\"", "\\\"");
     }
 
-    String verb = requestTemplate.method().trim();
-    String invocationUrl = (requestTemplate.url()+requestTemplate.queryLine()).trim();
-    String jsonEncodedArray = new StringBuilder("[\"").append(verb).append(FIELD_SEPARATOR).append(invocationUrl).append(FIELD_SEPARATOR)
-        .append(requestBody).append(FIELD_SEPARATOR).append(currentNonce).append(FIELD_SEPARATOR).append(currentTimestamp).append("\"]").toString();
+    String verb = restInvocation.getHttpMethod().trim();
+    String invocationUrl = restInvocation.getInvocationUrl().trim();
+    String jsonEncodedArray =
+        new StringBuilder("[\"")
+            .append(verb)
+            .append(FIELD_SEPARATOR)
+            .append(invocationUrl)
+            .append(FIELD_SEPARATOR)
+            .append(requestBody)
+            .append(FIELD_SEPARATOR)
+            .append(currentNonce)
+            .append(FIELD_SEPARATOR)
+            .append(currentTimestamp)
+            .append("\"]")
+            .toString();
     md.update(currentNonce.getBytes(charset));
     md.update(jsonEncodedArray.getBytes(charset));
     byte[] messageHash = md.digest();
@@ -71,6 +82,6 @@ public class ItBitHmacPostBodyDigest extends ParamsDigest {
     mac512.update(messageHash);
 
     byte[] hmacDigest = mac512.doFinal();
-    return apiKey + ":" + Base64.encodeBytes(hmacDigest);
+    return apiKey + ":" + Base64.getEncoder().encodeToString(hmacDigest);
   }
 }

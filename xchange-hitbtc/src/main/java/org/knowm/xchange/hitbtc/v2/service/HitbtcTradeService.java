@@ -1,10 +1,16 @@
 package org.knowm.xchange.hitbtc.v2.service;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.Order;
-import org.knowm.xchange.dto.trade.*;
-import org.knowm.xchange.exceptions.NotYetImplementedForExchangeException;
+import org.knowm.xchange.dto.trade.LimitOrder;
+import org.knowm.xchange.dto.trade.MarketOrder;
+import org.knowm.xchange.dto.trade.OpenOrders;
+import org.knowm.xchange.dto.trade.UserTrades;
 import org.knowm.xchange.hitbtc.v2.HitbtcAdapters;
 import org.knowm.xchange.hitbtc.v2.dto.HitbtcOrder;
 import org.knowm.xchange.hitbtc.v2.dto.HitbtcOwnTrade;
@@ -17,11 +23,6 @@ import org.knowm.xchange.service.trade.params.TradeHistoryParamOffset;
 import org.knowm.xchange.service.trade.params.TradeHistoryParamPaging;
 import org.knowm.xchange.service.trade.params.TradeHistoryParams;
 import org.knowm.xchange.service.trade.params.orders.OpenOrdersParams;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 public class HitbtcTradeService extends HitbtcTradeServiceRaw implements TradeService {
 
@@ -42,41 +43,30 @@ public class HitbtcTradeService extends HitbtcTradeServiceRaw implements TradeSe
 
   @Override
   public String placeMarketOrder(MarketOrder marketOrder) throws IOException {
-    return placeMarketOrderRaw(marketOrder).clientOrderId;
+    return placeMarketOrderRaw(marketOrder).id;
   }
 
   @Override
   public String placeLimitOrder(LimitOrder limitOrder) throws IOException {
-    return placeLimitOrderRaw(limitOrder).clientOrderId;
-  }
-
-  @Override
-  public String placeStopOrder(StopOrder stopOrder) throws IOException {
-    throw new NotYetImplementedForExchangeException();
-  }
-
-  @Override
-  public boolean cancelOrder(String orderId) throws IOException {
-    HitbtcOrder cancelOrderRaw = cancelOrderRaw(orderId);
-    return "canceled".equals(cancelOrderRaw.status);
+    return placeLimitOrderRaw(limitOrder).id;
   }
 
   @Override
   public boolean cancelOrder(CancelOrderParams orderParams) throws IOException {
     if (orderParams instanceof CancelOrderByIdParams) {
-      return cancelOrder(((CancelOrderByIdParams) orderParams).getOrderId());
+      String clientOrderId = ((CancelOrderByIdParams) orderParams).getOrderId();
+      HitbtcOrder cancelOrderRaw = cancelOrderRaw(clientOrderId);
+      return "canceled".equals(cancelOrderRaw.status);
     } else {
       return false;
     }
   }
 
-  /**
-   * Required parameters: {@link TradeHistoryParamPaging} {@link TradeHistoryParamCurrencyPair}
-   */
+  /** Required parameters: {@link TradeHistoryParamPaging} {@link TradeHistoryParamCurrencyPair} */
   @Override
   public UserTrades getTradeHistory(TradeHistoryParams params) throws IOException {
 
-    long limit = 1000;
+    Integer limit = 1000;
     long offset = 0;
 
     if (params instanceof TradeHistoryParamLimit) {
@@ -95,7 +85,7 @@ public class HitbtcTradeService extends HitbtcTradeServiceRaw implements TradeSe
     }
 
     List<HitbtcOwnTrade> tradeHistoryRaw = getTradeHistoryRaw(symbol, limit, offset);
-    return HitbtcAdapters.adaptTradeHistory(tradeHistoryRaw, exchange.getExchangeMetaData());
+    return HitbtcAdapters.adaptTradeHistory(tradeHistoryRaw);
   }
 
   @Override
@@ -110,30 +100,18 @@ public class HitbtcTradeService extends HitbtcTradeServiceRaw implements TradeSe
 
   @Override
   public Collection<Order> getOrder(String... orderIds) throws IOException {
-    if (orderIds == null || orderIds.length == 0){
+    if (orderIds == null || orderIds.length == 0) {
       return new ArrayList<>();
     }
 
     Collection<Order> orders = new ArrayList<>();
     for (String orderId : orderIds) {
-      HitbtcOrder rawOrder = getHitbtcOrder("BTCUSD", orderId);
-      
-      if (rawOrder != null)
-        orders.add(HitbtcAdapters.adaptOrder(rawOrder));
+      HitbtcOrder rawOrder =
+          getHitbtcOrder("BTCUSD", orderId); // why is the currency pair hardcoded?
+
+      if (rawOrder != null) orders.add(HitbtcAdapters.adaptOrder(rawOrder));
     }
-    
+
     return orders;
-  }
-
-  @Override
-  public void verifyOrder(LimitOrder limitOrder) {
-
-    throw new NotYetImplementedForExchangeException();
-  }
-
-  @Override
-  public void verifyOrder(MarketOrder marketOrder) {
-
-    throw new NotYetImplementedForExchangeException();
   }
 }

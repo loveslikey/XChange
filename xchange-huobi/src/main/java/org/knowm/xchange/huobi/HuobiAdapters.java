@@ -1,155 +1,196 @@
 package org.knowm.xchange.huobi;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.Order;
-import org.knowm.xchange.dto.marketdata.OrderBook;
+import org.knowm.xchange.dto.Order.OrderStatus;
+import org.knowm.xchange.dto.Order.OrderType;
+import org.knowm.xchange.dto.account.Balance;
+import org.knowm.xchange.dto.account.Wallet;
 import org.knowm.xchange.dto.marketdata.Ticker;
-import org.knowm.xchange.dto.marketdata.Trade;
-import org.knowm.xchange.dto.marketdata.Trades;
 import org.knowm.xchange.dto.meta.CurrencyMetaData;
 import org.knowm.xchange.dto.meta.CurrencyPairMetaData;
 import org.knowm.xchange.dto.meta.ExchangeMetaData;
 import org.knowm.xchange.dto.trade.LimitOrder;
-import org.knowm.xchange.huobi.dto.marketdata.*;
-import org.knowm.xchange.huobi.dto.meta.Symbol;
-import org.knowm.xchange.utils.DateUtils;
+import org.knowm.xchange.dto.trade.MarketOrder;
+import org.knowm.xchange.dto.trade.OpenOrders;
+import org.knowm.xchange.huobi.dto.account.HuobiBalanceRecord;
+import org.knowm.xchange.huobi.dto.account.HuobiBalanceSum;
+import org.knowm.xchange.huobi.dto.marketdata.HuobiAsset;
+import org.knowm.xchange.huobi.dto.marketdata.HuobiAssetPair;
+import org.knowm.xchange.huobi.dto.marketdata.HuobiTicker;
+import org.knowm.xchange.huobi.dto.trade.HuobiOrder;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-/**
- * Created by Administrator on 2018/2/20.
- */
 public class HuobiAdapters {
 
-    public static ExchangeMetaData adaptMetaData(List<CurrencyPair> currencyPairs, ExchangeMetaData metaData) {
+  public static Ticker adaptTicker(HuobiTicker huobiTicker, CurrencyPair currencyPair) {
+    Ticker.Builder builder = new Ticker.Builder();
+    builder.open(huobiTicker.getOpen());
+    builder.ask(huobiTicker.getAsk().getPrice());
+    builder.bid(huobiTicker.getBid().getPrice());
+    builder.last(huobiTicker.getClose());
+    builder.high(huobiTicker.getHigh());
+    builder.low(huobiTicker.getLow());
+    builder.volume(huobiTicker.getVol());
+    builder.timestamp(huobiTicker.getTs());
+    builder.currencyPair(currencyPair);
+    return builder.build();
+  }
 
-        Map<CurrencyPair, CurrencyPairMetaData> pairsMap = metaData.getCurrencyPairs();
-        Map<Currency, CurrencyMetaData> currenciesMap = metaData.getCurrencies();
-        for (CurrencyPair c : currencyPairs) {
-            if (!pairsMap.containsKey(c)) {
-                pairsMap.put(c, null);
-            }
-            if (!currenciesMap.containsKey(c.base)) {
-                currenciesMap.put(c.base, null);
-            }
-            if (!currenciesMap.containsKey(c.counter)) {
-                currenciesMap.put(c.counter, null);
-            }
-        }
+  static ExchangeMetaData adaptToExchangeMetaData(
+      HuobiAssetPair[] assetPairs, HuobiAsset[] assets) {
+    HuobiUtils.setHuobiAssets(assets);
+    HuobiUtils.setHuobiAssetPairs(assetPairs);
 
-        return metaData;
+    Map<CurrencyPair, CurrencyPairMetaData> pairs = new HashMap<>();
+    for (HuobiAssetPair pair : assetPairs) {
+      pairs.put(adaptCurrencyPair(pair.getKey()), adaptPair(pair));
     }
 
-    public static Ticker adaptTicker(Merged huobiTicker, CurrencyPair currencyPair) {
-        BigDecimal last = new BigDecimal(huobiTicker.getClose());
-        BigDecimal bid = new BigDecimal(huobiTicker.getBid().get(0));
-        BigDecimal ask = new BigDecimal(huobiTicker.getAsk().get(0));
-        BigDecimal high =new BigDecimal( huobiTicker.getHigh());
-        BigDecimal low = new BigDecimal(huobiTicker.getLow());
-        BigDecimal volume =new BigDecimal( huobiTicker.getVol());
-        Date timestamp = DateUtils.fromMillisUtc(huobiTicker.getTs());
-        return new Ticker.Builder().currencyPair(currencyPair).last(last).bid(bid).ask(ask).high(high).low(low).volume(volume).timestamp(timestamp)
-                .build();
+    Map<Currency, CurrencyMetaData> currencies = new HashMap<>();
+    for (HuobiAsset asset : assets) {
+      Currency currency = adaptCurrency(asset.getAsset());
+      currencies.put(currency, new CurrencyMetaData(0, null));
     }
 
-    public static Ticker adaptTicker(Details huobiTicker, CurrencyPair currencyPair) {
-        BigDecimal last = new BigDecimal(huobiTicker.getClose());
-        BigDecimal high =new BigDecimal( huobiTicker.getHigh());
-        BigDecimal low = new BigDecimal(huobiTicker.getLow());
-        BigDecimal volume =new BigDecimal( huobiTicker.getVol());
-        Date timestamp = DateUtils.fromMillisUtc(huobiTicker.getTs());
-        return new Ticker.Builder().currencyPair(currencyPair).last(last).high(high).low(low).volume(volume).timestamp(timestamp)
-                .build();
+    return new ExchangeMetaData(pairs, currencies, null, null, false);
+  }
+
+  private static CurrencyPair adaptCurrencyPair(String currencyPair) {
+    return HuobiUtils.translateHuobiCurrencyPair(currencyPair);
+  }
+
+  private static CurrencyPairMetaData adaptPair(HuobiAssetPair pair) {
+    return new CurrencyPairMetaData(null, null, null, new Integer(pair.getPricePrecision()));
+  }
+
+  private static Currency adaptCurrency(String currency) {
+    return HuobiUtils.translateHuobiCurrencyCode(currency);
+  }
+
+  public static Wallet adaptWallet(Map<String, HuobiBalanceSum> huobiWallet) {
+    List<Balance> balances = new ArrayList<>(huobiWallet.size());
+    for (Map.Entry<String, HuobiBalanceSum> record : huobiWallet.entrySet()) {
+      Currency currency = adaptCurrency(record.getKey());
+      Balance balance =
+          new Balance(
+              currency,
+              record.getValue().getTotal(),
+              record.getValue().getAvailable(),
+              record.getValue().getFrozen());
+      balances.add(balance);
     }
+    return new Wallet(balances);
+  }
 
-    public static Trades adaptTrades(List<HistoryTradess> historyTradessList, CurrencyPair currencyPair) {
-        List<Trade> tradesList = new ArrayList<>(historyTradessList.size());
-        BigDecimal lastTradeId = new BigDecimal(0);
-        for (HistoryTradess  historyTradess: historyTradessList) {
-            BigDecimal tradeId = historyTradess.getId();
-            if (tradeId .compareTo(lastTradeId)>0) {
-                lastTradeId = tradeId;
-            }
-            for(HistoryTrade historyTrade: historyTradess.getData()){
-                tradesList.add(adaptTrade(historyTrade, currencyPair));
-            }
-        }
-        return new Trades(tradesList, lastTradeId.longValueExact(), Trades.TradeSortType.SortByID);
+  public static Map<String, HuobiBalanceSum> adaptBalance(HuobiBalanceRecord[] huobiBalance) {
+    Map<String, HuobiBalanceSum> map = new HashMap<>();
+    for (HuobiBalanceRecord record : huobiBalance) {
+      HuobiBalanceSum sum = map.get(record.getCurrency());
+      if (sum == null) {
+        sum = new HuobiBalanceSum();
+        map.put(record.getCurrency(), sum);
+      }
+      if (record.getType().equals("trade")) {
+        sum.setAvailable(record.getBalance());
+      } else if (record.getType().equals("frozen")) {
+        sum.setFrozen(record.getBalance());
+      }
     }
+    return map;
+  }
 
-    public static Trade adaptTrade(HistoryTrade historyTrade, CurrencyPair currencyPair) {
-         Order.OrderType orderType = historyTrade.getDirection().equals("buy") ? Order.OrderType.BID : Order.OrderType.ASK;
-        BigDecimal amount = new BigDecimal(historyTrade.getAmount());
-        BigDecimal price = new BigDecimal( historyTrade.getPrice());
-        Date date = DateUtils.fromMillisUtc(historyTrade.getTs()); // Bitfinex uses Unix timestamps
-        final String tradeId = String.valueOf(historyTrade.getId());
-        return new Trade(orderType, amount, currencyPair, price, date, tradeId);
+  public static OpenOrders adaptOpenOrders(HuobiOrder[] openOrders) {
+    List<LimitOrder> limitOrders = new ArrayList<>();
+    for (HuobiOrder openOrder : openOrders) {
+      if (openOrder.isLimit()) {
+        limitOrders.add((LimitOrder) adaptOrder(openOrder));
+      }
     }
+    return new OpenOrders(limitOrders);
+  }
 
-    public static OrderBook adaptOrderBook(Depth huobiDepth, CurrencyPair currencyPair) {
-
-        OrdersContainer asksOrdersContainer = adaptOrders(huobiDepth.getAsks(),Long.parseLong(huobiDepth.getTs()), currencyPair, Order.OrderType.ASK);
-        OrdersContainer bidsOrdersContainer = adaptOrders(huobiDepth.getBids(),Long.parseLong(huobiDepth.getTs()), currencyPair, Order.OrderType.BID);
-        return new OrderBook(new Date(Math.max(asksOrdersContainer.getTimestamp(), bidsOrdersContainer.getTimestamp())),
-                asksOrdersContainer.getLimitOrders(), bidsOrdersContainer.getLimitOrders());
+  private static Order adaptOrder(HuobiOrder openOrder) {
+    Order order = null;
+    OrderType orderType = adaptOrderType(openOrder.getType());
+    CurrencyPair currencyPair = adaptCurrencyPair(openOrder.getSymbol());
+    if (openOrder.isMarket()) {
+      order =
+          new MarketOrder(
+              orderType,
+              openOrder.getAmount(),
+              currencyPair,
+              String.valueOf(openOrder.getId()),
+              openOrder.getCreatedAt(),
+              null,
+              openOrder.getFieldAmount(),
+              openOrder.getFieldFees(),
+              null);
     }
-
-    public static OrdersContainer adaptOrders(List<List<BigDecimal>> bigDecimalListList , Long ts,CurrencyPair currencyPair, Order.OrderType orderType) {
-        List<LimitOrder> limitOrders = new ArrayList<>(bigDecimalListList.size());
-        Date timestamp = DateUtils.fromMillisUtc(ts);
-        for (List<BigDecimal> bigDecimalList : bigDecimalListList) {
-            limitOrders.add(adaptOrder(bigDecimalList.get(1), bigDecimalList.get(0), currencyPair, orderType, timestamp));
-        }
-
-        return new OrdersContainer(ts, limitOrders);
+    if (openOrder.isLimit()) {
+      order =
+          new LimitOrder(
+              orderType,
+              openOrder.getAmount(),
+              openOrder.getFieldAmount(),
+              currencyPair,
+              String.valueOf(openOrder.getId()),
+              openOrder.getCreatedAt(),
+              openOrder.getPrice());
     }
-
-    public static LimitOrder adaptOrder(BigDecimal originalAmount, BigDecimal price, CurrencyPair currencyPair, Order.OrderType orderType, Date timestamp) {
-
-        return new LimitOrder(orderType, originalAmount, currencyPair, "", timestamp, price);
+    if (order != null) {
+      order.setOrderStatus(adaptOrderStatus(openOrder.getState()));
     }
+    return order;
+  }
 
-    public static CurrencyPair adaptCurrencyPair(Symbol symbol) {
-        return new CurrencyPair(symbol.getBaseCurrency(), symbol.getQuoteCurrency());
+  private static OrderStatus adaptOrderStatus(String huobiStatus) {
+    OrderStatus result = OrderStatus.UNKNOWN;
+    switch (huobiStatus) {
+      case "pre-submitted":
+        result = OrderStatus.PENDING_NEW;
+        break;
+      case "submitting":
+        result = OrderStatus.PENDING_NEW;
+        break;
+      case "submitted":
+        result = OrderStatus.NEW;
+        break;
+      case "partial-filled":
+        result = OrderStatus.PARTIALLY_FILLED;
+        break;
+      case "partial-canceled":
+        result = OrderStatus.PARTIALLY_CANCELED;
+        break;
+      case "filled":
+        result = OrderStatus.FILLED;
+        break;
+      case "canceled":
+        result = OrderStatus.CANCELED;
+        break;
     }
+    return result;
+  }
 
-
-
-    public static String adaptBitfinexCurrency(String bitfinexSymbol) {
-        String currency = bitfinexSymbol.toUpperCase();
-        return currency;
+  private static OrderType adaptOrderType(String orderType) {
+    if (orderType.startsWith("buy")) {
+      return OrderType.BID;
     }
-
-    public static class OrdersContainer {
-
-        private final long timestamp;
-        private final List<LimitOrder> limitOrders;
-
-        /**
-         * Constructor
-         *
-         * @param timestamp
-         * @param limitOrders
-         */
-        public OrdersContainer(long timestamp, List<LimitOrder> limitOrders) {
-
-            this.timestamp = timestamp;
-            this.limitOrders = limitOrders;
-        }
-
-        public long getTimestamp() {
-
-            return timestamp;
-        }
-
-        public List<LimitOrder> getLimitOrders() {
-
-            return limitOrders;
-        }
+    if (orderType.startsWith("sell")) {
+      return OrderType.ASK;
     }
+    return null;
+  }
+
+  public static List<Order> adaptOrders(List<HuobiOrder> huobiOrders) {
+    List<Order> orders = new ArrayList<>();
+    for (HuobiOrder order : huobiOrders) {
+      orders.add(adaptOrder(order));
+    }
+    return orders;
+  }
 }

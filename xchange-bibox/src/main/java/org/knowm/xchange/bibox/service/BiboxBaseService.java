@@ -2,11 +2,12 @@ package org.knowm.xchange.bibox.service;
 
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.bibox.BiboxAuthenticated;
+import org.knowm.xchange.bibox.dto.BiboxResponse;
+import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.service.BaseExchangeService;
 import org.knowm.xchange.service.BaseService;
-
-import org.knowm.xchange.service.ParamsDigest;
-import org.knowm.xchange.RestProxyFactory;
+import si.mazi.rescu.ParamsDigest;
+import si.mazi.rescu.RestProxyFactory;
 
 public class BiboxBaseService extends BaseExchangeService implements BaseService {
 
@@ -21,8 +22,20 @@ public class BiboxBaseService extends BaseExchangeService implements BaseService
    */
   protected BiboxBaseService(Exchange exchange) {
     super(exchange);
-    this.bibox = RestProxyFactory.createProxy(BiboxAuthenticated.class, exchange.getExchangeSpecification().getSslUri(), getClientConfig());
+    this.bibox =
+        RestProxyFactory.createProxy(
+            BiboxAuthenticated.class,
+            exchange.getExchangeSpecification().getSslUri(),
+            getClientConfig());
     this.apiKey = exchange.getExchangeSpecification().getApiKey();
-    this.signatureCreator = BiboxDigest.createInstance(exchange.getExchangeSpecification().getSecretKey());
+    this.signatureCreator =
+        BiboxDigest.createInstance(exchange.getExchangeSpecification().getSecretKey());
+  }
+
+  protected static void throwErrors(BiboxResponse<?> response) {
+    if (response.getError() != null) {
+      throw new ExchangeException(
+          response.getError().getCode() + ": " + response.getError().getMsg());
+    }
   }
 }

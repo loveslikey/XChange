@@ -1,17 +1,13 @@
 package org.knowm.xchange.dsx.service;
 
-import feign.RequestTemplate;
-import org.knowm.xchange.service.ParamsDigest;
-
-import javax.crypto.Mac;
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;
+import javax.crypto.Mac;
+import org.knowm.xchange.service.BaseParamsDigest;
+import si.mazi.rescu.RestInvocation;
 
-/**
- * @author Mikhail Wall
- */
-
-public class DSXHmacPostBodyDigest extends ParamsDigest {
+/** @author Mikhail Wall */
+public class DSXHmacPostBodyDigest extends BaseParamsDigest {
 
   private DSXHmacPostBodyDigest(String secretKeyBase64) {
 
@@ -24,10 +20,10 @@ public class DSXHmacPostBodyDigest extends ParamsDigest {
   }
 
   @Override
-  public String digestParams(RequestTemplate requestTemplate) {
+  public String digestParams(RestInvocation restInvocation) {
 
     try {
-      String postBody = requestTemplate.bodyTemplate();
+      String postBody = restInvocation.getRequestBody();
       Mac mac = getMac();
       mac.update(postBody.getBytes("UTF-8"));
       return Base64.getEncoder().encodeToString(mac.doFinal());

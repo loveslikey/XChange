@@ -1,15 +1,12 @@
 package org.knowm.xchange.mercadobitcoin.service;
 
-import feign.RequestTemplate;
-import org.knowm.xchange.service.ParamsDigest;
-
-import javax.crypto.Mac;
 import java.math.BigInteger;
+import javax.crypto.Mac;
+import org.knowm.xchange.service.BaseParamsDigest;
+import si.mazi.rescu.RestInvocation;
 
-/**
- * @author Felipe Micaroni Lalli
- */
-public class MercadoBitcoinDigest extends ParamsDigest {
+/** @author Felipe Micaroni Lalli */
+public class MercadoBitcoinDigest extends BaseParamsDigest {
 
   private final String method;
   private final String pin;
@@ -29,13 +26,14 @@ public class MercadoBitcoinDigest extends ParamsDigest {
     this.tonce = tonce;
   }
 
-  public static MercadoBitcoinDigest createInstance(String method, String pin, String signCode, long tonce) {
+  public static MercadoBitcoinDigest createInstance(
+      String method, String pin, String signCode, long tonce) {
 
     return signCode == null ? null : new MercadoBitcoinDigest(method, pin, signCode, tonce);
   }
 
   @Override
-  public String digestParams(RequestTemplate requestTemplate) {
+  public String digestParams(RestInvocation restInvocation) {
 
     Mac hmac512 = getMac();
 

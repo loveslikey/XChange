@@ -3,12 +3,13 @@ package org.knowm.xchange.livecoin.service;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Date;
-
 import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.dto.marketdata.Trades;
-import org.knowm.xchange.dto.trade.*;
+import org.knowm.xchange.dto.trade.LimitOrder;
+import org.knowm.xchange.dto.trade.MarketOrder;
+import org.knowm.xchange.dto.trade.OpenOrders;
+import org.knowm.xchange.dto.trade.UserTrades;
 import org.knowm.xchange.exceptions.NotAvailableFromExchangeException;
-import org.knowm.xchange.exceptions.NotYetImplementedForExchangeException;
 import org.knowm.xchange.livecoin.LivecoinExchange;
 import org.knowm.xchange.service.trade.TradeService;
 import org.knowm.xchange.service.trade.params.TradeHistoryParamLimit;
@@ -33,11 +34,6 @@ public class LivecoinTradeService extends LivecoinTradeServiceRaw implements Tra
   }
 
   @Override
-  public String placeStopOrder(StopOrder stopOrder) throws IOException {
-    throw new NotYetImplementedForExchangeException();
-  }
-
-  @Override
   public UserTrades getTradeHistory(TradeHistoryParams params) throws IOException {
     Date start = new Date(0);
     Date end = new Date();
@@ -57,7 +53,8 @@ public class LivecoinTradeService extends LivecoinTradeServiceRaw implements Tra
       limit = ((TradeHistoryParamLimit) params).getLimit();
     }
 
-    return new UserTrades(tradeHistory(start, end, limit, offset), Trades.TradeSortType.SortByTimestamp);
+    return new UserTrades(
+        tradeHistory(start, end, limit, offset), Trades.TradeSortType.SortByTimestamp);
   }
 
   @Override

@@ -1,31 +1,42 @@
 package org.knowm.xchange.luno;
 
-import feign.Feign;
-import org.knowm.xchange.RestProxyFactory;
-import org.knowm.xchange.luno.dto.LunoBoolean;
-import org.knowm.xchange.luno.dto.LunoException;
-import org.knowm.xchange.luno.dto.account.*;
-import org.knowm.xchange.luno.dto.account.LunoWithdrawals.Withdrawal;
-import org.knowm.xchange.luno.dto.marketdata.LunoOrderBook;
-import org.knowm.xchange.luno.dto.marketdata.LunoTicker;
-import org.knowm.xchange.luno.dto.marketdata.LunoTickers;
-import org.knowm.xchange.luno.dto.marketdata.LunoTrades;
-import org.knowm.xchange.luno.dto.trade.*;
-import org.knowm.xchange.luno.dto.trade.LunoOrders.Order;
-import org.knowm.xchange.utils.BasicAuthCredentials;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import org.knowm.xchange.luno.dto.LunoBoolean;
+import org.knowm.xchange.luno.dto.LunoException;
+import org.knowm.xchange.luno.dto.account.LunoAccount;
+import org.knowm.xchange.luno.dto.account.LunoAccountTransactions;
+import org.knowm.xchange.luno.dto.account.LunoBalance;
+import org.knowm.xchange.luno.dto.account.LunoFundingAddress;
+import org.knowm.xchange.luno.dto.account.LunoPendingTransactions;
+import org.knowm.xchange.luno.dto.account.LunoQuote;
+import org.knowm.xchange.luno.dto.account.LunoWithdrawals;
+import org.knowm.xchange.luno.dto.account.LunoWithdrawals.Withdrawal;
+import org.knowm.xchange.luno.dto.marketdata.LunoOrderBook;
+import org.knowm.xchange.luno.dto.marketdata.LunoTicker;
+import org.knowm.xchange.luno.dto.marketdata.LunoTickers;
+import org.knowm.xchange.luno.dto.marketdata.LunoTrades;
+import org.knowm.xchange.luno.dto.trade.LunoFeeInfo;
+import org.knowm.xchange.luno.dto.trade.LunoOrders;
+import org.knowm.xchange.luno.dto.trade.LunoOrders.Order;
+import org.knowm.xchange.luno.dto.trade.LunoPostOrder;
+import org.knowm.xchange.luno.dto.trade.OrderType;
+import org.knowm.xchange.luno.dto.trade.State;
+import si.mazi.rescu.BasicAuthCredentials;
+import si.mazi.rescu.ClientConfig;
+import si.mazi.rescu.RestProxyFactory;
 
 public class LunoAPIImpl implements LunoAPI {
 
+  private static final Set<String> VALID_TYPES =
+      new HashSet<String>(Arrays.asList("ZAR_EFT", "NAD_EFT", "KES_MPESA", "MYR_IBG", "IDR_LLG"));
   private final LunoAuthenticated luno;
   private final BasicAuthCredentials auth;
 
-  public LunoAPIImpl(String key, String secret, String uri, Feign.Builder clientConfig) {
+  public LunoAPIImpl(String key, String secret, String uri, ClientConfig clientConfig) {
 
     luno = RestProxyFactory.createProxy(LunoAuthenticated.class, uri, clientConfig);
     auth = new BasicAuthCredentials(key, secret);
@@ -62,8 +73,8 @@ public class LunoAPIImpl implements LunoAPI {
   }
 
   @Override
-  public LunoAccountTransactions transactions(String id, int minRow, int maxRow) throws IOException,
-      LunoException {
+  public LunoAccountTransactions transactions(String id, int minRow, int maxRow)
+      throws IOException, LunoException {
     return luno.transactions(this.auth, id, minRow, maxRow);
   }
 
@@ -78,17 +89,33 @@ public class LunoAPIImpl implements LunoAPI {
   }
 
   @Override
-  public LunoPostOrder postLimitOrder(String pair, OrderType type, BigDecimal volume, BigDecimal price,
-      String baseAccountId, String counterAccountId) throws IOException, LunoException {
-    assert type == OrderType.ASK || type == OrderType.BID : "The order type for limit order must be ASK or BID.";
-    return luno.postLimitOrder(this.auth, pair, type, volume, price, baseAccountId, counterAccountId);
+  public LunoPostOrder postLimitOrder(
+      String pair,
+      OrderType type,
+      BigDecimal volume,
+      BigDecimal price,
+      String baseAccountId,
+      String counterAccountId)
+      throws IOException, LunoException {
+    assert type == OrderType.ASK || type == OrderType.BID
+        : "The order type for limit order must be ASK or BID.";
+    return luno.postLimitOrder(
+        this.auth, pair, type, volume, price, baseAccountId, counterAccountId);
   }
 
   @Override
-  public LunoPostOrder postMarketOrder(String pair, OrderType type, BigDecimal counterVolume,
-      BigDecimal baseVolume, String baseAccountId, String counterAccountId) throws IOException, LunoException {
-    assert type == OrderType.BUY || type == OrderType.SELL : "The order type for limit order must be SELL or BUY.";
-    return luno.postMarketOrder(this.auth, pair, type, counterVolume, baseVolume, baseAccountId, counterAccountId);
+  public LunoPostOrder postMarketOrder(
+      String pair,
+      OrderType type,
+      BigDecimal counterVolume,
+      BigDecimal baseVolume,
+      String baseAccountId,
+      String counterAccountId)
+      throws IOException, LunoException {
+    assert type == OrderType.BUY || type == OrderType.SELL
+        : "The order type for limit order must be SELL or BUY.";
+    return luno.postMarketOrder(
+        this.auth, pair, type, counterVolume, baseVolume, baseAccountId, counterAccountId);
   }
 
   @Override
@@ -102,8 +129,8 @@ public class LunoAPIImpl implements LunoAPI {
   }
 
   @Override
-  public org.knowm.xchange.luno.dto.trade.LunoUserTrades listTrades(String pair, Long since, Integer limit) throws IOException,
-      LunoException {
+  public org.knowm.xchange.luno.dto.trade.LunoUserTrades listTrades(
+      String pair, Long since, Integer limit) throws IOException, LunoException {
     return luno.listTrades(this.auth, pair, since, limit);
   }
 
@@ -113,7 +140,8 @@ public class LunoAPIImpl implements LunoAPI {
   }
 
   @Override
-  public LunoFundingAddress getFundingAddress(String asset, String address) throws IOException, LunoException {
+  public LunoFundingAddress getFundingAddress(String asset, String address)
+      throws IOException, LunoException {
     return luno.getFundingAddress(this.auth, asset, address);
   }
 
@@ -126,9 +154,6 @@ public class LunoAPIImpl implements LunoAPI {
   public LunoWithdrawals withdrawals() throws IOException, LunoException {
     return luno.withdrawals(this.auth);
   }
-
-  private static final Set<String> VALID_TYPES = new HashSet<String>(Arrays.asList(
-      "ZAR_EFT", "NAD_EFT", "KES_MPESA", "MYR_IBG", "IDR_LLG"));
 
   @Override
   public Withdrawal requestWithdrawal(String type, BigDecimal amount, String beneficiaryId)
@@ -148,15 +173,17 @@ public class LunoAPIImpl implements LunoAPI {
   }
 
   @Override
-  public LunoBoolean send(BigDecimal amount, String currency, String address, String description,
-      String message) throws IOException, LunoException {
+  public LunoBoolean send(
+      BigDecimal amount, String currency, String address, String description, String message)
+      throws IOException, LunoException {
     return luno.send(this.auth, amount, currency, address, description, message);
   }
 
   @Override
-  public LunoQuote createQuote(OrderType type, BigDecimal baseAmount, String pair) throws IOException,
-      LunoException {
-    assert type == OrderType.BUY || type == OrderType.SELL : "The type for quote must be SELL or BUY.";
+  public LunoQuote createQuote(OrderType type, BigDecimal baseAmount, String pair)
+      throws IOException, LunoException {
+    assert type == OrderType.BUY || type == OrderType.SELL
+        : "The type for quote must be SELL or BUY.";
     return luno.createQuote(this.auth, type, baseAmount, pair);
   }
 

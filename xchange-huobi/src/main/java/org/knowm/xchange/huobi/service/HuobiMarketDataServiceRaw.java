@@ -1,47 +1,36 @@
 package org.knowm.xchange.huobi.service;
 
+import java.io.IOException;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.CurrencyPair;
-import org.knowm.xchange.huobi.HuobiAdapters;
-import org.knowm.xchange.huobi.dto.marketdata.Depth;
-import org.knowm.xchange.huobi.dto.marketdata.HistoryTradess;
-import org.knowm.xchange.huobi.dto.marketdata.Merged;
-import org.knowm.xchange.huobi.dto.marketdata.MergedResponse;
-import org.knowm.xchange.huobi.dto.meta.Symbol;
+import org.knowm.xchange.huobi.HuobiUtils;
+import org.knowm.xchange.huobi.dto.marketdata.HuobiAssetPair;
+import org.knowm.xchange.huobi.dto.marketdata.HuobiDepth;
+import org.knowm.xchange.huobi.dto.marketdata.HuobiTicker;
+import org.knowm.xchange.huobi.dto.marketdata.results.HuobiAssetPairsResult;
+import org.knowm.xchange.huobi.dto.marketdata.results.HuobiDepthResult;
+import org.knowm.xchange.huobi.dto.marketdata.results.HuobiTickerResult;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+public class HuobiMarketDataServiceRaw extends HuobiBaseService {
 
-/**
- * Created by Administrator on 2018/2/20.
- */
-public class HuobiMarketDataServiceRaw extends  HuobiBaseService {
-    protected HuobiMarketDataServiceRaw(Exchange exchange) {
-        super(exchange);
-    }
+  public HuobiMarketDataServiceRaw(Exchange exchange) {
+    super(exchange);
+  }
 
-    public Merged getHuobiTicker(String symbol){
-        MergedResponse<Merged> mergedResponse= huobiAuthenticated.merged(symbol);
-        return  mergedResponse.getTick();
-    }
+  public HuobiTicker getHuobiTicker(CurrencyPair currencyPair) throws IOException {
+    String huobiCurrencyPair = HuobiUtils.createHuobiCurrencyPair(currencyPair);
+    HuobiTickerResult tickerResult = huobi.getTicker(huobiCurrencyPair);
+    return checkResult(tickerResult);
+  }
 
-    public List<HistoryTradess> getHuobiTrades(String symbol, Integer size){
-         return huobiAuthenticated.historyTrade(symbol,size).getData();
-    }
+  public HuobiAssetPair[] getHuobiAssetPairs() throws IOException {
+    HuobiAssetPairsResult assetPairsResult = huobi.getAssetPairs();
+    return checkResult(assetPairsResult);
+  }
 
-    public Depth getHuobiOrderBook(String symbol, Integer limitBids, Integer limitAsks) {
-         return huobiAuthenticated.depth(symbol,"step1").getTick();
-    }
-
-    public List<CurrencyPair> getExchangeSymbols() throws IOException {
-        List<CurrencyPair> currencyPairs = new ArrayList<>();
-        for (Symbol symbol : huobiAuthenticated.symbols().getData()) {
-            currencyPairs.add(HuobiAdapters.adaptCurrencyPair(symbol));
-        }
-        return currencyPairs;
-    }
-
-
-
+  public HuobiDepth getHuobiDepth(CurrencyPair currencyPair, String depthType) throws IOException {
+    String huobiCurrencyPair = HuobiUtils.createHuobiCurrencyPair(currencyPair);
+    HuobiDepthResult depthResult = huobi.getDepth(huobiCurrencyPair, depthType);
+    return checkResult(depthResult);
+  }
 }

@@ -1,13 +1,12 @@
 package org.knowm.xchange.liqui.service;
 
-import feign.RequestTemplate;
-import org.apache.commons.codec.binary.Hex;
-import org.knowm.xchange.service.ParamsDigest;
-
-import javax.crypto.Mac;
 import java.nio.charset.StandardCharsets;
+import javax.crypto.Mac;
+import javax.xml.bind.DatatypeConverter;
+import org.knowm.xchange.service.BaseParamsDigest;
+import si.mazi.rescu.RestInvocation;
 
-public class LiquiDigest extends ParamsDigest {
+public class LiquiDigest extends BaseParamsDigest {
 
   protected LiquiDigest(final String secretKeyBase64) throws IllegalArgumentException {
     super(secretKeyBase64, HMAC_SHA_512);
@@ -21,11 +20,11 @@ public class LiquiDigest extends ParamsDigest {
   }
 
   @Override
-  public String digestParams(final RequestTemplate requestTemplate) {
+  public String digestParams(final RestInvocation restInvocation) {
 
     final Mac mac512 = getMac();
-    mac512.update(requestTemplate.bodyTemplate().getBytes(StandardCharsets.UTF_8));
+    mac512.update(restInvocation.getRequestBody().getBytes(StandardCharsets.UTF_8));
 
-    return new String(Hex.encodeHex(mac512.doFinal()));
+    return DatatypeConverter.printHexBinary(mac512.doFinal()).toLowerCase();
   }
 }

@@ -16,20 +16,23 @@ The following list of authors was automatically generated from the XChange proje
 
     git log --format='%aN' | sort -u
 
-小田謙太郎
 =
 Achterhoeker
+Adam from WALCZAK.IT
 Alejandro Reyero
 Aleksey Baryshnikov
 Alex Nugent
 Alexey Syrtsev
 Alexey Z
 Allen Day
+Alvin Singh
 Andraž
+Andrea Fossi
 André Reiter
 Anthony Tsang
 Arthurm1
 Artur
+Artur M
 Baffo32
 Benedict Wong
 Benedikt Bünz
@@ -40,13 +43,19 @@ Bryan
 Bryan Hernandez
 Carbo Kuo
 Carlos Lopez-Camey
+Chris Cannell
 Chris Rico
 Christian Strässle
 Cray Imperative
 Cristian Lucaci
+Cyril
+Daniel Cohen
+Danilo Guimarães
 Dave Seyb
 David FRANCOIS
 David Kreutzer
+Devin Smith
+Dmitry Fedorenko
 Dolezal Zdenek
 Douggie
 DrawFun
@@ -56,20 +65,29 @@ EzBar
 Ezer Bar-Aviv
 Fabien André
 Felipe Micaroni Lalli
+Flemingjp
+Frank Kaiser
 GENiALi
 Gary Rowe
 Gianluigi
 Giridhar Nandigam
+Graham Crockford
 Guillaume Labbé-Morissette
 Guillaume Morissette
 HairyFotr
+Herman Ofenböck
 Ignacio Larranaga
 JH
 JK
+James
 James Edwards
+James Fleming
+Jan Akerman
 Jan Vojt
+Jan X Marek
 Janosch Gräf
 Jean-Pierre Froud
+Jim Northrup
 Joe Zhou
 Johannes Zweng
 Jonathan Heusser
@@ -84,11 +102,15 @@ Karol Pysniak
 Karsten Nilsen
 Ken Fehling
 Kenneth Jorgensen
+Kevin Britz
+Kevin Jannis
 Kolozsy Gábor
 Konstantin Alexandrov
 Konstantin Indjov
+Konstantin Tenman
 Krystian Nowak
 Krzysiek
+Krzysztof Cieślak
 Leonid Shamis
 LifeIsGoodMF
 Luca Rosellini
@@ -97,6 +119,7 @@ Lukáš Krejza
 Macarse
 Marius Hillenbrand
 MartianTech
+Martin Kubliniak
 Martin Stachon
 Massimiliano Gerardi
 Matija Mazi
@@ -111,17 +134,26 @@ Mikelle
 Mikhail Wall
 Miso Oprendek
 Muffon
+Nathan King
 Nicolas Pinot
+Nikita Belenkiy
+Niko Schmuck
 Norbert Sándor
 ObsessiveOrange
+Oleg Danilov
 Oleg Khomenko
+Oliver Drotleff
 Oscar Francia
+Pablo Lopez
 Pan, Xinyang
 Panchen
+Pavlo Pastushok
+Peter Keeler
 Peter N. Steinmetz
 Piotr Ladyzynski
 Piotr Ładyżyński
 Radu
+Rafal Krupinski
 Rafał Krupiński
 Raphael Voellmy
 Richard Flint
@@ -129,19 +161,34 @@ Robert Felker
 Roei Bar Aviv
 Roman Belkov
 Ronald Bultman
+Ryan Fox
 Ryan Sundberg
 Sebastiaan van Erk
 Sergey Belyakov
+Sergey Lukashevich
+Sergey Tselovalnikov
+Sergii Pogodin
 Sergio Rodriguez
 Sikerdebaard
+Snailz
+Stuart Low
 Sumedha Saxena
+Sylvain
+Sébastien Koch
 TM Lee
+The Gitter Badger
+Theofanis Pantelides
 Thomas Diesler
 Thomas Muhm
 Tillerino
 Tim Molter
 Tomas Cere
+Tomáš Procházka
+Tony Skulk
+Travis Collins
 U-TORA\cristian.lucaci
+Ujjwal Kabra
+Uwe
 Vassilis Papavassiliou
 Vassilis Ppapavassiliou
 Victor Mezrin
@@ -150,25 +197,44 @@ Wojciech Langiewicz
 Wyatt Endres
 Yang Yang
 Ying Zhe Chong
+Your Name
 Yuki INOUE
 Zach Holmes
 Zdenek Dolezal
+Zorge.R
+ahmetoz
+ajdev
+aleks-azen
+aleksazen@gmail.com
+alessandro luppi
 alobarev
+amjad1210
+anton
 anw
 apaygh
 artvel
 b00lean
+bharris
 bolo
 bolobox
+boppleton
+brilliantnut
 bronko
+bronoman
 brox
+cacofish
+cacofishadct
+caleb
+coinlover75
 cymp
 cyril
+datbui
 david-yam
 deveth0
 dhenry
 dimecoin
 doublesharp
+dovamir
 dyorgio
 evdubs
 ezhik97
@@ -178,8 +244,14 @@ gmorpheme
 godoorsun
 gpwclark
 hardsky
+hbwhyte
+henry
+huguanrui
+hurricup
+interwater
 ivan.kosianenko
 jamespedwards42
+jasonliu119
 jclaruelle
 jcuypers
 johndemic
@@ -190,40 +262,57 @@ kyr7
 lapoor
 lazy_p@163.com
 lazyp
+m4g4
+makarid
 matija.mazi@gmail.com
 matt pearson
 mazi
 mdeverdelhan
 mfarid
 mharris021
+michaelscheung
 miho
 mnapier
+moardm
 nakedpony
 nicostouch
 nimrood
 npomfret
 nxtpool@gmail.com
 o
+odaken
 paul
+pchertalev
+perlboy
 piotr
 pnkwpk
 pozheg
+procyon
 seanrobb
+sebastienkoch
 semihunaldi
 senecaso
 sikerdebaard
 simonkeliuotis
+sirilicious
 skipster
 sowhynot
 stachon
 stephane-coulomb
+stevenuray
+suchac
 swiesend
+taoruifu
 tbosman
 tim
 timmolter
+trix
+trix13
 veken0m
 vulicevic
 will
 wvr
 ww3456
 zholmes
+陈晔
+小田謙太郎

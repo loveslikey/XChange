@@ -4,8 +4,7 @@ import org.knowm.xchange.Exchange;
 import org.knowm.xchange.service.BaseExchangeService;
 import org.knowm.xchange.service.BaseService;
 import org.knowm.xchange.vircurex.VircurexAuthenticated;
-
-import org.knowm.xchange.RestProxyFactory;
+import si.mazi.rescu.RestProxyFactory;
 
 public class VircurexBaseService extends BaseExchangeService implements BaseService {
 
@@ -19,7 +18,10 @@ public class VircurexBaseService extends BaseExchangeService implements BaseServ
   public VircurexBaseService(Exchange exchange) {
 
     super(exchange);
-    this.vircurexAuthenticated = RestProxyFactory.createProxy(VircurexAuthenticated.class, exchange.getExchangeSpecification().getSslUri(),
-        getClientConfig());
+    this.vircurexAuthenticated =
+        RestProxyFactory.createProxy(
+            VircurexAuthenticated.class,
+            exchange.getExchangeSpecification().getSslUri(),
+            getClientConfig());
   }
 }

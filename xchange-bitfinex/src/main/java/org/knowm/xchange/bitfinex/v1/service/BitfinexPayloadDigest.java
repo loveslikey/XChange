@@ -1,15 +1,15 @@
 package org.knowm.xchange.bitfinex.v1.service;
 
-import net.iharder.Base64;
-import org.knowm.xchange.service.ParamsDigest;
-import feign.RequestTemplate;
+import java.util.Base64;
+import si.mazi.rescu.ParamsDigest;
+import si.mazi.rescu.RestInvocation;
 
-public class BitfinexPayloadDigest extends ParamsDigest {
+public class BitfinexPayloadDigest implements ParamsDigest {
 
   @Override
-  public synchronized String digestParams(RequestTemplate requestTemplate) {
+  public synchronized String digestParams(RestInvocation restInvocation) {
 
-    String postBody = requestTemplate.bodyTemplate();
-    return Base64.encodeBytes(postBody.getBytes());
+    String postBody = restInvocation.getRequestBody();
+    return Base64.getEncoder().encodeToString(postBody.getBytes());
   }
 }

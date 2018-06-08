@@ -23,18 +23,18 @@
  */
 package org.knowm.xchange.coinmate.service;
 
-import feign.RequestTemplate;
-import org.knowm.xchange.service.ParamsDigest;
-
-import javax.crypto.Mac;
 import java.math.BigInteger;
+import javax.crypto.Mac;
+import javax.ws.rs.FormParam;
+import org.knowm.xchange.service.BaseParamsDigest;
+import si.mazi.rescu.RestInvocation;
 
 /**
  * This is based on BitstampDigest
  *
  * @author Martin Stachon
  */
-public class CoinmateDigest extends ParamsDigest {
+public class CoinmateDigest extends BaseParamsDigest {
 
   private final String clientId;
   private final String publicApiKey;
@@ -44,7 +44,8 @@ public class CoinmateDigest extends ParamsDigest {
    *
    * @param secretKeyBase64
    * @param clientId
-   * @param publicApiKey @throws IllegalArgumentException if key is invalid (cannot be base-64-decoded or the decoded key is invalid).
+   * @param publicApiKey @throws IllegalArgumentException if key is invalid (cannot be
+   *     base-64-decoded or the decoded key is invalid).
    */
   private CoinmateDigest(String secretKeyBase64, String clientId, String publicApiKey) {
 
@@ -53,16 +54,19 @@ public class CoinmateDigest extends ParamsDigest {
     this.publicApiKey = publicApiKey;
   }
 
-  public static CoinmateDigest createInstance(String secretKeyBase64, String clientId, String publicApiKey) {
+  public static CoinmateDigest createInstance(
+      String secretKeyBase64, String clientId, String publicApiKey) {
 
-    return secretKeyBase64 == null ? null : new CoinmateDigest(secretKeyBase64, clientId, publicApiKey);
+    return secretKeyBase64 == null
+        ? null
+        : new CoinmateDigest(secretKeyBase64, clientId, publicApiKey);
   }
 
   @Override
-  public String digestParams(RequestTemplate requestTemplate) {
+  public String digestParams(RestInvocation restInvocation) {
 
     Mac mac256 = getMac();
-    mac256.update(requestTemplate.queries().get("nonce").iterator().next().getBytes());
+    mac256.update(restInvocation.getParamValue(FormParam.class, "nonce").toString().getBytes());
     mac256.update(clientId.getBytes());
     mac256.update(publicApiKey.getBytes());
 

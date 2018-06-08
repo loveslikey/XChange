@@ -1,15 +1,13 @@
 package org.knowm.xchange.coinbase.service;
 
-import feign.RequestTemplate;
-import org.knowm.xchange.service.ParamsDigest;
-
-import javax.crypto.Mac;
 import java.math.BigInteger;
+import javax.crypto.Mac;
+import javax.ws.rs.HeaderParam;
+import org.knowm.xchange.service.BaseParamsDigest;
+import si.mazi.rescu.RestInvocation;
 
-/**
- * @author jamespedwards42
- */
-public class CoinbaseDigest extends ParamsDigest {
+/** @author jamespedwards42 */
+public class CoinbaseDigest extends BaseParamsDigest {
 
   private CoinbaseDigest(String secretKey) {
 
@@ -22,10 +20,12 @@ public class CoinbaseDigest extends ParamsDigest {
   }
 
   @Override
-  public String digestParams(RequestTemplate requestTemplate) {
+  public String digestParams(RestInvocation restInvocation) {
 
-    final String message = requestTemplate.queries().get("ACCESS_NONCE").iterator().next() + requestTemplate.url()+requestTemplate.queryLine()
-        + requestTemplate.bodyTemplate();
+    final String message =
+        restInvocation.getParamValue(HeaderParam.class, "ACCESS_NONCE").toString()
+            + restInvocation.getInvocationUrl()
+            + restInvocation.getRequestBody();
 
     Mac mac256 = getMac();
     mac256.update(message.getBytes());

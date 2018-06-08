@@ -1,11 +1,9 @@
 package org.knowm.xchange.bitso.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Collection;
 import java.util.Map;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import org.knowm.xchange.exceptions.HttpStatusExceptionSupport;
+import si.mazi.rescu.HttpStatusExceptionSupport;
 
 public class BitsoException extends HttpStatusExceptionSupport {
 
